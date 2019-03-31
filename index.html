@@ -10,10 +10,11 @@
 <link rel="stylesheet" href="style.css">
     
 <body>
-<div id="background">
+
+<div id="background" class="text">
 	<div class="dropdown" style="float:right;">
         <button class="dropbtn">Change Background</button>
-			<div class="dropdown-content">
+			<div class="dropdown-content text2">
                 <a href="#" onclick="bg1()">Background #1</a>
                 <a href="#" onclick="bg2()">Background #2</a>
                 <a href="#" onclick="bg3()">Background #3</a>
@@ -26,12 +27,12 @@
 <div class="split left">
     <table cellspacing="0" cellpadding="3">
         <tr>
-            <td class="text">Total Population</td>
+            <td >Maximum Population</td>
             <td><input type="text" id="totalPopulation" disabled style = "text-align: center"></td>
         </tr>
         
         <tr>
-            <td class="text">Idle Population</td>
+            <td >Current Population</td>
             <td><input type="text" id="idlePopulation" disabled style = "text-align: center"></td>
         </tr>
         
@@ -39,24 +40,40 @@
             <td><button class="textButton" onclick="getFood()" style="width:100%; height: 30px; background: url(images/food.jpg); background-size: 100% 100%">Food</button></td>
             <td id="food" disabled style = "text-align: center">0</td>
 			<td><img src="images/food.png" height="42" width="42"></td>
+            <td id="foodSec"> 0 /s </td>
         </tr>
         
         <tr>
             <td><button class="textButton" onclick="getWood()" style="width:100%; height: 30px; background: url(images/wood.jpg); background-size: 100% 100%">Wood</button></td>
             <td id="wood" disabled style = "text-align: center">0</td>
 			<td><img src="images/wood.png" height="42" width="42"></td>
+            <td id="woodSec"> 0 /s </td>
         </tr>
         
         <tr>
             <td><button class="textButton" onclick="getStone()" style="width:100%; height: 30px; background: url(images/stone.jpg); background-size: 100% 100%">Stone</button></td>
             <td id="stone" disabled style = "text-align: center">0</td>
 			<td><img src="images/stone.png" height="42" width="42"></td>
+            <td id="stoneSec"> 0 /s </td>
         </tr>
     </table>
 </div>
 
 <div class="split right">
-	<table class="text" cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px; font-size: 20">
+	<table  cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px; font-size: 20">
+        <tr>
+            <th style = "text-align: center">Create Worker</th>
+            <th style = "text-align: center">30 Food</th>
+            <th><button onclick="createWorker(1)">+1</button> </th>
+            <th><button onclick="createWorker(5)">+5</button> </th>
+            <th><button onclick="createWorker(10)">+10</button> </th>
+        </tr>
+        
+        <tr>
+            <td>Workers Available</td>
+            <td id="workers">0</td>
+        </tr>
+        
 		<tr>
 			<td>Farmers</td>
 			<td id="foodWA">0</td>
@@ -76,32 +93,32 @@
 
 <div class="under left">
 <hr>
-    <h1 class="text">Build Menu</h2>
+    <h1 >Build Menu</h2>
     <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">
         <tr>
             <td><button onclick="buyTent()" id="tent" style="width:100%; height: 30px">Tent</button></td>
-            <td class="text" id="costTent" style = "text-align: center">6 Food | 3 Wood | 0 Stone</td>
+            <td  id="costTent" style = "text-align: center">6 Food | 3 Wood | 0 Stone</td>
             <td>|</td>
-            <td class="text" disabled style = "text-align: center">Add +2 Population</td>
+            <td  disabled style = "text-align: center">Add +2 Maximum Population</td>
         </tr> 
         
         <tr>
             <td><button onclick="buySmallHouse()" id="SmallHouse" style="width:100%; height: 30px">Small House</button></td>
-            <td class="text" id="costSmallHouse" disabled style = "text-align: center">18 Food | 40 Wood | 40 Stone</td>
+            <td  id="costSmallHouse" disabled style = "text-align: center">18 Food | 40 Wood | 40 Stone</td>
             <td>|</td>
-            <td class="text" disabled style = "text-align: center">Add +6 Population</td>
+            <td  disabled style = "text-align: center">Add +6 Maximum Population</td>
         </tr>
         
         <tr>
             <td><button onclick="buyMediumHouse()" id="MediumHouse" style="width:100%; height: 30px">Medium House</button></td>
-            <td class="text" id="costMediumHouse" disabled style = "text-align: center">30 Food | 90 Wood | 110 Stone</td>
+            <td  id="costMediumHouse" disabled style = "text-align: center">30 Food | 90 Wood | 110 Stone</td>
             <td>|</td>
-            <td class="text" disabled style = "text-align: center">Add +10 Population</td>
+            <td  disabled style = "text-align: center">Add +10 Maximum Population</td>
         </tr>
     </table>
 	
-	<h1 class="text">Assign Workers to automatically gather resources</h2>
-	<table class="text" cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">
+	<h1 >Assign Workers to automatically gather resources</h2>
+	<table  cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">
 		<tr>
 			<td style="font-size: 25">Farmer</td>
 			<td><button onclick="addWorker(1,'farmer')" style="width:100%; height: 25px"> +1 </button></td>
@@ -126,22 +143,22 @@
 </div>
 	
 <div class="under right2">
-	<h2 class="text">Options</h2>
+	<h2>Options</h2>
 	<table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">		
 		<tr>
-			<td><button onclick="save()" style="width:100%; height: 30px">Save Game</td>
+			<td><button onclick="save()" style="width:100%; height: 30px">Save Game</button></td>
 		</tr>
 		
 		<tr>
-			<td><button onclick="load()" style="width:100%; height: 30px">Load Game</td>
+			<td><button onclick="load()" style="width:100%; height: 30px">Load Game</button></td>
 		</tr>
 		
 		<tr>
-			<td><button onclick="textShadow()" style="width:100%; height: 30px">Enable / Disable Text Shadows</td>
+			<td><button onclick="changeName()" style="width:100%; height: 30px">Change Name</button></td>
 		</tr>
 		
 		<tr>
-			<td><button onclick="reset()" style="width:100%; height: 30px">Reset Everything</td>
+			<td><button onclick="reset()" style="width:100%; height: 30px">Reset Everything</button></td>
 		</tr>
 
 	</table>
@@ -151,10 +168,10 @@
 
 	
 <div class="footer">
-    <p class="text">Idle time: 
-        <span id="ore"> 0 hours, </span>
-		<span id="minute"> 0 minutes, </span>
-		<span id="secunde"> 0 seconds. </span>
+    <p  style="font-size: 20">Idle time: 
+        <span id="ore"> 0 </span> hours |
+		<span id="minute"> 0 </span>  minutes |
+		<span id="secunde"> 0 </span> seconds
     </p> 
 </div>
 

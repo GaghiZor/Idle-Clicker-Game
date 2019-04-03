@@ -4,179 +4,252 @@
         <title> Idle Game - Proiect </title>
     </head>
 
-<script src="script.js"></script>
-<script src="bg.js"></script>
+<script src="scripts/script.js"></script>
+<script src="scripts/menu.js"></script>
+<script src="scripts/bg.js"></script>
 
 <link rel="stylesheet" href="style.css">
     
-<body>
+<body onload="updateName()">
 
-<div id="background" class="text">
-	<div class="dropdown" style="float:right;">
-        <button class="dropbtn">Change Background</button>
-			<div class="dropdown-content text2">
-                <a href="#" onclick="bg1()">Background #1</a>
-                <a href="#" onclick="bg2()">Background #2</a>
-                <a href="#" onclick="bg3()">Background #3</a>
-                <a href="#" onclick="bg4()">Background #4</a>
-                <a href="#" onclick="bg5()">Background #5</a>
-             </div>
+<header>
+
+<div class="dropdown" style="float:right;">
+    <button class="dropbtn">Change Background</button>
+    <div class="dropdown-content text2">
+         <a href="#" onclick="bg1()">Background #1</a>
+         <a href="#" onclick="bg2()">Background #2</a>
+         <a href="#" onclick="bg3()">Background #3</a>
+         <a href="#" onclick="bg4()">Background #4</a>
+         <a href="#" onclick="bg5()">Background #5</a>
+     </div>
+</div>
+
+<div class="btn-group">
+    <button class="textButton navigate" onclick="tab('game')">Game</button>
+    <button class="textButton navigate" onclick="tab('army')">Army</button>
+    <button class="textButton navigate" onclick="tab('blacksmith')">Blacksmith</button>
+    <button class="textButton navigate" onclick="tab('trades')">Trades</button>
+    <button class="textButton navigate" onclick="tab('stats')">Stats</button>
+</div>
+    
+</header>
+
+<p id="name" class="text" style="font-size: 35px; color: red"></p>
+
+<!-- GAME Interface -->
+<div id="game" class="text">
+    <div class="menu">
+        <div class="menu gather">
+            <table cellspacing="0" cellpadding="3">
+                <tr>
+                    <td>Maximum Population</td>
+                    <td><input type="text" id="totalPopulation" disabled style = "text-align: center"></td>
+                </tr>
+
+                <tr>
+                    <td>Current Population</td>
+                    <td><input type="text" id="idlePopulation" disabled style = "text-align: center"></td>
+                </tr>
+
+                <tr>
+                    <td><button class="textButton" onclick="getFood()" style="width:100%; height: 30px; background: url(images/food.jpg); background-size: 100% 100%">Food</button></td>
+                    <td id="food" disabled style = "text-align: center">0</td>
+                    <td><img src="images/food.png" height="42" width="42"></td>
+                    <td id="foodSec"> 0 /s </td>
+                </tr>
+
+                <tr>
+                    <td><button class="textButton" onclick="getWood()" style="width:100%; height: 30px; background: url(images/wood.jpg); background-size: 100% 100%">Wood</button></td>
+                    <td id="wood" disabled style = "text-align: center">0</td>
+                    <td><img src="images/wood.png" height="42" width="42"></td>
+                    <td id="woodSec"> 0 /s </td>
+                </tr>
+
+                <tr>
+                    <td><button class="textButton" onclick="getStone()" style="width:100%; height: 30px; background: url(images/stone.jpg); background-size: 100% 100%">Stone</button></td>
+                    <td id="stone" disabled style = "text-align: center">0</td>
+                    <td><img src="images/stone.png" height="42" width="42"></td>
+                    <td id="stoneSec"> 0 /s </td>
+                </tr>
+            </table>
+        </div>
+
+
+    <div class="menu workers">
+        <table  cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px; font-size: 20">
+            <tr>
+                <th style = "text-align: center">Create Worker</th>
+                <th style = "text-align: center">30 Food</th>
+                <th><button onclick="createWorker(1)">+1</button> </th>
+                <th><button onclick="createWorker(5)">+5</button> </th>
+                <th><button onclick="createWorker(10)">+10</button> </th>
+            </tr>
+
+            <tr>
+                <td>Workers Available</td>
+                <td id="workers">0</td>
+            </tr>
+
+            <tr>
+                <td>Farmers</td>
+                <td id="foodWA">0</td>
+            </tr>
+
+            <tr>
+                <td>Woodcutters</td>
+                <td id="woodWA">0</td>
+            </tr>
+
+            <tr>
+                <td>Miners</td>
+                <td id="stoneWA" >0</td>
+            </tr>
+        </table>
+
+        <h1 >Assign Workers to automatically gather resources</h2>
+        <table  cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">
+            <tr>
+                <td><button onclick="removeWorker(1,'farmer')" style="width:100%; height: 25px"> -1 </button></td>
+                <td><button onclick="removeWorker(5,'farmer')" style="width:100%; height: 25px"> -5 </button></td>
+                <td><button onclick="removeWorker(10,'farmer')" style="width:100%; height: 25px"> -10 </button></td>
+                    <td style="font-size: 25; text-align: center">Farmer</td>
+                <td><button onclick="addWorker(1,'farmer')" style="width:100%; height: 25px"> +1 </button></td>
+                <td><button onclick="addWorker(5,'farmer')" style="width:100%; height: 25px"> +5 </button></td>
+                <td><button onclick="addWorker(10,'farmer')" style="width:100%; height: 25px"> +10 </button></td>
+            </tr>
+
+            <tr>
+                <td><button onclick="removeWorker(1,'woodcutter')" style="width:100%; height: 25px"> -1 </button></td>
+                <td><button onclick="removeWorker(5,'woodcutter')" style="width:100%; height: 25px"> -5 </button></td>
+                <td><button onclick="removeWorker(10,'woodcutter')" style="width:100%; height: 25px"> -10 </button></td>
+                    <td style="font-size: 25; text-align: center; text-align: center">Woodcutter</td>
+                <td><button onclick="addWorker(1,'woodcutter')" style="width:100%; height: 25px"> -1 </button></td>
+                <td><button onclick="addWorker(5,'woodcutter')" style="width:100%; height: 25px"> -5 </button></td>
+                <td><button onclick="addWorker(10,'woodcutter')" style="width:100%; height: 25px"> -10 </button></td>
+            </tr>
+
+            <tr>
+                <td><button onclick="removeWorker(1,'miner')" style="width:100%; height: 25px"> -1 </button></td>
+                <td><button onclick="removeWorker(5,'miner')" style="width:100%; height: 25px"> -5 </button></td>
+                <td><button onclick="removeWorker(10,'miner')" style="width:100%; height: 25px"> -10 </button></td>
+                    <td style="font-size: 25; text-align: center">Miner</td>
+                <td><button onclick="addWorker(1,'miner')" style="width:100%; height: 25px"> +1 </button></td>
+                <td><button onclick="addWorker(5,'miner')" style="width:100%; height: 25px"> +5 </button></td>
+                <td><button onclick="addWorker(10,'miner')" style="width:100%; height: 25px"> +10 </button></td>
+            </tr>
+        </table>
     </div>
-	
- 
-<div class="split left">
-    <table cellspacing="0" cellpadding="3">
-        <tr>
-            <td >Maximum Population</td>
-            <td><input type="text" id="totalPopulation" disabled style = "text-align: center"></td>
-        </tr>
+
+    <div class="menu buildings">
+        <h1>Build Menu</h1>
+        <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">
+            <tr>
+                <td><button onclick="buyTent()" id="tent" style="width:100%; height: 30px">Tent</button></td>
+                <td  id="costTent" style = "text-align: center">6 Food | 3 Wood | 0 Stone</td>
+                <td>|</td>
+                <td  disabled style = "text-align: center">Add +2 Maximum Population</td>
+            </tr> 
+
+            <tr>
+                <td><button onclick="buySmallHouse()" id="SmallHouse" style="width:100%; height: 30px">Small House</button></td>
+                <td  id="costSmallHouse" disabled style = "text-align: center">18 Food | 40 Wood | 40 Stone</td>
+                <td>|</td>
+                <td  disabled style = "text-align: center">Add +6 Maximum Population</td>
+            </tr>
+
+            <tr>
+                <td><button onclick="buyMediumHouse()" id="MediumHouse" style="width:100%; height: 30px">Medium House</button></td>
+                <td  id="costMediumHouse" disabled style = "text-align: center">30 Food | 90 Wood | 110 Stone</td>
+                <td>|</td>
+                <td  disabled style = "text-align: center">Add +10 Maximum Population</td>
+            </tr>
+        </table>
+    </div>
+    </div>
+</div>
+<!-- END OF GAME Interface -->
+    
+<!-- ARMY Interface -->
+<div id="army" class="text">
+    <div class="menu">
         
-        <tr>
-            <td >Current Population</td>
-            <td><input type="text" id="idlePopulation" disabled style = "text-align: center"></td>
-        </tr>
+    </div>
+</div>
+<!-- END OF ARMY Interface -->    
+    
+<!-- BLACKSMITH Interface -->
+<div id="blacksmith" class="text">
+    <div class="menu">
+        <div class="menu classes">
+            <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+                <tr>
+                    <td><button style="width:140px; height: 30px" onclick="farmerUpgrade()">Farmer</button></td>
+                </tr>
+
+                <tr>
+                    <td><button style="width:140px; height: 30px" onclick="woodcUpgrade()">Woodcutter</button></td>
+                </tr>
+
+                <tr>
+                    <td><button style="width:140px; height: 30px" onclick="minerUpgrade()">Miner</button></td>
+                </tr>
+            </table>
+        </div>
         
-        <tr>
-            <td><button class="textButton" onclick="getFood()" style="width:100%; height: 30px; background: url(images/food.jpg); background-size: 100% 100%">Food</button></td>
-            <td id="food" disabled style = "text-align: center">0</td>
-			<td><img src="images/food.png" height="42" width="42"></td>
-            <td id="foodSec"> 0 /s </td>
-        </tr>
+        <div class="menu upgrades">
+            <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+                <tr>
+                    <td><button class="button textButton" style="width: 100%; height: 50px">Upgrade Shovel</button></td>
+                </tr>
+                
+                <tr>
+                    <td><button class="button textButton" style="width: 100%; height: 50px">Upgrade Hoe</button></td>
+                </tr>
+            </table>
+        </div>
         
-        <tr>
-            <td><button class="textButton" onclick="getWood()" style="width:100%; height: 30px; background: url(images/wood.jpg); background-size: 100% 100%">Wood</button></td>
-            <td id="wood" disabled style = "text-align: center">0</td>
-			<td><img src="images/wood.png" height="42" width="42"></td>
-            <td id="woodSec"> 0 /s </td>
-        </tr>
+        <div class="menu description">
+            <p id="shovelUp" style="margin-left: 15px; font-size: 30px">Upgrading the shovel makes easier for farmers to dig into the ground.</p>
+            <p id="hoeUp" style="margin-left: 15px; font-size: 30px">Upgrading the hoe increases efficiency of harvesting.</p>
+        </div>
         
-        <tr>
-            <td><button class="textButton" onclick="getStone()" style="width:100%; height: 30px; background: url(images/stone.jpg); background-size: 100% 100%">Stone</button></td>
-            <td id="stone" disabled style = "text-align: center">0</td>
-			<td><img src="images/stone.png" height="42" width="42"></td>
-            <td id="stoneSec"> 0 /s </td>
-        </tr>
+    </div>
+</div>
+<!-- END OF BLACKSMITH Interface -->
+    
+<!-- Options Menu -->
+<div class="menu options">
+    <h2>Options</h2>
+     <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">		
+         <tr>
+             <td><button onclick="save()" style="width:100%; height: 30px">Save Game</button></td>
+         </tr>
+         
+         <tr>
+            <td><button onclick="load()" style="width:100%; height: 30px">Load Game</button></td>
+         </tr>
+
+         <tr>
+            <td><button onclick="changeName()" style="width:100%; height: 30px">Change Name</button></td>
+         </tr>
+
+         <tr>
+            <td><button onclick="reset()" style="width:100%; height: 30px">Reset Everything</button></td>
+         </tr>
+
     </table>
+
 </div>
-
-<div class="split right">
-	<table  cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px; font-size: 20">
-        <tr>
-            <th style = "text-align: center">Create Worker</th>
-            <th style = "text-align: center">30 Food</th>
-            <th><button onclick="createWorker(1)">+1</button> </th>
-            <th><button onclick="createWorker(5)">+5</button> </th>
-            <th><button onclick="createWorker(10)">+10</button> </th>
-        </tr>
-        
-        <tr>
-            <td>Workers Available</td>
-            <td id="workers">0</td>
-        </tr>
-        
-		<tr>
-			<td>Farmers</td>
-			<td id="foodWA">0</td>
-		</tr>
-		
-		<tr>
-			<td>Woodcutters</td>
-			<td id="woodWA">0</td>
-		</tr>
-		
-		<tr>
-			<td>Miners</td>
-			<td id="stoneWA" >0</td>
-		</tr>
-	</table>
-</div>
-
-<div class="under left">
-<hr>
-    <h1 >Build Menu</h2>
-    <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">
-        <tr>
-            <td><button onclick="buyTent()" id="tent" style="width:100%; height: 30px">Tent</button></td>
-            <td  id="costTent" style = "text-align: center">6 Food | 3 Wood | 0 Stone</td>
-            <td>|</td>
-            <td  disabled style = "text-align: center">Add +2 Maximum Population</td>
-        </tr> 
-        
-        <tr>
-            <td><button onclick="buySmallHouse()" id="SmallHouse" style="width:100%; height: 30px">Small House</button></td>
-            <td  id="costSmallHouse" disabled style = "text-align: center">18 Food | 40 Wood | 40 Stone</td>
-            <td>|</td>
-            <td  disabled style = "text-align: center">Add +6 Maximum Population</td>
-        </tr>
-        
-        <tr>
-            <td><button onclick="buyMediumHouse()" id="MediumHouse" style="width:100%; height: 30px">Medium House</button></td>
-            <td  id="costMediumHouse" disabled style = "text-align: center">30 Food | 90 Wood | 110 Stone</td>
-            <td>|</td>
-            <td  disabled style = "text-align: center">Add +10 Maximum Population</td>
-        </tr>
-    </table>
-	
-	<h1 >Assign Workers to automatically gather resources</h2>
-	<table  cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">
-		<tr>
-			<td style="font-size: 25">Farmer</td>
-			<td><button onclick="addWorker(1,'farmer')" style="width:100%; height: 25px"> +1 </button></td>
-			<td><button onclick="addWorker(5,'farmer')" style="width:100%; height: 25px"> +5 </button></td>
-			<td><button onclick="addWorker(10,'farmer')" style="width:100%; height: 25px"> +10 </button></td>
-		</tr>
-		
-		<tr>
-			<td style="font-size: 25">Woodcutter</td>
-			<td><button onclick="addWorker(1,'woodcutter')" style="width:100%; height: 25px"> +1 </button></td>
-			<td><button onclick="addWorker(5,'woodcutter')" style="width:100%; height: 25px"> +5 </button></td>
-			<td><button onclick="addWorker(10,'woodcutter')" style="width:100%; height: 25px"> +10 </button></td>
-		</tr>
-		
-		<tr>
-			<td style="font-size: 25">Miner</td>
-			<td><button onclick="addWorker(1,'miner')" style="width:100%; height: 25px"> +1 </button></td>
-			<td><button onclick="addWorker(5,'miner')" style="width:100%; height: 25px"> +5 </button></td>
-			<td><button onclick="addWorker(10,'miner')" style="width:100%; height: 25px"> +10 </button></td>
-		</tr>
-	</table>
-</div>
-	
-<div class="under right2">
-	<h2>Options</h2>
-	<table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">		
-		<tr>
-			<td><button onclick="save()" style="width:100%; height: 30px">Save Game</button></td>
-		</tr>
-		
-		<tr>
-			<td><button onclick="load()" style="width:100%; height: 30px">Load Game</button></td>
-		</tr>
-		
-		<tr>
-			<td><button onclick="changeName()" style="width:100%; height: 30px">Change Name</button></td>
-		</tr>
-		
-		<tr>
-			<td><button onclick="reset()" style="width:100%; height: 30px">Reset Everything</button></td>
-		</tr>
-
-	</table>
-	
-</div>
-
-
-	
+<!-- END OF OPTIONS MENU Interface -->
+    
 <div class="footer">
-    <p  style="font-size: 20">Idle time: 
-        <span id="ore"> 0 </span> hours |
-		<span id="minute"> 0 </span>  minutes |
-		<span id="secunde"> 0 </span> seconds
+     <p  style="font-size: 20">Idle time: 
+         <span id="ore"> 0 </span> hours |
+         <span id="minute"> 0 </span>  minutes |
+         <span id="secunde"> 0 </span> seconds
     </p> 
 </div>
 
-</div>
-
-</body>
-    
+</body>  
 </html>

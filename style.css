@@ -1,5 +1,6 @@
 body {
-  background-image: url("images/backgrounds/bg1.jpg");
+  background-image: url("images/backgrounds/bg6.jpg");
+  background-color: rgba(0, 0, 0, 0.7);
   background-size: 100% 100%;
   width: 100%;
   height: 100%;
@@ -39,42 +40,146 @@ html, body {
     margin: 0;
 }
 
-.split {
-  height: 25%;
-  width: 50%;
+.button {
+  background-color: rgba(255, 0, 0, 1);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* Navigation */
+#game {
+    display: block;
+}
+
+#army {
+    display: none;
+}
+
+
+#blacksmith {
+    display: none;
+}
+
+#trades {
+    display: none;
+}
+
+#stats {
+    display: none;
+}
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* SPLIT PAGE */
+
+.btn-group .navigate {
+  background-color: #4CAF50; /* Green */
+  border: 1px solid green;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+}
+
+.btn-group .navigate:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+.btn-group .navigate:hover {
+  background-color: #3e8e41;
+}
+
+.menu {
+  height: 80%;
+  width: 65%;
+  left: 1%;
   position: fixed;
   z-index: 1;
-  top: 0;
+  top: 10%;
   overflow-x: hidden;
   padding-top: 20px;
 }
 
-.under {
-  height: 75%;
-  width: 100%;
-  position: fixed;
-  z-index: 1;
-  top: 25%;
-  overflow-x: hidden;
-  padding-top: 20px;
+/* GAME TAB */
+.gather {
+  top: 10%;
+  width: 24%;
+  background-color: rgba(255, 0, 0, 0.4);
+  border-style: solid;
+  border-width: medium;
 }
 
-.left {
-  left: 0;
-  //background-color: #111;
+.workers {
+  left: 26%;
+  top: 10%;
+  width: 63%;
+  border-style: solid;
+  border-width: medium;
+  background-color: rgba(0, 255, 0, 0.4);
 }
 
-.right {
-  right: 0;
-  left: 35%;
-  //background-color: red;
+.buildings {
+  left: 26%;
+  top: 55%;
+  height: 35%;
+  width: 63%;
+  background-color: rgba(0, 0, 255, 0.4);
+  border-style: solid;
+  border-width: medium;
 }
 
-.right2 {
-  right: 0;
-  left: 70%;
-  //background-color: red;
+/* ARMY TAB */
+
+/* BLACKSMITH TAB */
+.classes {
+  top: 10%;
+  width: 10%;
+  background-color: rgba(255, 0, 0, 0.4);
+  border-style: solid;
+  border-width: medium;
 }
+
+.upgrades {
+  left: 12%;
+  top: 10%;
+  width: 45%;
+  border-style: solid;
+  border-width: medium;
+  background-color: rgba(0, 255, 0, 0.4);
+}
+
+.description {
+  left: 58%;
+  top: 10%;
+  width: 31%;
+  background-color: rgba(0, 0, 255, 0.4);
+  border-style: solid;
+  border-width: medium;
+}
+
+.options {
+    left: 90%;
+    width: 9%;
+    top: 10%;
+    background-color: rgba(0, 100, 100, 0.4);
+    border-style: solid;
+    border-width: medium;
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* FOOTER */
 
 .footer {
   position: fixed;

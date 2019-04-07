@@ -1,12 +1,8 @@
 <html>
 
     <head>
-        <title> Idle Game - Proiect </title>
+        <title> Rise of a new era - Proiect </title>
     </head>
-
-<script src="scripts/script.js"></script>
-<script src="scripts/menu.js"></script>
-<script src="scripts/bg.js"></script>
 
 <link rel="stylesheet" href="style.css">
     
@@ -35,7 +31,9 @@
     
 </header>
 
-<p id="name" class="text" style="font-size: 35px; color: red"></p>
+<p id="name" class="text" style="font-size: 35px; color: red">The Ruler of this nation is: </p>
+    
+    <!-- ============================================================================================================================================================================================= -->
 
 <!-- GAME Interface -->
 <div id="game" class="text">
@@ -146,23 +144,30 @@
         <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">
             <tr>
                 <td><button onclick="buyTent()" id="tent" style="width:100%; height: 30px">Tent</button></td>
-                <td  id="costTent" style = "text-align: center">6 Food | 3 Wood | 0 Stone</td>
+                <td  id="costTent" style = "text-align: center">20 Food | 15 Wood | 5 Stone</td>
                 <td>|</td>
-                <td  disabled style = "text-align: center">Add +2 Maximum Population</td>
+                <td  disabled style = "text-align: center">Add +1 Maximum Population</td>
             </tr> 
 
             <tr>
                 <td><button onclick="buySmallHouse()" id="SmallHouse" style="width:100%; height: 30px">Small House</button></td>
-                <td  id="costSmallHouse" disabled style = "text-align: center">18 Food | 40 Wood | 40 Stone</td>
+                <td  id="costSmallHouse" disabled style = "text-align: center">40 Food | 80 Wood | 120 Stone</td>
                 <td>|</td>
-                <td  disabled style = "text-align: center">Add +6 Maximum Population</td>
+                <td  disabled style = "text-align: center">Add +2 Maximum Population</td>
             </tr>
 
             <tr>
                 <td><button onclick="buyMediumHouse()" id="MediumHouse" style="width:100%; height: 30px">Medium House</button></td>
-                <td  id="costMediumHouse" disabled style = "text-align: center">30 Food | 90 Wood | 110 Stone</td>
+                <td  id="costMediumHouse" disabled style = "text-align: center">60 Food | 150 Wood | 200 Stone</td>
                 <td>|</td>
-                <td  disabled style = "text-align: center">Add +10 Maximum Population</td>
+                <td  disabled style = "text-align: center">Add +3 Maximum Population</td>
+            </tr>
+			
+			<tr>
+                <td><button onclick="createBarrack()" id="barrack" style="width:100%; height: 30px">Barrack</button></td>
+                <td  id="costBarrack" disabled style = "text-align: center">1000 Food | 1000 Wood | 1000 Stone</td>
+                <td>|</td>
+                <td  disabled style = "text-align: center">Start building your army</td>
             </tr>
         </table>
     </div>
@@ -170,13 +175,90 @@
 </div>
 <!-- END OF GAME Interface -->
     
+    <!-- ============================================================================================================================================================================================= -->
+    
 <!-- ARMY Interface -->
 <div id="army" class="text">
-    <div class="menu">
+    <div class="menu classes">
+        <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+            <tr>
+                <td><button style="width:140px; height: 30px" onclick="armyTab('soldier')">Soldier</button></td>
+            </tr>
+
+            <tr>
+                <td><button style="width:140px; height: 30px" onclick="armyTab('officer')">Officer</button></td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="menu upgrades">
+        <div id="soldierUpgrade">
+            <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+                <tr>
+                    <td>
+                        <button id="soldierMenu1" class="button textButton" style="width: 100%; height: 50px" onmouseover="costSoldier(1)" onmouseout="updateArmy()" onclick="addWorker('soldier')">
+                            Train Soldier
+                        </button>
+                    </td>
+                    <td class="desc">| Training soldiers protects you from attackers.</td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <button id="soldierMenu2" class="button textButton" style="width: 100%; height: 50px" onmouseover="costSoldier(2)" onmouseout="updateArmy()" onclick="soldierUpgrade(1)">
+                            Upgrade Soldiers Rank
+                        </button>
+                    </td>
+                    <td class="desc">| Upgrading solider's rank improves their stats overall.</td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <button id="soldierMenu3" class="button textButton" style="width: 100%; height: 50px" onmouseover="costSoldier(3)" onmouseout="updateArmy()" onclick="soldierUpgrade(2)">
+                            Upgrade Gun
+                        </button>
+                    </td>
+                    <td class="desc">| Upgrading the gun makes your soldiers to shoot more accurately.</td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <button id="soldierMenu4" class="button textButton" style="width: 100%; height: 50px" onmouseover="costSoldier(4)" onmouseout="updateArmy()" onclick="soldierUpgrade(3)">
+                            Upgrade Stamina
+                        </button>
+                    </td>
+                    <td class="desc">| Upgrading stamina increases the soldier's resistance.</td>
+                </tr>
+            </table>
+        </div>
         
+        <div id="officerUpgrade">
+            <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+                <tr>
+                    <td><button class="button textButton" style="width: 100%; height: 50px" onclick="soldierUpgrade(1)">Train Officer</button></td>
+                    <td class="desc">| Training officers will improve soldiers efficienty.</td>
+                </tr>
+                
+                <tr>
+                    <td><button class="button textButton" style="width: 100%; height: 50px" onclick="soldierUpgrade(2)">Upgrade Officer</button></td>
+                    <td class="desc">| Upgrading the officers will boost the moral of your soldiers.</td>
+                </tr>
+            </table>
+        </div>
+    
+    </div>
+    
+    <div class="menu description">
+        <p id="soldierNumber" style="margin-left: 15px; font-size: 20px">You currently have: 0 soldiers.</p>
+        <p id="soldierRank" style="margin-left: 15px; font-size: 20px">Current soldier's rank: Private .</p>
+            <hr>
+        <p id="officerNumber" style="margin-left: 15px; font-size: 20px">You currently have: 0 officers.</p>
+        <p id="officerRank" style="margin-left: 15px; font-size: 20px">Current officer's rank: Second Lieutenant .</p>
     </div>
 </div>
 <!-- END OF ARMY Interface -->    
+    
+    <!-- ============================================================================================================================================================================================= -->
     
 <!-- BLACKSMITH Interface -->
 <div id="blacksmith" class="text">
@@ -188,7 +270,7 @@
                 </tr>
 
                 <tr>
-                    <td><button style="width:140px; height: 30px" onclick="woodcUpgrade()">Woodcutter</button></td>
+                    <td><button style="width:140px; height: 30px" onclick="woodcutterUpgrade()">Woodcutter</button></td>
                 </tr>
 
                 <tr>
@@ -218,8 +300,30 @@
 </div>
 <!-- END OF BLACKSMITH Interface -->
     
+    <!-- ============================================================================================================================================================================================= -->
+    
+<!-- TRADES Interface -->
+<div id="trades" class="text">
+    <div class="menu">
+    
+    </div>
+</div>
+<!-- END OF TRADES Interface -->
+    
+    <!-- ============================================================================================================================================================================================= -->
+    
+<!-- STATS Interface -->
+<div id="stats" class="text">
+    <div class="menu">
+    
+    </div>
+</div>
+<!-- END OF STATS Interface -->
+    
+    <!-- ============================================================================================================================================================================================= -->
+    
 <!-- Options Menu -->
-<div class="menu options">
+<div class="menu options text">
     <h2>Options</h2>
      <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">		
          <tr>
@@ -237,7 +341,21 @@
          <tr>
             <td><button onclick="reset()" style="width:100%; height: 30px">Reset Everything</button></td>
          </tr>
+    </table>
+    
+    <h2>Developer</h2>
+    <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">		
+         <tr>
+             <td><button onclick="add('food')" style="width:100%; height: 30px">+1000 Food</button></td>
+         </tr>
+         
+         <tr>
+            <td><button onclick="add('wood')" style="width:100%; height: 30px">+1000 Wood</button></td>
+         </tr>
 
+         <tr>
+            <td><button onclick="add('stone')" style="width:100%; height: 30px">+1000 Stone</button></td>
+         </tr>
     </table>
 
 </div>
@@ -251,5 +369,9 @@
     </p> 
 </div>
 
+<script src="scripts/script.js"></script>
+<script src="scripts/menu.js"></script>
+<script src="scripts/bg.js"></script>
+    
 </body>  
 </html>

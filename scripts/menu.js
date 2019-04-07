@@ -52,3 +52,21 @@ function tab(x)
 
         }
 }
+
+function armyTab(x)
+{
+    switch(x)
+        {
+            case 'soldier' :
+                document.getElementById("soldierUpgrade").style.display = "block";
+                
+                document.getElementById("officerUpgrade").style.display = "none";
+                break;
+                
+            case 'officer' :
+                document.getElementById("officerUpgrade").style.display = "block";
+                
+                document.getElementById("soldierUpgrade").style.display = "none";
+                break;
+        }
+}

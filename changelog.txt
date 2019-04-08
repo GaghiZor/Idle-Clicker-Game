@@ -18,7 +18,7 @@ Project v0.0.3
 
 Project v0.0.4
 ------------------------------------------------------------
-	1. Create the 'Army' tab
+	1. Created the 'Army' tab
 	2. Implemented 'Barrack' to host soldiers
 	3. Added possibility to train soldiers
 	4. Added soldier's / officer's ranks

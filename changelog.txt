@@ -1,0 +1,27 @@
+Project v0.0.1
+------------------------------------------------------------
+	Original release
+
+Project v0.0.2
+------------------------------------------------------------
+	Minor changes.
+
+Project v0.0.3
+------------------------------------------------------------
+	1. Completely UI changed
+	2. Added a navigation menu
+	3. Added a name for the nation's owner
+	4. Added [Change name] option
+	5. Added possibility to fire workers
+	6. Adjusted function to hire workers
+	7. Other minor changes to code
+
+Project v0.0.4
+------------------------------------------------------------
+	1. Create the 'Army' tab
+	2. Implemented 'Barrack' to host soldiers
+	3. Added possibility to train soldiers
+	4. Added soldier's / officer's ranks
+	5. Changed the cost of buildings
+	6. Added a 'Reset' option to reset everything
+	7. Minor changes to code

@@ -18,13 +18,14 @@ Project v0.0.3
 
 Project v0.0.4
 ------------------------------------------------------------
-	1. Create the 'Army' tab
+	1. Created the 'Army' tab
 	2. Implemented 'Barrack' to host soldiers
 	3. Added possibility to train soldiers
 	4. Added soldier's / officer's ranks
 	5. Changed the cost of buildings
 	6. Added a 'Reset' option to reset everything
 	7. Minor changes to code
+<<<<<<< HEAD
 
 Project v0.0.5
 ------------------------------------------------------------
@@ -33,3 +34,5 @@ Project v0.0.5
 	3. Added a menu for 'Extra Resources'
 	4. Added a drop chance for extra resources when you click on normal resources
 	5. Changed the increment function for normal resources
+=======
+>>>>>>> e7a5ab522125a2a9e854902b068028325f26f5dd

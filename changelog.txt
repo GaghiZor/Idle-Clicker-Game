@@ -25,3 +25,11 @@ Project v0.0.4
 	5. Changed the cost of buildings
 	6. Added a 'Reset' option to reset everything
 	7. Minor changes to code
+
+Project v0.0.5
+------------------------------------------------------------
+	1. Fixed 'Train Soldier'
+	2. Fixed CSS overlaping
+	3. Added a menu for 'Extra Resources'
+	4. Added a drop chance for extra resources when you click on normal resources
+	5. Changed the increment function for normal resources

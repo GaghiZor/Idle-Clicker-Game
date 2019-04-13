@@ -13,11 +13,12 @@
 <div class="dropdown" style="float:right;">
     <button class="dropbtn">Change Background</button>
     <div class="dropdown-content text2">
-         <a href="#" onclick="bg1()">Background #1</a>
-         <a href="#" onclick="bg2()">Background #2</a>
-         <a href="#" onclick="bg3()">Background #3</a>
-         <a href="#" onclick="bg4()">Background #4</a>
-         <a href="#" onclick="bg5()">Background #5</a>
+         <a href="#" onclick="bg(0)">No Background</a>
+         <a href="#" onclick="bg(1)">Background #1</a>
+         <a href="#" onclick="bg(2)">Background #2</a>
+         <a href="#" onclick="bg(3)">Background #3</a>
+         <a href="#" onclick="bg(4)">Background #4</a>
+         <a href="#" onclick="bg(5)">Background #5</a>
      </div>
 </div>
 
@@ -73,36 +74,55 @@
             </table>
             
             <hr>
+            
             <h2>Extra Resources</h2>
             <table cellspacing="0" cellpadding="3" style="font-size: 20px; border-spacing: 10px; margin-left: 20px">
                 <tr>
                     <td>Apples</td>
                     <td id="apples" disabled style = "text-align: center">0</td>
+                    <td><img src="images/extrares/apple.png" height="42" width="42"></td>
                 </tr>
                 
                 <tr>
                     <td>Leather</td>
                     <td id="leather" disabled style = "text-align: center">0</td>
+                    <td><img src="images/extrares/leather.png" height="42" width="42"></td>
                 </tr>
                 
                 <tr>
                     <td>Iron</td>
                     <td id="iron" disabled style = "text-align: center">0</td>
+                    <td><img src="images/extrares/iron.png" height="42" width="42"></td>
                 </tr>
                 
                 <tr>
                     <td>Silver</td>
                     <td id="silver" disabled style = "text-align: center">0</td>
+                    <td><img src="images/extrares/silver.png" height="42" width="42"></td>
                 </tr>
                 
                 <tr>
                     <td>Gold</td>
                     <td id="gold" disabled style = "text-align: center">0</td>
+                    <td><img src="images/extrares/gold.png" height="42" width="42"></td>
+                </tr>
+                
+                <tr>
+                    <td>Coal</td>
+                    <td id="coal" disabled style = "text-align: center">0</td>
+                    <td><img src="images/extrares/coal.png" height="42" width="42"></td>
+                </tr>
+                                
+                <tr>
+                    <td>Charcoal</td>
+                    <td id="charcoal" disabled style = "text-align: center">0</td>
+                    <td><img src="images/extrares/charcoal.png" height="42" width="42"></td>
                 </tr>
                 
                 <tr>
                     <td>Gunpowder</td>
                     <td id="gunpowder" disabled style = "text-align: center">0</td>
+                    <td><img src="images/extrares/gunpowder.png" height="42" width="42"></td>
                 </tr>
             </table>
         </div>
@@ -300,34 +320,84 @@
         <div class="menu classes">
             <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
                 <tr>
-                    <td><button style="width:140px; height: 30px" onclick="farmerUpgrade()">Farmer</button></td>
+                    <td><button style="width:140px; height: 30px" onclick="blacksmithTab(1)">Farmer</button></td>
                 </tr>
 
                 <tr>
-                    <td><button style="width:140px; height: 30px" onclick="woodcutterUpgrade()">Woodcutter</button></td>
+                    <td><button style="width:140px; height: 30px" onclick="blacksmithTab(2)">Woodcutter</button></td>
                 </tr>
 
                 <tr>
-                    <td><button style="width:140px; height: 30px" onclick="minerUpgrade()">Miner</button></td>
+                    <td><button style="width:140px; height: 30px" onclick="blacksmithTab(3)">Miner</button></td>
+                </tr>
+                
+                <tr>
+                    <td><hr></td>
+                </tr>
+                
+                <tr>
+                    <td><button style="width:140px; height: 30px" onclick="blacksmithTab(4)">Kiln</button></td>
+                </tr>
+                
+                <tr>
+                    <td><button style="width:140px; height: 30px" onclick="blacksmithTab(5)">Powder Mill</button></td>
                 </tr>
             </table>
         </div>
         
         <div class="menu upgrades">
-            <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
-                <tr>
-                    <td><button class="button textButton" style="width: 100%; height: 50px">Upgrade Shovel</button></td>
-                </tr>
+            <div id="farmer">
+                <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+                    <tr>
+                        <td>
+                        <button id="farmerMenu0" class="button textButton" style="width: 100%; height: 50px" onmouseover="costFarmer(0)" onmouseout="updateFarmer()" onclick="farmerUpgrade(0)">
+                            Upgrade Shovel
+                        </button>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        <button id="farmerMenu1" class="button textButton" style="width: 100%; height: 50px" onmouseover="costFarmer(1)" onmouseout="updateFarmer()" onclick="farmerUpgrade(1)">
+                            Upgrade Shovel
+                        </button>
+                        </td>
+                        <td class="desc">| Upgrading the shovel improves farmer's skill to dig</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        <button id="farmerMenu2" class="button textButton" style="width: 100%; height: 50px" onmouseover="costFarmer(2)" onmouseout="updateFarmer()" onclick="farmerUpgrade(2)">
+                            Upgrade Hoe
+                        </button>
+                        </td>
+                        <td class="desc">| Upgrading the hoe improves their ability to plough the land</td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+        <!-- =============================================================================================================== -->
+            <div id="woodcutter">
                 
-                <tr>
-                    <td><button class="button textButton" style="width: 100%; height: 50px">Upgrade Hoe</button></td>
-                </tr>
-            </table>
+            </div>
+        <!-- =============================================================================================================== -->
+            <div id="miner">
+            
+            </div>
+        <!-- =============================================================================================================== -->
+            <div id="kiln">
+            
+            </div>
+        <!-- =============================================================================================================== -->
+            <div id="powdermill">
+            
+            </div>
         </div>
         
         <div class="menu description">
-            <p id="shovelUp" style="margin-left: 15px; font-size: 30px">Upgrading the shovel makes easier for farmers to dig into the ground.</p>
-            <p id="hoeUp" style="margin-left: 15px; font-size: 30px">Upgrading the hoe increases efficiency of harvesting.</p>
+            <p id="farmerEfficienty" style="margin-left: 15px; font-size: 30px">Farmer's Efficienty: 1</p>
+            <p id="woodcutterEfficienty" style="margin-left: 15px; font-size: 30px">Woodcutter's Efficienty: 1</p>
         </div>
         
     </div>
@@ -380,15 +450,19 @@
     <h2>Developer</h2>
     <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px">		
          <tr>
-             <td><button onclick="add('food')" style="width:100%; height: 30px">+1000 Food</button></td>
+             <td><button onclick="add('food')" style="width:100%; height: 30px">+100000 Food</button></td>
          </tr>
          
          <tr>
-            <td><button onclick="add('wood')" style="width:100%; height: 30px">+1000 Wood</button></td>
+            <td><button onclick="add('wood')" style="width:100%; height: 30px">+100000 Wood</button></td>
          </tr>
 
          <tr>
-            <td><button onclick="add('stone')" style="width:100%; height: 30px">+1000 Stone</button></td>
+            <td><button onclick="add('stone')" style="width:100%; height: 30px">+100000 Stone</button></td>
+         </tr>
+        
+         <tr>
+            <td><button onclick="add('extra')" style="width:100%; height: 30px">+100 Extra Res</button></td>
          </tr>
     </table>
 

@@ -70,3 +70,53 @@ function armyTab(x)
                 break;
         }
 }
+
+function blacksmithTab(x)
+{
+    switch(x)
+        {
+            case 1 :
+                document.getElementById("farmer").style.display = "block";
+                
+                document.getElementById("woodcutter").style.display = "none";
+                document.getElementById("miner").style.display = "none";
+                document.getElementById("kiln").style.display = "none";
+                document.getElementById("powdermill").style.display = "none";
+                break;
+            case 2 :
+                document.getElementById("woodcutter").style.display = "block";
+                
+                document.getElementById("farmer").style.display = "none";
+                document.getElementById("miner").style.display = "none";
+                document.getElementById("kiln").style.display = "none";
+                document.getElementById("powdermill").style.display = "none";
+                break;
+                
+            case 3 :
+                document.getElementById("miner").style.display = "block";
+                
+                document.getElementById("farmer").style.display = "none";
+                document.getElementById("woodcutter").style.display = "none";
+                document.getElementById("kiln").style.display = "none";
+                document.getElementById("powdermill").style.display = "none";
+                break;
+                
+            case 4 :
+                document.getElementById("kiln").style.display = "block";
+                
+                document.getElementById("farmer").style.display = "none";
+                document.getElementById("miner").style.display = "none";
+                document.getElementById("woodcutter").style.display = "none";
+                document.getElementById("powdermill").style.display = "none";
+                break;
+                
+            case 5 :
+                document.getElementById("powdermill").style.display = "block";
+                
+                document.getElementById("farmer").style.display = "none";
+                document.getElementById("miner").style.display = "none";
+                document.getElementById("kiln").style.display = "none";
+                document.getElementById("woodcutter").style.display = "none";
+                break;
+        }
+}

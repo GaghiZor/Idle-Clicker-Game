@@ -6,6 +6,8 @@ var stoneAmount = 0;
 
 var extraRes = {
     gunpowder: 0,
+    charcoal: 0,
+    coal: 0,
     leather: 0,
     gold: 0,
     iron: 0,
@@ -16,9 +18,31 @@ var extraRes = {
 
 /* Workers */
 var workers = 0;
-var foodWorkers = 0;
-var woodWorkers = 0;
-var stoneWorkers = 0;
+
+var farmer = {
+    total: 0,
+    shovel: 1,
+    hoe: 1,
+    level: 1,
+    efficienty: 1
+}
+
+var woodcutter = {
+    total: 0,
+    axe: 0,
+    handSaw: 0,
+    level: 1,
+    efficienty: 1
+}
+
+var miner = {
+    total: 0,
+    pickaxe: 1,
+    shovel: 1,
+    chisel: 1,
+    level: 1,
+    efficienty: 1
+}
 
 /* Population */
 var maxPopulation = 0;
@@ -107,13 +131,13 @@ function update()
 	document.getElementById("totalPopulation").value = maxPopulation;
 	document.getElementById("idlePopulation").value = Population;
 	
-    document.getElementById("food").innerHTML = foodAmount;
-    document.getElementById("wood").innerHTML = woodAmount;
-    document.getElementById("stone").innerHTML = stoneAmount;
+    document.getElementById("food").innerHTML = Math.round((foodAmount*100)/100);
+    document.getElementById("wood").innerHTML = Math.round((woodAmount*100)/100);
+    document.getElementById("stone").innerHTML = Math.round((stoneAmount*100)/100);
     
-    document.getElementById("foodSec").innerHTML = foodWorkers + " /s"; // Food / s - foodEff
-    document.getElementById("woodSec").innerHTML = woodWorkers + " /s"; // Wood / s - woodEff
-    document.getElementById("stoneSec").innerHTML = stoneWorkers + " /s"; // Stone / s - stoneEff
+    document.getElementById("foodSec").innerHTML = parseFloat(Math.round((farmer.total * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10)*100)/100).toFixed(2) + " /s"; // Food / s - foodEff
+    document.getElementById("woodSec").innerHTML = woodcutter.total + " /s"; // Wood / s - woodEff
+    document.getElementById("stoneSec").innerHTML = miner.total + " /s"; // Stone / s - stoneEff
     
     document.getElementById("costTent").innerHTML = tentCost[0] + " Food | " + tentCost[1] + " Wood | " + tentCost[2] + " Stone"; // Tent's Cost
     document.getElementById("costSmallHouse").innerHTML = smallHouseCost[0] + " Food | " + smallHouseCost[1] + " Wood | " + smallHouseCost[2] + " Stone"; // SmallHouse's Cost
@@ -122,20 +146,22 @@ function update()
 
 function updateExtraRes()
 {
-    document.getElementById("apples").innerHTML = extraRes.apples;
-    document.getElementById("leather").innerHTML = extraRes.leather;
-    document.getElementById("iron").innerHTML = extraRes.iron;
-    document.getElementById("silver").innerHTML = extraRes.silver;
-    document.getElementById("gold").innerHTML = extraRes.gold;
-    document.getElementById("gunpowder").innerHTML = extraRes.gunpowder;
+    document.getElementById("apples").innerHTML = Math.round((extraRes.apples*100)/100);
+    document.getElementById("leather").innerHTML = Math.round((extraRes.leather*100)/100);
+    document.getElementById("iron").innerHTML = Math.round((extraRes.iron*100)/100);
+    document.getElementById("silver").innerHTML = Math.round((extraRes.silver*100)/100);
+    document.getElementById("gold").innerHTML = Math.round((extraRes.gold*100)/100);
+    document.getElementById("gunpowder").innerHTML = Math.round((extraRes.gunpowder*100)/100);
+    document.getElementById("charcoal").innerHTML = Math.round((extraRes.charcoal*100)/100);
+    document.getElementById("coal").innerHTML = Math.round((extraRes.coal*100)/100);
 }
 
 function updateWorkers()
 {
     document.getElementById("workers").innerHTML = workers; // Workers Available
-	document.getElementById("foodWA").innerHTML = foodWorkers; // Food Workers Amount
-	document.getElementById("woodWA").innerHTML = woodWorkers; // Wood Workers Amount
-	document.getElementById("stoneWA").innerHTML = stoneWorkers; // Stone Workers Amount
+	document.getElementById("foodWA").innerHTML = farmer.total; // Food Workers Amount
+	document.getElementById("woodWA").innerHTML = woodcutter.total; // Wood Workers Amount
+	document.getElementById("stoneWA").innerHTML = miner.total; // Stone Workers Amount
 }
 
 function updateName()
@@ -156,6 +182,14 @@ function updateArmy()
     
     document.getElementById("soldierNumber").innerHTML = "You currently have: " + soldier.amount + " soldier(s).";
     document.getElementById("soldierRank").innerHTML = "Current soldier's rank: " + soldier.rank + " .";
+}
+
+function updateFarmer()
+{
+    document.getElementById("farmerMenu1").innerHTML = "Upgrade Shovel";
+    document.getElementById("farmerMenu2").innerHTML = "Upgrade Hoe";
+    
+    document.getElementById("farmerEfficienty").innerHTML = "Farmer's efficienty: " + farmer.efficienty;
 }
 
 // Idle time
@@ -181,18 +215,18 @@ function idleTime()
 function foodAuto()
 {
 
-    foodAmount += foodWorkers; // de refacut
+    foodAmount += farmer.total * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10;
 }
 
 function woodAuto()
 {
-	woodAmount += woodWorkers;
+	woodAmount += woodcutter.total;
 
 }
 
 function stoneAuto()
 {
-	stoneAmount += stoneWorkers;
+	stoneAmount += miner.total;
 
 }
 
@@ -228,12 +262,14 @@ function increment(name)
             extraRes.apples += 1;
     
     if(x < extraRes.chance && name === "stone")
-        if(z <= 5)
+        if(z <= 2)
             extraRes.iron += 1;
-        else if(z >= 6 && z <= 8)
+        else if(z >= 6 && z <= 7)
             extraRes.silver += 1;
         else if(z == 18)
             extraRes.gold +=1 ;
+        else if(z >= 9 && z <= 12)
+            extraRes.coal += 1;
     
     update();
     updateExtraRes();
@@ -333,21 +369,21 @@ function addWorker(x,job)
 	//Workers for food
 	if( workers >= x && job == "farmer" )
 	{
-		foodWorkers += x;
+		farmer.total += x;
 		workers -= x;
 	}
 	
 	//Workers for wood
 	else if( workers >= x && job == "woodcutter" )
 	{
-		woodWorkers += x;
+		woodcutter.total += x;
 		workers -= x;
 	}
 	
 	//Workers for stone
 	else if( workers >= x && job == "miner" )
 	{
-		stoneWorkers += x;
+		miner.total += x;
 		workers -= x;
 	}
 	else alert("No workers are available");
@@ -359,23 +395,23 @@ function addWorker(x,job)
 function removeWorker(x,job)
 {
 	//Workers for food
-	if(job == "farmer" && foodWorkers >= x)
+	if(job == "farmer" && farmer.total >= x)
 	{
-		foodWorkers -= x;
+		farmer.total -= x;
 		workers += x;
 	}
 	
 	//Workers for wood
-	if(job == "woodcutter" && woodWorkers >= x)
+	if(job == "woodcutter" && woodcutter.total >= x)
 	{
-		woodWorkers -= x;
+		woodcutter.total -= x;
 		workers += x;
 	}
 	
 	//Workers for stone
-	if(job == "miner" && stoneWorkers >= x)
+	if(job == "miner" && miner.total >= x)
 	{
-		stoneWorkers -= x;
+		miner.total -= x;
 		workers += x;
 	}
 	
@@ -390,8 +426,8 @@ function removeWorker(x,job)
 // Options
 
 // Save/Load script
-  function save()
-  {
+function save()
+{
     //alert("Save Complete");
       
     localStorage.setItem("foodAmount",foodAmount); // Save foodAmount
@@ -399,9 +435,6 @@ function removeWorker(x,job)
     localStorage.setItem("stoneAmount",stoneAmount); // Save stoneAmount
 	
     localStorage.setItem("workers", workers); // Save number of workers
-    localStorage.setItem("foodWorkers",foodWorkers); // Save number of farmers (foodWorkers)
-    localStorage.setItem("woodWorkers",woodWorkers); // Save number of woodcutter (woodWorkers)
-    localStorage.setItem("stoneWorkers",stoneWorkers); // Save number of miners (stoneWorkers)
       
     localStorage.setItem("maxPopulation", maxPopulation); // Save number of maxPopulation
     localStorage.setItem("Population", Population); // Save number of current Population
@@ -422,7 +455,10 @@ function removeWorker(x,job)
         extraRes: extraRes,
         soldier: soldier,
         boolHasBarrack: boolHasBarrack,
-        boolSoldierMaxRank: boolSoldierMaxRank
+        boolSoldierMaxRank: boolSoldierMaxRank,
+        farmer: farmer,
+        woodcutter: woodcutter,
+        miner: miner
     }
       
     try {
@@ -430,10 +466,10 @@ function removeWorker(x,job)
     } catch(err) {
         console.log("Can not acces localStorage");
     }
-  }
+}
 
-  function load()
-  {
+function load()
+{
     //alert("Load Complete");
 
     foodAmount = localStorage.getItem("foodAmount"); // Load foodAmount
@@ -448,14 +484,14 @@ function removeWorker(x,job)
     workers = localStorage.getItem("workers"); // Load number of workers
     workers = parseInt(workers);
       
-	foodWorkers = localStorage.getItem("foodWorkers"); // Load number of farmers (foodWorkers)
-	foodWorkers = parseInt(foodWorkers);
+	farmer.total = localStorage.getItem("farmer.total"); // Load number of farmers (farmer.total)
+	farmer.total = parseInt(farmer.total);
 	
-	woodWorkers = localStorage.getItem("woodWorkers"); // Load number of woodcutters (woodWorkers)
-	woodWorkers = parseInt(woodWorkers);
+	woodcutter.total = localStorage.getItem("woodcutter.total"); // Load number of woodcutters (woodcutter.total)
+	woodcutter.total = parseInt(woodcutter.total);
 	
-	stoneWorkers = localStorage.getItem("stoneWorkers"); // Load number of miners (stoneWorkers)
-	stoneWorkers = parseInt(stoneWorkers);
+	miner.total = localStorage.getItem("miner.total"); // Load number of miners (miner.total)
+	miner.total = parseInt(miner.total);
 // ===============================================================================================================
     maxPopulation = localStorage.getItem("maxPopulation"); // Load number of maxPopulation
     maxPopulation = parseInt(maxPopulation);
@@ -498,6 +534,8 @@ function removeWorker(x,job)
     if(loadVar.extraRes.gold != null) extraRes.gold = loadVar.extraRes.gold;
     if(loadVar.extraRes.silver != null) extraRes.silver = loadVar.extraRes.silver;
     if(loadVar.extraRes.iron != null) extraRes.iron = loadVar.extraRes.iron;
+    if(loadVar.extraRes.coal != null) extraRes.coal = loadVar.extraRes.coal;
+    if(loadVar.extraRes.coal != null) extraRes.coal = loadVar.extraRes.coal;
 // Loading soldier
     if(loadVar.soldier.amount != null) soldier.amount = loadVar.soldier.amount;
     if(loadVar.soldier.n != null) soldier.n = loadVar.soldier.n;
@@ -507,6 +545,25 @@ function removeWorker(x,job)
     if(loadVar.soldier.stamina != null) soldier.stamina = loadVar.soldier.stamina;
     if(loadVar.boolHasBarrack != null) boolHasBarrack = loadVar.boolHasBarrack;
     if(loadVar.boolSoldierMaxRank != null) boolSoldierMaxRank = load.boolSoldierMaxRank;
+// Loading Farmers, Woodcutter and Miners
+    if(loadVar.farmer.total != null) farmer.total = loadVar.farmer.total;
+    if(loadVar.farmer.shovel != null) farmer.shovel = loadVar.farmer.shovel;
+    if(loadVar.farmer.hoe != null) farmer.hoe = loadVar.farmer.hoe;
+    if(loadVar.farmer.level != null) farmer.level = loadVar.farmer.level;
+    if(loadVar.farmer.efficienty != null) farmer.efficienty = loadVar.farmer.efficienty;
+      //-------------
+    if(loadVar.woodcutter.total != null) woodcutter.total = loadVar.woodcutter.total;
+    if(loadVar.woodcutter.axe != null) woodcutter.axe = loadVar.woodcutter.axe;
+    if(loadVar.woodcutter.handSaw != null) woodcutter.handSaw = loadVar.woodcutter.handSaw;
+    if(loadVar.woodcutter.level != null) woodcutter.level = loadVar.woodcutter.level;
+    if(loadVar.woodcutter.efficienty != null) woodcutter.efficienty = loadVar.woodcutter.efficienty;
+      //-------------
+    if(loadVar.miner.total != null) miner.total = loadVar.miner.total;
+    if(loadVar.miner.pickaxe != null) miner.pickaxe = loadVar.miner.pickaxe;
+    if(loadVar.miner.shovel != null) miner.shovel = loadVar.miner.shovel;
+    if(loadVar.miner.chisel != null) miner.chisel = loadVar.miner.chisel;
+    if(loadVar.miner.level != null) miner.level = loadVar.miner.level;
+    if(loadVar.miner.efficienty != null) miner.efficienty = loadVar.miner.efficienty;
       
     if(boolHasBarrack == 1)
         document.getElementById("barrack").disabled = true;
@@ -533,9 +590,30 @@ function reset()
     stoneAmount = 0;
     
     workers = 0;
-    foodWorkers = 0;
-    woodWorkers = 0;
-    stoneWorkers = 0;
+    farmer = {
+        total: 0,
+        shovel: 1,
+        hoe: 1,
+        level: 1,
+        efficienty: 1
+    }
+
+    woodcutter = {
+        total: 0,
+        axe: 0,
+        handSaw: 0,
+        level: 1,
+        efficienty: 1
+    }
+
+    miner = {
+        total: 0,
+        pickaxe: 1,
+        shovel: 1,
+        chisel: 1,
+        level: 1,
+        efficienty: 1
+    }
     
     maxPopulation = 0;
     Population = 0;
@@ -564,11 +642,14 @@ function reset()
     
     extraRes = {
         gunpowder: 0,
+        charcoal: 0,
+        coal: 0,
         leather: 0,
         gold: 0,
         iron: 0,
         silver: 0,
-        apples: 0
+        apples: 0,
+        chance: 1
     }
     
     save();
@@ -588,6 +669,19 @@ function add(res)
         woodAmount += 100000;
     if(res === 'stone')
         stoneAmount += 100000;
+    
+    if(res === 'extra')
+        {
+            extraRes.apples += 100;
+            extraRes.charcoal += 100;
+            extraRes.coal += 100;
+            extraRes.iron += 100;
+            extraRes.silver += 100;
+            extraRes.gold += 100;
+            extraRes.gunpowder += 100;
+            extraRes.leather += 100;
+        }
+    updateExtraRes();
     update();
 }
 
@@ -636,9 +730,65 @@ function soldierUpgrade(x)
                                 document.getElementById("soldierMenu2").disabled = true;
                             }
                         break;
-                case 3 : 
+                // Upgrade Gun
+                case 3 : if(extraRes.gunpowder >= 800)
+                            {
+                                soldier.gun += 1;
+                                extraRes.gunpowder -= 800;
+                                updateExtraRes();
+                                updateArmy();
+                            }
+                        break;
+                case 4 : if(foodAmount >= 300)
+                            {
+                                foodAmount -= 300;
+                                soldier.stamina += 1;
+                                update();
+                                updateArmy();
+                            }
                     
             }
+    updateArmy();
+}
+
+function farmerUpgrade(x)
+{
+    switch(x)
+        {
+            case 0 : if(extraRes.iron >= Math.round((100 * farmer.efficienty * farmer.shovel)) && extraRes.silver >= Math.round((100 * farmer.efficienty * farmer.shovel)) && extraRes.gold >= Math.round((100 * farmer.efficienty * farmer.shovel)))
+                        {
+                            extraRes.iron -= 100 * farmer.efficienty * farmer.shovel;
+                            extraRes.silver -= 100 * farmer.efficienty * farmer.shovel;
+                            extraRes.gold -= 100 * farmer.efficienty * farmer.shovel;
+                            farmer.efficienty += 1;
+                            updateExtraRes();
+                            updateFarmer();
+                        }
+            // Upgrade Shovel
+            case 1 : if(extraRes.iron >= Math.round((15 * farmer.efficienty * farmer.shovel)) && extraRes.silver >= Math.round((10 * farmer.efficienty * farmer.shovel)) && extraRes.gold >= Math.round((5 * farmer.efficienty * farmer.shovel)))
+                        {
+                            extraRes.iron -= 15 * farmer.efficienty * farmer.shovel;
+                            extraRes.silver -= 10 * farmer.efficienty * farmer.shovel;
+                            extraRes.gold -= 5 * farmer.efficienty * farmer.shovel;
+                            farmer.shovel += 0.2;
+                            updateExtraRes();
+                            updateFarmer();
+                        }
+                    break;
+            // Upgrade Hoe
+            case 2 : if(extraRes.iron >= Math.round((15 * farmer.efficienty * farmer.hoe)) && extraRes.silver >= Math.round((10 * farmer.efficienty * farmer.hoe)) && extraRes.gold >= Math.round((5 * farmer.efficienty * farmer.hoe)))
+                        {
+                            extraRes.iron -= 15 * farmer.efficienty * farmer.hoe;
+                            extraRes.silver -= 10 * farmer.efficienty * farmer.hoe;
+                            extraRes.gold -= 5 * farmer.efficienty * farmer.hoe;
+                            farmer.hoe += 0.2;
+                            updateExtraRes();
+                            updateFarmer();
+                        }
+                    break;
+                
+        }
+    updateFarmer();
 }
 
 function costSoldier(x)
@@ -650,6 +800,15 @@ function costSoldier(x)
         case 3 : document.getElementById("soldierMenu3").innerHTML = "800 Gunpowder"; break;
         case 4 : document.getElementById("soldierMenu4").innerHTML = 300 + " Food"; break;
     }
+}
+
+function costFarmer(x)
+{
+    switch(x)
+        {
+            case 1 : document.getElementById("farmerMenu1").innerHTML = Math.round((15 * farmer.efficienty * farmer.shovel)) + " Iron | " + Math.round((10 * farmer.efficienty * farmer.shovel)) + " Silver | " + Math.round((5 * farmer.efficienty * farmer.shovel)) + " Gold"; break;
+            case 2 : document.getElementById("farmerMenu2").innerHTML = Math.round((15 * farmer.efficienty * farmer.hoe)) + " Iron | " + Math.round((10 * farmer.efficienty * farmer.hoe)) + " Silver | " + Math.round((5 * farmer.efficienty * farmer.hoe)) + " Gold"; break;
+        }
 }
 
 // ==============================================

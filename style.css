@@ -1,0 +1,286 @@
+body {
+  background-image: url("images/backgrounds/bg6.jpg");
+  background-color: rgba(0, 0, 0, 0.6);
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+#background {
+  
+}
+
+.text {
+  text-shadow:
+   -2px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 2px 0 #000,
+     2px 2px 0 #000;
+}
+
+.text2 {
+	text-shadow: none;
+}
+
+.textButton {
+	font-size: 17;
+	color: white;
+	text-shadow:
+   -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.button {
+  background-color: rgba(255, 0, 0, 1);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+button:disabled {
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+/*--------------------------------------------------------------------------------------------*/
+/* Navigation */
+#game {
+    display: block;
+}
+
+#army {
+    display: none;
+}
+
+
+#blacksmith {
+    display: none;
+}
+
+#trades {
+    display: none;
+}
+
+#stats {
+    display: none;
+}
+
+/* Army Navigation */
+#soldierUpgrade {
+    display: none;
+}
+
+#officerUpgrade {
+    display: none;
+}
+
+/* Blacksmith Navigation */
+#farmer {
+    display: none;
+}
+
+#woodcutter {
+    display: none;
+}
+
+#miner {
+    display: none;
+}
+
+#kiln {
+    display: none;
+}
+
+#powdermill {
+    display: none;
+}
+
+
+/*--------------------------------------------------------------------------------------------*/
+/* SPLIT PAGE */
+
+.btn-group .navigate {
+  background-color: #4CAF50; /* Green */
+  border: 1px solid green;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float: left;
+}
+
+.btn-group .navigate:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+.btn-group .navigate:hover {
+  background-color: #3e8e41;
+}
+
+.menu {
+  height: 80%;
+  width: 65%;
+  left: 1%;
+  position: fixed;
+  z-index: 1;
+  top: 10%;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* GAME TAB */
+.gather {
+  top: 10%;
+  width: 24%;
+  background-color: rgba(255, 0, 0, 0.4);
+  border-style: solid;
+  border-width: medium;
+}
+
+.workers {
+  left: 26%;
+  top: 10%;
+  width: 63%;
+  height: 41%;
+  border-style: solid;
+  border-width: medium;
+  background-color: rgba(0, 255, 0, 0.4);
+}
+
+.buildings {
+  left: 26%;
+  top: 55%;
+  height: 35%;
+  width: 63%;
+  background-color: rgba(0, 0, 255, 0.4);
+  border-style: solid;
+  border-width: medium;
+}
+
+/* ARMY TAB */
+.desc {
+    font-size: 25px;
+}
+
+/* BLACKSMITH TAB */
+.classes {
+  top: 10%;
+  width: 10%;
+  background-color: rgba(255, 0, 0, 0.4);
+  border-style: solid;
+  border-width: medium;
+}
+
+.upgrades {
+  left: 12%;
+  top: 10%;
+  width: 45%;
+  border-style: solid;
+  border-width: medium;
+  background-color: rgba(0, 255, 0, 0.4);
+}
+
+.description {
+  left: 58%;
+  top: 10%;
+  width: 31%;
+  background-color: rgba(0, 0, 255, 0.4);
+  border-style: solid;
+  border-width: medium;
+}
+
+.options {
+    left: 90%;
+    width: 9%;
+    top: 10%;
+    background-color: rgba(0, 100, 100, 0.4);
+    border-style: solid;
+    border-width: medium;
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/* FOOTER */
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(186, 186, 186, 0.3);
+  color: white;
+  text-align: center;
+}
+
+.footer p {
+  color: white;
+  text-shadow:
+ -1px -1px 0 #000,
+ 1px -1px 0 #000,
+ -1px 1px 0 #000,
+  2px 2px 0 #000;
+}
+
+.footer span {
+  color: white;
+  text-shadow:
+ -1px -1px 0 #000,
+ 1px -1px 0 #000,
+ -1px 1px 0 #000,
+  2px 2px 0 #000;
+}
+
+.dropbtn {
+    background-color: #cc2424;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    right: 10px;
+	top: 0px;
+}
+
+.dropdown-content {
+    text-align: center;
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 177px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #720505;}

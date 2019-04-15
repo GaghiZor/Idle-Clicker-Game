@@ -40,3 +40,4 @@ Project v.0.0.6
 	2. Changed how workers are declared
 	3. Added option to remove the image from background
 	4. Implemented Farmer's upgrade
+	5. Added 'Stats' tab

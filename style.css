@@ -1,5 +1,4 @@
 body {
-  background-image: url("images/backgrounds/bg6.jpg");
   background-color: rgba(0, 0, 0, 0.6);
   background-size: 100% 100%;
   width: 100%;
@@ -211,6 +210,14 @@ button:disabled {
     width: 9%;
     top: 10%;
     background-color: rgba(0, 100, 100, 0.4);
+    border-style: solid;
+    border-width: medium;
+}
+
+.stats {
+    top: 10%;
+    width: 88%;
+    background-color: rgba(255, 0, 0, 0.4);
     border-style: solid;
     border-width: medium;
 }

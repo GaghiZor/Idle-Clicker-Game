@@ -176,9 +176,9 @@
                 <td><button onclick="removeWorker(5,'woodcutter')" style="width:100%; height: 25px"> -5 </button></td>
                 <td><button onclick="removeWorker(10,'woodcutter')" style="width:100%; height: 25px"> -10 </button></td>
                     <td style="font-size: 25; text-align: center; text-align: center">Woodcutter</td>
-                <td><button onclick="addWorker(1,'woodcutter')" style="width:100%; height: 25px"> -1 </button></td>
-                <td><button onclick="addWorker(5,'woodcutter')" style="width:100%; height: 25px"> -5 </button></td>
-                <td><button onclick="addWorker(10,'woodcutter')" style="width:100%; height: 25px"> -10 </button></td>
+                <td><button onclick="addWorker(1,'woodcutter')" style="width:100%; height: 25px"> +1 </button></td>
+                <td><button onclick="addWorker(5,'woodcutter')" style="width:100%; height: 25px"> +5 </button></td>
+                <td><button onclick="addWorker(10,'woodcutter')" style="width:100%; height: 25px"> +10 </button></td>
             </tr>
 
             <tr>
@@ -316,7 +316,7 @@
     
 <!-- BLACKSMITH Interface -->
 <div id="blacksmith" class="text">
-    <div class="menu">
+
         <div class="menu classes">
             <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
                 <tr>
@@ -351,9 +351,10 @@
                     <tr>
                         <td>
                         <button id="farmerMenu0" class="button textButton" style="width: 100%; height: 50px" onmouseover="costFarmer(0)" onmouseout="updateFarmer()" onclick="farmerUpgrade(0)">
-                            Upgrade Shovel
+                            Upgrade Farmer
                         </button>
                         </td>
+                        <td class="desc">| Upgradint the farmer improves their stats overall.</td>
                     </tr>
                     
                     <tr>
@@ -399,8 +400,6 @@
             <p id="farmerEfficienty" style="margin-left: 15px; font-size: 30px">Farmer's Efficienty: 1</p>
             <p id="woodcutterEfficienty" style="margin-left: 15px; font-size: 30px">Woodcutter's Efficienty: 1</p>
         </div>
-        
-    </div>
 </div>
 <!-- END OF BLACKSMITH Interface -->
     
@@ -418,8 +417,107 @@
     
 <!-- STATS Interface -->
 <div id="stats" class="text">
-    <div class="menu">
-    
+    <div class="menu stats">
+        <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
+            <tr>
+                <td>Maximum Population</td>
+                <td id="stats1">0</td>
+                
+                <td>|</td>
+                <td>Total Soldiers</td>
+                <td id="stats14">0</td>
+            </tr>
+            <tr>
+                <td>Current Population</td>
+                <td id="stats2">0</td>
+                
+                <td>|</td>
+                <td>Total Officers</td>
+                <td id="stats15">0</td>
+            </tr>
+            <tr>
+                <td><hr></td>
+                <td></td>
+                <td>|</td>
+                <td><hr></td>
+            </tr>
+            <tr>
+                <td>Total Food Amount</td>
+                <td id="stats3">0</td>
+                
+                <td>|</td>
+                <td>Shovel Upgrade(Farmer)</td>
+                <td id="stats16">0</td>
+            </tr>
+            <tr>
+                <td>Total Wood Amount</td>
+                <td id="stats4">0</td>
+                
+                <td>|</td>
+                <td>Hoe Upgrade</td>
+                <td id="stats17">0</td>
+            </tr>
+            <tr>
+                <td>Total Stone Amount</td>
+                <td id="stats5">0</td>
+                
+                <td>|</td>
+                <td>Axe Upgrade</td>
+                <td id="stats18">0</td>
+            </tr>
+            <tr>
+                <td><hr></td>
+                <td></td>
+                
+                <td>|</td>
+                <td>Hand Saw Upgrade</td>
+                <td id="stats19">0</td>
+            </tr>
+            <tr>
+                <td>Total Apples</td>
+                <td id="stats6">0</td>
+                
+                <td>|</td>
+                <td>Pickaxe Upgrade</td>
+                <td id="stats20">0</td>
+            </tr>
+            <tr>
+                <td>Total Leather</td>
+                <td id="stats7">0</td>
+                
+                <td>|</td>
+                <td>Shovel Upgrade(Miner)</td>
+                <td id="stats21">0</td>
+            </tr>
+            <tr>
+                <td>Total Iron</td>
+                <td id="stats8">0</td>
+                
+                <td>|</td>
+                <td>Chisel Upgrade</td>
+                <td id="stats22">0</td>
+            </tr>
+            <tr>
+                <td>Total Silver</td>
+                <td id="stats9">0</td>
+            </tr>
+            <tr>
+                <td>Total Gold</td>
+                <td id="stats10">0</td>
+            </tr>
+            <tr>
+                <td>Total Coal</td>
+                <td id="stats11">0</td>
+            </tr>
+            <tr>
+                <td>Total Charcoal</td>
+                <td id="stats12">0</td>
+            </tr>
+            <tr>
+                <td>Total Gunpowder</td>
+                <td id="stats13">0</td>
+            </tr>
+        </table>
     </div>
 </div>
 <!-- END OF STATS Interface -->
@@ -470,7 +568,7 @@
 <!-- END OF OPTIONS MENU Interface -->
     
 <div class="footer">
-     <p  style="font-size: 20">Idle time: 
+     <p  style="font-size: 20">Time spent: 
          <span id="ore"> 0 </span> hours |
          <span id="minute"> 0 </span>  minutes |
          <span id="secunde"> 0 </span> seconds

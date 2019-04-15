@@ -4,6 +4,39 @@ var foodAmount = 0;
 var woodAmount = 0;
 var stoneAmount = 0;
 
+var stats = {
+    maxPop: 0,
+    currentPop: 0,
+    
+    foodTotal: 0,
+    woodTotal: 0,
+    stoneTotal: 0,
+    
+    gunpowder: 0,
+    charcoal: 0,
+    coal: 0,
+    leather: 0,
+    gold: 0,
+    iron: 0,
+    silver: 0,
+    apples: 0,
+    
+    shovelFarmer: 0,
+    hoeFarmer: 0,
+    
+    axeWoodcutter: 0,
+    handSawWoodcutter: 0,
+    
+    shovelMiner: 0,
+    pickaxeMiner: 0,
+    chiselMiner: 0,
+    
+    soldierTotal: 0,
+    officerTotal: 0,
+    
+    clicks: 0
+}
+
 var extraRes = {
     gunpowder: 0,
     charcoal: 0,
@@ -29,8 +62,8 @@ var farmer = {
 
 var woodcutter = {
     total: 0,
-    axe: 0,
-    handSaw: 0,
+    axe: 1,
+    handSaw: 1,
     level: 1,
     efficienty: 1
 }
@@ -53,7 +86,7 @@ var h = 0; // Hours
 var m = 0; // Minutes
 var s = 0; // Seconds
 
-var name;
+var name = "";
 
 /* Building Cost */
 var tentCost = [20, 15, 5];
@@ -104,11 +137,12 @@ var soldier = {
 window.onload = function () {
     if (localStorage.getItem("hasCodeRunBefore") === null)
 	{
-        name = window.prompt("How should I cal you? ");
+        name = window.prompt("How should I call you? ");
         localStorage.setItem("hasCodeRunBefore", true);
     }
-    document.getElementById("name").innerHTML = "The Ruler of this nation is: " + name;
-    load();
+    else load();
+    
+    updateName();
 }
 	
 // ==================================================================================================================
@@ -126,6 +160,38 @@ function timer()
 setInterval(timer, 1000);
 
 // Update values
+function updateStats()
+{
+    document.getElementById("clicks").innerHTML = stats.clicks;
+    
+    document.getElementById("stats1").innerHTML = stats.maxPop;
+    document.getElementById("stats2").innerHTML = stats.currentPop;
+    
+    document.getElementById("stats3").innerHTML = stats.foodTotal;
+    document.getElementById("stats4").innerHTML = stats.woodTotal;
+    document.getElementById("stats5").innerHTML = stats.stoneTotal;
+    
+    document.getElementById("stats6").innerHTML = stats.apples;
+    document.getElementById("stats7").innerHTML = stats.leather;
+    document.getElementById("stats8").innerHTML = stats.iron;
+    document.getElementById("stats9").innerHTML = stats.silver;
+    document.getElementById("stats10").innerHTML = stats.gold;
+    document.getElementById("stats11").innerHTML = stats.coal;
+    document.getElementById("stats12").innerHTML = stats.charcoal;
+    document.getElementById("stats13").innerHTML = stats.gunpowder;
+    
+    document.getElementById("stats14").innerHTML = stats.soldierTotal;
+    document.getElementById("stats15").innerHTML = stats.officerTotal;
+    
+    document.getElementById("stats16").innerHTML = stats.shovelFarmer;
+    document.getElementById("stats17").innerHTML = stats.hoeFarmer;
+    document.getElementById("stats18").innerHTML = stats.axeWoodcutter;
+    document.getElementById("stats19").innerHTML = stats.handSawWoodcutter;
+    document.getElementById("stats20").innerHTML = stats.pickaxeMiner;
+    document.getElementById("stats21").innerHTML = stats.shovelMiner;
+    document.getElementById("stats22").innerHTML = stats.chiselMiner;
+}
+
 function update()
 {
 	document.getElementById("totalPopulation").value = maxPopulation;
@@ -135,8 +201,8 @@ function update()
     document.getElementById("wood").innerHTML = Math.round((woodAmount*100)/100);
     document.getElementById("stone").innerHTML = Math.round((stoneAmount*100)/100);
     
-    document.getElementById("foodSec").innerHTML = parseFloat(Math.round((farmer.total * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10)*100)/100).toFixed(2) + " /s"; // Food / s - foodEff
-    document.getElementById("woodSec").innerHTML = woodcutter.total + " /s"; // Wood / s - woodEff
+    document.getElementById("foodSec").innerHTML = parseFloat(Math.round(((farmer.total * farmer.level) * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10)*100)/100).toFixed(2) + " /s"; // Food / s - foodEff
+    document.getElementById("woodSec").innerHTML = parseFloat(Math.round(((woodcutter.total * woodcutter.level) * (1+(woodcutter.efficienty * woodcutter.axe * woodcutter.handSaw)) / 10) *100)/100).toFixed(2) + " /s"; // Wood / s - woodEff
     document.getElementById("stoneSec").innerHTML = miner.total + " /s"; // Stone / s - stoneEff
     
     document.getElementById("costTent").innerHTML = tentCost[0] + " Food | " + tentCost[1] + " Wood | " + tentCost[2] + " Stone"; // Tent's Cost
@@ -166,7 +232,9 @@ function updateWorkers()
 
 function updateName()
 {
-	document.getElementById("name").innerHTML = "The Ruler of this nation is: " + name;
+    if(name === "")
+	   document.getElementById("name").innerHTML = "This nation has no ruler." + name;
+    else document.getElementById("name").innerHTML = "The Ruler of this nation is: " + name;
 }
 
 function updateArmy()
@@ -186,10 +254,11 @@ function updateArmy()
 
 function updateFarmer()
 {
+    document.getElementById("farmerMenu0").innerHTML = "Upgrade Farmer";
     document.getElementById("farmerMenu1").innerHTML = "Upgrade Shovel";
     document.getElementById("farmerMenu2").innerHTML = "Upgrade Hoe";
     
-    document.getElementById("farmerEfficienty").innerHTML = "Farmer's efficienty: " + farmer.efficienty;
+    document.getElementById("farmerEfficienty").innerHTML = "Farmer's Efficienty: " + farmer.efficienty;
 }
 
 // Idle time
@@ -215,13 +284,12 @@ function idleTime()
 function foodAuto()
 {
 
-    foodAmount += farmer.total * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10;
+    foodAmount += (farmer.total * farmer.level) * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10;
 }
 
 function woodAuto()
 {
-	woodAmount += woodcutter.total;
-
+	woodAmount += (woodcutter.total * woodcutter.level) * (1+(woodcutter.efficienty * woodcutter.axe * woodcutter.handSaw)) / 10;
 }
 
 function stoneAuto()
@@ -268,7 +336,7 @@ function increment(name)
             extraRes.silver += 1;
         else if(z == 18)
             extraRes.gold +=1 ;
-        else if(z >= 9 && z <= 12)
+        else if(z >= 9 && z <= 11)
             extraRes.coal += 1;
     
     update();
@@ -458,7 +526,8 @@ function save()
         boolSoldierMaxRank: boolSoldierMaxRank,
         farmer: farmer,
         woodcutter: woodcutter,
-        miner: miner
+        miner: miner,
+        stats: stats
     }
       
     try {
@@ -483,15 +552,6 @@ function load()
 // ===============================================================================================================
     workers = localStorage.getItem("workers"); // Load number of workers
     workers = parseInt(workers);
-      
-	farmer.total = localStorage.getItem("farmer.total"); // Load number of farmers (farmer.total)
-	farmer.total = parseInt(farmer.total);
-	
-	woodcutter.total = localStorage.getItem("woodcutter.total"); // Load number of woodcutters (woodcutter.total)
-	woodcutter.total = parseInt(woodcutter.total);
-	
-	miner.total = localStorage.getItem("miner.total"); // Load number of miners (miner.total)
-	miner.total = parseInt(miner.total);
 // ===============================================================================================================
     maxPopulation = localStorage.getItem("maxPopulation"); // Load number of maxPopulation
     maxPopulation = parseInt(maxPopulation);
@@ -535,7 +595,7 @@ function load()
     if(loadVar.extraRes.silver != null) extraRes.silver = loadVar.extraRes.silver;
     if(loadVar.extraRes.iron != null) extraRes.iron = loadVar.extraRes.iron;
     if(loadVar.extraRes.coal != null) extraRes.coal = loadVar.extraRes.coal;
-    if(loadVar.extraRes.coal != null) extraRes.coal = loadVar.extraRes.coal;
+    if(loadVar.extraRes.charcoal != null) extraRes.charcoal = loadVar.extraRes.charcoal;
 // Loading soldier
     if(loadVar.soldier.amount != null) soldier.amount = loadVar.soldier.amount;
     if(loadVar.soldier.n != null) soldier.n = loadVar.soldier.n;
@@ -564,6 +624,30 @@ function load()
     if(loadVar.miner.chisel != null) miner.chisel = loadVar.miner.chisel;
     if(loadVar.miner.level != null) miner.level = loadVar.miner.level;
     if(loadVar.miner.efficienty != null) miner.efficienty = loadVar.miner.efficienty;
+// Loading Stats
+    if(loadVar.stats.click != null) stats.clicks = loadVar.stats.clicks;
+    if(loadVar.stats.maxPop != null) stats.maxPop = loadVar.stats.maxPop;
+    if(loadVar.stats.currentPop != null) stats.currentPop = loadVar.stats.currentPop;
+    if(loadVar.stats.foodTotal != null) stats.foodTotal = loadVar.stats.foodTotal;
+    if(loadVar.stats.woodTotal != null) stats.woodTotal = loadVar.stats.woodTotal;
+    if(loadVar.stats.stoneTotal != null) stats.stoneTotal = loadVar.stats.stoneTotal;
+    if(loadVar.stats.gunpowder != null) stats.gunpowder = loadVar.stats.gunpowder;
+    if(loadVar.stats.apples != null) stats.apples = loadVar.stats.apples;
+    if(loadVar.stats.leather != null) stats.leather = loadVar.stats.leather;
+    if(loadVar.stats.gold != null) stats.gold = loadVar.stats.gold;
+    if(loadVar.stats.iron != null) stats.iron = loadVar.stats.iron;
+    if(loadVar.stats.silver != null) stats.silver = loadVar.stats.silver;
+    if(loadVar.stats.coal != null) stats.coal = loadVar.stats.coal;
+    if(loadVar.stats.charcoal != null) stats.charcoal = loadVar.stats.charcoal;
+    if(loadVar.stats.shovelFarmer != null) stats.shovelFarmer = loadVar.stats.shovelFarmer;
+    if(loadVar.stats.hoeFarmer != null) stats.hoeFarmer = loadVar.stats.hoeFarmer;
+    if(loadVar.stats.axeWoodcutter != null) stats.axeWoodcutter = loadVar.stats.axeWoodcutter;
+    if(loadVar.stats.handSawWoodcutter != null) stats.handSawWoodcutter = loadVar.stats.handSawWoodcutter;
+    if(loadVar.stats.shovelMiner != null) stats.shovelMiner = loadVar.stats.shovelMiner;
+    if(loadVar.stats.pickaxeMiner != null) stats.pickaxeMiner = loadVar.stats.pickaxeMiner;
+    if(loadVar.stats.chiselMiner != null) stats.chiselMiner = loadVar.stats.chiselMiner;
+    if(loadVar.stats.soldierTotal != null) stats.soldierTotal = loadVar.stats.soldierTotal;
+    if(loadVar.stats.officerTotal != null) stats.officerTotal = loadVar.stats.officerTotal;
       
     if(boolHasBarrack == 1)
         document.getElementById("barrack").disabled = true;
@@ -579,7 +663,7 @@ function load()
   
  function changeName()
  {
-	 name = window.prompt("How should I cal you? ");
+     name = window.prompt("How should I call you? ");
 	 updateName();
  }
 
@@ -600,8 +684,8 @@ function reset()
 
     woodcutter = {
         total: 0,
-        axe: 0,
-        handSaw: 0,
+        axe: 1,
+        handSaw: 1,
         level: 1,
         efficienty: 1
     }
@@ -755,15 +839,16 @@ function farmerUpgrade(x)
 {
     switch(x)
         {
-            case 0 : if(extraRes.iron >= Math.round((100 * farmer.efficienty * farmer.shovel)) && extraRes.silver >= Math.round((100 * farmer.efficienty * farmer.shovel)) && extraRes.gold >= Math.round((100 * farmer.efficienty * farmer.shovel)))
+            case 0 : if(extraRes.iron >= Math.round((100 * farmer.efficienty)) && extraRes.silver >= Math.round((100 * farmer.efficienty)) && extraRes.gold >= Math.round((100 * farmer.efficienty)))
                         {
-                            extraRes.iron -= 100 * farmer.efficienty * farmer.shovel;
-                            extraRes.silver -= 100 * farmer.efficienty * farmer.shovel;
-                            extraRes.gold -= 100 * farmer.efficienty * farmer.shovel;
+                            extraRes.iron -= 100 * farmer.efficienty;
+                            extraRes.silver -= 100 * farmer.efficienty;
+                            extraRes.gold -= 100 * farmer.efficienty;
                             farmer.efficienty += 1;
                             updateExtraRes();
                             updateFarmer();
                         }
+					break;
             // Upgrade Shovel
             case 1 : if(extraRes.iron >= Math.round((15 * farmer.efficienty * farmer.shovel)) && extraRes.silver >= Math.round((10 * farmer.efficienty * farmer.shovel)) && extraRes.gold >= Math.round((5 * farmer.efficienty * farmer.shovel)))
                         {
@@ -806,7 +891,8 @@ function costFarmer(x)
 {
     switch(x)
         {
-            case 1 : document.getElementById("farmerMenu1").innerHTML = Math.round((15 * farmer.efficienty * farmer.shovel)) + " Iron | " + Math.round((10 * farmer.efficienty * farmer.shovel)) + " Silver | " + Math.round((5 * farmer.efficienty * farmer.shovel)) + " Gold"; break;
+            case 0 : document.getElementById("farmerMenu0").innerHTML = 100*farmer.efficienty + " Iron | " + 100*farmer.efficienty + " Silver | " + 100*farmer.efficienty + " Gold"; break;
+            case 1 : document.getElementById("farmerMenu1").innerHTML = Math.round((15 * farmer.efficienty * farmer.shovel)) + " Iron | " + Math.round((10 * farmer.efficienty * farmer.shovel)) + " Silver | " +           Math.round((5 * farmer.efficienty * farmer.shovel)) + " Gold"; break;
             case 2 : document.getElementById("farmerMenu2").innerHTML = Math.round((15 * farmer.efficienty * farmer.hoe)) + " Iron | " + Math.round((10 * farmer.efficienty * farmer.hoe)) + " Silver | " + Math.round((5 * farmer.efficienty * farmer.hoe)) + " Gold"; break;
         }
 }

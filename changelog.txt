@@ -41,3 +41,12 @@ Project v.0.0.6
 	3. Added option to remove the image from background
 	4. Implemented Farmer's upgrade
 	5. Added 'Stats' tab
+
+Project v.0.0.7
+------------------------------------------------------------
+	1. Included Bootstrap Library
+	2. Redesigned Interface
+	3. Added 'Stats' tab functionality
+	4. Added Woodcutter's upgrades and Miner's upgrades to blacksmith
+	5. Implemented an AI to attack the player's empire
+	

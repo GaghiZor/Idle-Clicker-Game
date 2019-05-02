@@ -1,293 +1,131 @@
+html {
+  scroll-behavior: smooth;
+}
 body {
-  background-color: rgba(0, 0, 0, 0.6);
-  background-size: 100% 100%;
-  width: 100%;
-  height: 100%;
-  color: white;
-}
-
-#background {
+  margin: 0;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  font-family: 'Roboto Mono', sans-serif !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
   
+  /* this breaks position sticky in Firefox */
+  /* overflow-x: hidden; */
 }
 
-.text {
-  text-shadow:
-   -2px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 2px 0 #000,
-     2px 2px 0 #000;
-}
-
-.text2 {
-	text-shadow: none;
-}
-
-.textButton {
-	font-size: 17;
-	color: white;
-	text-shadow:
-   -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
-.button {
-  background-color: rgba(255, 0, 0, 1);
-  border: none;
+header {
+  grid-column: 1 / 3;
+  background: #455A64;
   color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-button:disabled {
-    background: rgba(0, 0, 0, 0.5);
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-/*--------------------------------------------------------------------------------------------*/
-/* Navigation */
-#game {
-    display: block;
-}
-
-#army {
-    display: none;
-}
-
-
-#blacksmith {
-    display: none;
-}
-
-#trades {
-    display: none;
-}
-
-#stats {
-    display: none;
-}
-
-/* Army Navigation */
-#soldierUpgrade {
-    display: none;
-}
-
-#officerUpgrade {
-    display: none;
-}
-
-/* Blacksmith Navigation */
-#farmer {
-    display: none;
-}
-
-#woodcutter {
-    display: none;
-}
-
-#miner {
-    display: none;
-}
-
-#kiln {
-    display: none;
-}
-
-#powdermill {
-    display: none;
-}
-
-
-/*--------------------------------------------------------------------------------------------*/
-/* SPLIT PAGE */
-
-.btn-group .navigate {
-  background-color: #4CAF50; /* Green */
-  border: 1px solid green;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-  float: left;
-}
-
-.btn-group .navigate:not(:last-child) {
-  border-right: none; /* Prevent double borders */
-}
-
-.btn-group .navigate:hover {
-  background-color: #3e8e41;
-}
-
-.menu {
-  height: 80%;
-  width: 65%;
-  left: 1%;
-  position: fixed;
-  z-index: 1;
-  top: 10%;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-/* GAME TAB */
-.gather {
-  top: 10%;
-  width: 24%;
-  background-color: rgba(255, 0, 0, 0.4);
-  border-style: solid;
-  border-width: medium;
-}
-
-.workers {
-  left: 26%;
-  top: 10%;
-  width: 63%;
-  height: 41%;
-  border-style: solid;
-  border-width: medium;
-  background-color: rgba(0, 255, 0, 0.4);
-}
-
-.buildings {
-  left: 26%;
-  top: 55%;
-  height: 35%;
-  width: 63%;
-  background-color: rgba(0, 0, 255, 0.4);
-  border-style: solid;
-  border-width: medium;
-}
-
-/* ARMY TAB */
-.desc {
-    font-size: 25px;
-}
-
-/* BLACKSMITH TAB */
-.classes {
-  top: 10%;
-  width: 10%;
-  background-color: rgba(255, 0, 0, 0.4);
-  border-style: solid;
-  border-width: medium;
-}
-
-.upgrades {
-  left: 12%;
-  top: 10%;
-  width: 45%;
-  border-style: solid;
-  border-width: medium;
-  background-color: rgba(0, 255, 0, 0.4);
-}
-
-.description {
-  left: 58%;
-  top: 10%;
-  width: 31%;
-  background-color: rgba(0, 0, 255, 0.4);
-  border-style: solid;
-  border-width: medium;
-}
-
-.options {
-    left: 90%;
-    width: 9%;
-    top: 10%;
-    background-color: rgba(0, 100, 100, 0.4);
-    border-style: solid;
-    border-width: medium;
-}
-
-.stats {
-    top: 10%;
-    width: 88%;
-    background-color: rgba(255, 0, 0, 0.4);
-    border-style: solid;
-    border-width: medium;
-}
-
-/*--------------------------------------------------------------------------------------------*/
-/* FOOTER */
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background: rgba(186, 186, 186, 0.3);
-  color: white;
+  padding: 4rem;
   text-align: center;
 }
-
-.footer p {
+nav {
+  white-space: nowrap;
+  background: #37474F;
+}
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* Only stick if you can fit */
+@media (min-height: 300px) {
+  nav ul {
+    position: sticky;
+    top: 0;
+  }
+}
+nav ul li a {
+  display: block;
+  padding: 0.5rem 1rem;
   color: white;
-  text-shadow:
- -1px -1px 0 #000,
- 1px -1px 0 #000,
- -1px 1px 0 #000,
-  2px 2px 0 #000;
+  text-decoration: none !important;
+}
+nav ul li a.current {
+  background: black;
+}
+main {
+  padding-bottom: 40rem;
+}
+section {
+  padding: 2rem;
+  margin: 0 0 2rem 0;
+}
+footer {
+  grid-column: 1 / 3;
+  background: #607D8B;
+  padding: 5rem 1rem;
 }
 
-.footer span {
-  color: white;
-  text-shadow:
- -1px -1px 0 #000,
- 1px -1px 0 #000,
- -1px 1px 0 #000,
-  2px 2px 0 #000;
+table { 
+	width: 750px; 
+	border-collapse: collapse; 
+	margin:50px auto; 
+	}
+
+th { 
+	background: #3498db; 
+	color: black; 
+	font-weight: bold; 
+	}
+
+td, th { 
+	padding: 10px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+	font-size: 18px;
+	background: #eee;
+	}
+
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	table { 
+	  	width: 100%; 
+	}
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		/* Label the data */
+		content: attr(data-column);
+
+		color: #000;
+		font-weight: bold;
+	}
+
 }
-
-.dropbtn {
-    background-color: #cc2424;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    right: 10px;
-	top: 0px;
-}
-
-.dropdown-content {
-    text-align: center;
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #f9f9f9;
-    min-width: 177px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 2;
-
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1;}
-.dropdown:hover .dropdown-content {display: block;}
-.dropdown:hover .dropbtn {background-color: #720505;}

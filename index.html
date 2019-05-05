@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 
@@ -33,14 +35,25 @@
 <main>
 
   <section id="section-1">
-    <p  style="font-size: 20">Time spent: 
-        <span id="ore"> 0 </span> hours 
-        <span id="minute"> 0 </span>  minutes 
-        <span id="secunde"> 0 </span> seconds
-    </p>
-	<strong><p id="name" style="font-size: 30px; color: #000">This nation has no ruler</p></strong>
+      <div class="container">
+          <div class="row">
+            <div class="col-sm">
+                <p  style="font-size: 12px">Time spent: 
+                    <span id="ore"> 0 </span> hours 
+                    <span id="minute"> 0 </span>  minutes 
+                    <span id="secunde"> 0 </span> seconds
+                </p>
+                <strong><p id="name" style="font-size: 20px; color: #000">This nation has no ruler</p></strong>
+            </div>
+            <div class="col-sm">
+                <p>Event List</p>
+                <p id="events">&bull;Your nation is safe ( for now )</p>
+                <p id="result" style="color: red"></p>
+            </div>
+          </div>
+      </div>
 
-	<table style="width: auto">
+	<table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
 		<tr>
 			<td>Maximum Population
 			<td><input type="text" id="totalPopulation" disabled style = "text-align: center">
@@ -121,13 +134,15 @@
 	
 	<section id="section-2">
 	<h1>Workers</h1>
-	<p>
-	Create Worker 30 Food
-        <button onclick="createWorker(1)">+1</button>
-        <button onclick="createWorker(5)">+5</button>
-		<button onclick="createWorker(10)">+10</button>
-	</p>
-        <table>
+        <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
+            <thead>
+                <th colspan="2">
+                    Create Worker 30 Food
+                    <button onclick="createWorker(1)">+1</button>
+                    <button onclick="createWorker(5)">+5</button>
+                    <button onclick="createWorker(10)">+10</button>
+                </th>
+            </thead>
             <tr>
                 <td>Workers Available</td>
                 <td id="workers">0</td>
@@ -150,7 +165,7 @@
         </table>
 
         <h4>Assign Workers to automatically gather resources</h4>
-        <table>          
+        <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">          
             <tr>
                 <td><button onclick="removeWorker(1,'farmer')" style="width:100%; height: auto"> -1 </button></td>
                 <td><button onclick="removeWorker(5,'farmer')" style="width:100%; height: auto"> -5 </button></td>
@@ -188,45 +203,44 @@
 	<section id="section-3">
     <h1>Buildings</h1>
     <table>
+        <thead>
+            <th></th>
+            <th style="text-align: center">Cost</th>
+            <th style="text-align: center">Description</th>
+        </thead>
         <tr>
             <td><button onclick="buyTent()" id="tent" style="width:100%; height: auto">Tent</button></td>
             <td  id="costTent" style = "text-align: center">20 Food | 15 Wood | 5 Stone</td>
-            <td></td>
             <td  style = "text-align: center">Add +1 Maximum Population</td>
         </tr> 
 
         <tr>
             <td><button onclick="buySmallHouse()" id="SmallHouse" style="width:100%; height: auto">Small House</button></td>
             <td  id="costSmallHouse" style = "text-align: center">40 Food | 80 Wood | 120 Stone</td>
-            <td></td>
             <td  style = "text-align: center">Add +2 Maximum Population</td>
         </tr>
 
         <tr>
             <td><button onclick="buyMediumHouse()" id="MediumHouse" style="width:100%; height: auto">Medium House</button></td>
             <td  id="costMediumHouse" style = "text-align: center">60 Food | 150 Wood | 200 Stone</td>
-            <td></td>
             <td  style = "text-align: center">Add +3 Maximum Population</td>
         </tr>
 			
         <tr>
             <td><button onclick="createBarrack()" id="barrack" style="width:100%; height: auto">Barrack</button></td>
             <td  id="costBarrack" style = "text-align: center">1000 Food | 1000 Wood | 1000 Stone</td>
-            <td></td>
             <td  style = "text-align: center">Start building your army</td>
         </tr>
 			
         <tr>
             <td><button onclick="createKiln()" id="kiln" style="width:100%; height: auto">Kiln</button></td>
             <td  id="costKiln" style = "text-align: center">1000 Food | 1000 Wood | 1000 Stone</td>
-            <td></td>
             <td  style = "text-align: center">Start heating wood to produce charcoal</td>
         </tr>
 			
         <tr>
             <td><button onclick="createPowdermill()" id="powdermill" style="width:100%; height: auto">Powder Mill</button></td>
             <td  id="costPowdermill" style = "text-align: center">1000 Food | 1000 Wood | 1000 Stone</td>
-            <td></td>
             <td  style = "text-align: center">Start improving your army</td>
         </tr>
         
@@ -242,7 +256,7 @@
 					<thead>
 						<tr>
 						  <th style="text-align: center">Farmer</th>
-                          <th></th>
+                          <th style="text-align: center" colspan="3">Cost</th>
                           <th colspan="3">Farmer's Efficienty: <span id="farmerEff">1</span></th>
 						</tr>
 					</thead>
@@ -290,7 +304,7 @@
 					<thead>
 						<tr>
 						  <th style="text-align: center">Woodcutter</th>
-                          <th></th>
+                          <th style="text-align: center" colspan="3">Cost</th>
                           <th colspan="3">Woodcutter's Efficienty: <span id="woodcutterEff">1</span></th>
 						</tr>
 					</thead>
@@ -337,7 +351,7 @@
 					<thead>
 						<tr>
 						  <th style="text-align: center">Miner</th>
-                          <th></th>
+                          <th style="text-align: center" colspan="3">Cost</th>
                           <th colspan="3">Miner's Efficienty: <span id="minerEff">1</span></th>
 						</tr>
 					</thead>
@@ -392,11 +406,53 @@
             </div>
         <!-- =============================================================================================================== -->
             <div id="kiln2">
-                
+                <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+                    <thead>
+                        <th style="text-align: center">Kiln</th>
+                        <th colspan="3">Heat wood to produce charcoal</th>
+                    </thead>
+                    
+                    <tr>
+                        <td style="text-align: center">Create charcoal
+                            <br>(5 wood and 1 coal each)</td>
+                        <td style="text-align: center"><button onclick="kiln(1)" id="kilnButton1">+1</button></td>
+                        <td style="text-align: center"><button onclick="kiln(5)" id="kilnButton2">+5</button></td>
+                        <td style="text-align: center"><button onclick="kiln(10)" id="kilnButton3">+10</button></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="4">
+                            <div class="myProgress">
+                              <div class="myBar" id="bar1"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         <!-- =============================================================================================================== -->
             <div id="powdermill2">
-            
+                <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+                    <thead>
+                        <th style="text-align: center">Powder mill</th>
+                        <th colspan="3">Transform charcoal to gunpowder</th>
+                    </thead>
+                    
+                    <tr>
+                        <td style="text-align: center">Create gunpowder
+                            <br>(3 charcoals)</td>
+                        <td style="text-align: center"><button onclick="powdermill(1)" id="powdermillButton1">+1</button></td>
+                        <td style="text-align: center"><button onclick="powdermill(5)" id="powdermillButton2">+5</button></td>
+                        <td style="text-align: center"><button onclick="powdermill(10)" id="powdermillButton3">+10</button></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="4">
+                            <div class="myProgress">
+                                <div class="myBar" id="bar2"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
   </section>
   
@@ -408,8 +464,8 @@
 			<thead>
 				<tr>
 				  <th>Soldier</th>
-                  <th></th>
-                  <th colspan="3">Soldier's Efficienty: <span id="soldierEff">1</span>
+                  <th colspan="3" style="text-align: center">Cost</th>
+                  <th>Soldier's Efficienty: <span id="soldierEff">1</span>
                       <br>
                       <span id="soldierNumber">You currently have: 0 soldier(s)</span>
                       <br>
@@ -508,11 +564,12 @@
                     <td>Total Soldiers</td>
                     <td id="stats14">0</td>
                 </tr>
-
+<!--
                 <tr>
                     <td>Total Officers</td>
                     <td id="stats15">0</td>
                 </tr>
+-->
              </table>
             </div>
               
@@ -587,75 +644,53 @@
 	
 	<table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px; width: auto">
 		<thead>
-			<th colspan="2" style="text-align: center">Resources</th>
+			<th colspan="6" style="text-align: center">Resources</th>
 		</thead>
 		
 		<tr>
             <td>Total Food Amount</td>
             <td id="stats3">0</td>
+            
+            <td>Total Apples</td>
+            <td id="stats6">0</td>
+            
+            <td>Total Iron</td>
+            <td id="stats8">0</td>
         </tr>
 		
 		<tr>
 			<td>Total Wood Amount</td>
             <td id="stats4">0</td>
-		</tr>
-		
-		<tr>
-			<td>Total Stone Amount</td>
-            <td id="stats5">0</td>
-		</tr>
-		
-		<tr>
-			<td colspan="2"></td>
-		</tr>
-		
-		<tr>
-			<td>Total Apples</td>
-            <td id="stats6">0</td>
-		</tr>
-		
-		<tr>
-			<td>Total Leather</td>
+            
+            <td>Total Leather</td>
             <td id="stats7">0</td>
-		</tr>
-		
-		<tr>
-			<td>Total Iron</td>
-            <td id="stats8">0</td>
-		</tr>
-		
-		<tr>
+            
             <td>Total Silver</td>
             <td id="stats9">0</td>
 		</tr>
 		
 		<tr>
-			<td>Total Gold</td>
-            <td id="stats10">0</td>
-        </tr>
-		
-        <tr>
+			<td>Total Stone Amount</td>
+            <td id="stats5">0</td>
+            
             <td>Total Coal</td>
             <td id="stats11">0</td>
+            
+            <td>Total Gold</td>
+            <td id="stats10">0</td>
 		</tr>
 		
 		<tr>
-			<td>Total Charcoal</td>
+			<td colspan="2"></td>
+            
+            <td>Total Charcoal</td>
             <td id="stats12">0</td>
-		</tr>
-		
-		<tr>
-			<td>Total Gunpowder</td>
+            
+            <td>Total Gunpowder</td>
             <td id="stats13">0</td>
-        </tr>
+		</tr>
 	</table>
-	
-	
-	
-	
-	
-	
-      
+
     <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
         <thead>
             <th colspan="2" style="text-align: center">Others</th>
@@ -665,12 +700,24 @@
             <td style="text-align: center">Total Clicks</td>
             <td id="clicks" style="text-align: center">0</td>
         </tr>
+        
+        <tr>
+            <td style="text-align: center">Victories</td>
+            <td id="victories" style="text-align: center">0</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align: center">Defeats</td>
+            <td id="defeats" style="text-align: center">0</td>
+        </tr>
     </table>
   </section>
   
 	<hr>
 	
   <section id="section-8">
+    <div class="row">
+    <div class="col">
     <h1>Options</h1>
     <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px; width: auto">		
          <tr>
@@ -690,10 +737,16 @@
          </tr>
          
          <tr>
-            <td><button onclick="download()">Download Save</button></td>
+            <td><button id="download" style="width:100%; height: 30px">Download Save</button></td>
+         </tr>
+        
+         <tr>
+            <td><button id="load" style="width:100%; height: 30px">Load from file</button></td>
          </tr>
     </table>
+    </div>
     
+    <div class="col">
     <h2>Developer</h2>
     <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px; width: auto">		
          <tr>
@@ -712,10 +765,12 @@
             <td><button onclick="add('extra')" style="width:100%; height: 30px">+100 Extra Res</button></td>
          </tr>
     </table>
+    </div>
+    </div>
   </section>
 </main>
 
-<footer>
+<footer id="footer">
   &copy;Pirpiliu Gabriel Ștefan - PCLP Project
 </footer>
 

@@ -47,6 +47,8 @@ function idleTime()
 function updateStats()
 {
     document.getElementById("clicks").innerHTML = stats.clicks;
+    document.getElementById("victories").innerHTML = victories;
+    document.getElementById("defeats").innerHTML = defeats;
     
     document.getElementById("stats1").innerHTML = maxPopulation;
     document.getElementById("stats2").innerHTML = Population;
@@ -65,7 +67,7 @@ function updateStats()
     document.getElementById("stats13").innerHTML = stats.gunpowder;
     
     document.getElementById("stats14").innerHTML = soldier.amount;
-    document.getElementById("stats15").innerHTML = officer.amount;
+    //document.getElementById("stats15").innerHTML = officer.amount;
     
     document.getElementById("stats16").innerHTML = stats.shovelFarmer;
     document.getElementById("stats17").innerHTML = stats.hoeFarmer;
@@ -191,3 +193,14 @@ function updateMiner()
     
     document.getElementById("minerEff").innerHTML = miner.efficienty;
 }
+
+function updateEvents()
+{
+    if(boolEnemyAttacks == 0)
+    {
+        document.getElementById("events").innerHTML = "&bull;Your nation is safe ( for now )";
+        document.getElementById("result").innerHTML = "";
+    }
+}
+
+setInterval(updateEvents, 30000);

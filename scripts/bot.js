@@ -4,6 +4,10 @@ var timeToAttack = Math.floor(Math.random() * 5000 + 400);
 var victories = 0;
 var defeats = 0;
 
+var attackNumbers = 0;
+
+var boolEnemyAttacks = 0;
+
 var enemy = {
     amount: 1,
     health: 1,
@@ -20,7 +24,7 @@ function canAttack()
     verify();
 }
 
-setInterval(attack, 5000);
+setInterval(canAttack, 5000);
 
 function verify()
 {
@@ -34,17 +38,21 @@ function verify()
 
 function siege()
 {
+    boolEnemyAttacks = 1;
+    attackNumbers += 1;
+    document.getElementById("events").innerHTML = "&bull;Your nation is under attack. x" + attackNumbers;
     if(soldier.amount >= enemy.amount)
         {
             if(soldier.amount % 2 == 0)
                 soldier.amount = soldier.amount / 2;
             else soldier.amount = (soldier.amount - 1) / 2;
             
-            enemy.amount += soldier.amount;
+            enemy.amount += Math.round(soldier.amount / 3);
             enemy.health += 1;
             enemy.damage += 0.5;
             
-            defeats += 1;
+            victories += 1;
+            document.getElementById("result").innerHTML = "You emerged victorious.";
         }
     else {
         workers += (soldier.amount / 2);
@@ -53,6 +61,8 @@ function siege()
         woodAmount -= (enemy.amount * (soldier.amount+1)) * 10;
         stoneAmount -= (enemy.amount * (soldier.amount+1)) * 10;
         
-        victories += 1;
+        defeats += 1;
+        document.getElementById("result").innerHTML = "Your army couldn't stop the conquerors.";
     }
+    boolEnemyAttacks = 0;
 }

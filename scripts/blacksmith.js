@@ -148,3 +148,80 @@ function minerUpgrade(x)
         }
     updateMiner();
 }
+
+function kiln(x)
+{
+    if(boolHasKiln == 1)
+    {
+        if(woodAmount >= (5*x) && extraRes.coal >= (1*x))
+            {
+                woodAmount -= 5 * x;
+                extraRes.coal -= 1 * x;
+                
+                document.getElementById("kilnButton1").disabled = true;
+                document.getElementById("kilnButton2").disabled = true;
+                document.getElementById("kilnButton3").disabled = true;
+                
+                var elem = document.getElementById("bar1"); 
+                var width = 1;
+                var id = setInterval(frame, (10*x));
+                function frame() 
+                {
+                    if(width >= 100) 
+                    {
+                        clearInterval(id);
+                        elem.style.width = 0;
+                        
+                        extraRes.charcoal += 1 * x;
+
+                        document.getElementById("kilnButton1").disabled = false;
+                        document.getElementById("kilnButton2").disabled = false;
+                        document.getElementById("kilnButton3").disabled = false;
+                    } 
+                    else 
+                    {
+                          width++; 
+                          elem.style.width = width + '%'; 
+                    }
+                }
+            }
+    }
+}
+
+function powdermill(x)
+{
+    if(boolHasPowdermill == 1)
+    {
+        if(extraRes.charcoal >= (3*x))
+            {
+                extraRes.charcoal -= 3 * x;
+                
+                document.getElementById("powdermillButton1").disabled = true;
+                document.getElementById("powdermillButton2").disabled = true;
+                document.getElementById("powdermillButton3").disabled = true;
+                
+                var elem2 = document.getElementById("bar2"); 
+                var width2 = 1;
+                var id2 = setInterval(frame2, (10*x));
+                function frame2()
+                {
+                    if(width2 >= 100)
+                    {
+                        clearInterval(id2);
+                        elem2.style.width = 0;
+                        
+                        extraRes.gunpowder += 1 * x;
+
+                        document.getElementById("powdermillButton1").disabled = false;
+                        document.getElementById("powdermillButton2").disabled = false;
+                        document.getElementById("powdermillButton3").disabled = false;
+                    } 
+                    else 
+                    {
+                          width2++; 
+                          elem2.style.width = width2 + '%'; 
+                    }
+                }
+            }
+    }
+}

@@ -6,8 +6,8 @@ body {
   display: grid;
   grid-template-columns: min-content 1fr;
   font-family: 'Roboto Mono', sans-serif !important;
-  background-color: rgba(0, 0, 0, 0.1) !important;
-  
+  /*background-color: rgba(0, 0, 0, 0.1) !important;*/
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
   /* this breaks position sticky in Firefox */
   /* overflow-x: hidden; */
 }
@@ -58,7 +58,7 @@ footer {
 }
 
 table { 
-	width: 750px; 
+	width: auto; 
 	border-collapse: collapse; 
 	margin:50px auto; 
 	}
@@ -128,4 +128,15 @@ only screen and (max-width: 760px),
 		font-weight: bold;
 	}
 
+}
+
+.myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+.myBar {
+  width: 0%;
+  height: 30px;
+  background-color: #4CAF50;
 }

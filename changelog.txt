@@ -48,5 +48,11 @@ Project v.0.0.7
 	2. Redesigned Interface
 	3. Added 'Stats' tab functionality
 	4. Added Woodcutter's upgrades and Miner's upgrades to blacksmith
-	5. Implemented an AI to attack the player's empire
+	5. Implemented a simple AI to attack the player's empire
+
+Project v.0.0.8
+------------------------------------------------------------
+	1. Added 'Kiln' building + functionality
+	2. Added 'Powder mill' building + functionality
+	3. Added an event list
 	

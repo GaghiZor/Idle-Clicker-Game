@@ -37,7 +37,11 @@ function save()
         
         boolHasBarrack: boolHasBarrack,
         boolHasKiln: boolHasKiln,
-        boolHasPowdermill: boolHasPowdermill
+        boolHasPowdermill: boolHasPowdermill,
+        
+        victories: victories,
+        defeats: defeats,
+        attackNumbers: attackNumbers
     }
       
     try {
@@ -150,6 +154,10 @@ function load()
     if(loadVar.numberBuilds.tent != null) numberBuilds.tent = loadVar.numberBuilds.tent;
     if(loadVar.numberBuilds.smallHouse != null) numberBuilds.smallHouse = loadVar.numberBuilds.smallHouse;
     if(loadVar.numberBuilds.mediumHouse != null) numberBuilds.mediumHouse = loadVar.numberBuilds.mediumHouse;
+// Loading for AI
+    if(loadVar.attackNumbers != null) attackNumbers = loadVar.attackNumbers;
+    if(loadVar.victories != null) victories = loadVar.victories;
+    if(loadVar.defeats != null) defeats = loadVar.defeats;
       
 // Loading Booleans
     if(loadVar.boolHasBarrack != null) boolHasBarrack = loadVar.boolHasBarrack;
@@ -166,11 +174,7 @@ function load()
     if(boolSoldierMaxRank == 1)
         document.getElementById("soldierMenu2").disabled = true;
 
-    update();
-    updateWorkers();
-    updateName();
-    updateArmy();
-    updateExtraRes();
+    updateAll()
 }
   
 function changeName()
@@ -251,6 +255,10 @@ function reset()
         chance: 1
     }
     
+    victories = 0;
+    defeats = 0;
+    attackNumbers = 0;
+    
     save();
     location.reload();
 }
@@ -300,3 +308,38 @@ function add(res)
 }
 
 // TEST
+
+//Save
+
+$('#download').on("click", function() {
+  function download() {
+    var saveVar1 = {
+        extraRes: extraRes,
+        soldier: soldier,
+        boolSoldierMaxRank: boolSoldierMaxRank,
+        farmer: farmer,
+        woodcutter: woodcutter,
+        miner: miner,
+        stats: stats,
+        numberBuilds: numberBuilds,
+        
+        boolHasBarrack: boolHasBarrack,
+        boolHasKiln: boolHasKiln,
+        boolHasPowdermill: boolHasPowdermill,
+        
+        victories: victories,
+        defeats: defeats,
+        attackNumbers: attackNumbers
+    }
+    var fileContents = JSON.stringify(saveVar1, null, 2);
+    var fileName = "data.json";
+
+    var pp = document.createElement('a');
+    pp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileContents));
+    pp.setAttribute('download', fileName);
+    pp.click();
+  }
+  setTimeout(function() {
+    download()
+  }, 500);
+});

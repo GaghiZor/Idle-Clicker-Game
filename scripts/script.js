@@ -5,10 +5,11 @@ window.onload = function () {
 	{
         name = window.prompt("How should I call you? ");
         localStorage.setItem("hasCodeRunBefore", true);
+        save();
     }
     else load();
     
-    updateName();
+    updateAll();
 }
 	
 // ==================================================================================================================
@@ -23,13 +24,14 @@ function autoResources()
     stats.foodTotal += (farmer.total * farmer.level) * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10;
     stats.woodTotal += (woodcutter.total * woodcutter.level) * (1+(woodcutter.efficienty * woodcutter.axe * woodcutter.handSaw)) / 10;
     stats.stoneTotal += (miner.total * miner.level) * (1+(miner.efficienty * miner.chisel * miner.pickaxe * miner.shovel)) / 10;
+    getProgress();
 }
 
 // ==============================================
 // Gather resources
 function increment(name)
 {
-    var x, y, z;
+    let x, y, z;
     
     if(name === "food")
     {
@@ -95,6 +97,7 @@ function increment(name)
     
     stats.clicks += 1;
     
+    getProgress();
     update();
     updateExtraRes();
 }
@@ -109,6 +112,9 @@ function createWorker(x)
         workers += x;
         foodAmount = foodAmount - (30*x);
         Population += x;
+
+        ageProgress += (1*x)/2;
+
         updateWorkers();
         update();
     }
@@ -172,12 +178,25 @@ function removeWorker(x,job)
 }
 
 
-// ==============================================
+function getProgress()
+{
+    if(stats.foodTotal != 0)
+        if(stats.foodTotal % 1000 == 0)
+        {
+            ageProgress += 5;
+        }
 
-// ==============================================
-// ==============================================
-// Test
+    if(stats.woodTotal != 0)
+        if(stats.woodTotal % 1000 == 0)
+        {
+            ageProgress += 5;
+        }
 
+    if(stats.stoneTotal != 0)
+        if(stats.stoneTotal % 1000 == 0)
+        {
+            ageProgress += 5;
+        }
+}
 
-// ==============================================
-
+/* ============================================================================ */

@@ -31,16 +31,15 @@ function verify()
     if(attack == 1)
     {
         clearInterval(canAttack);
-        siege();
-        setInterval(siege, timeToAttack*100);
+        setInterval(siege, timeToAttack*10000);
     }
 }
 
 function siege()
 {
-    boolEnemyAttacks = 1;
+    gameLog("Invaders are attacking your land.");
     attackNumbers += 1;
-    document.getElementById("events").innerHTML = "&bull;Your nation is under attack. x" + attackNumbers;
+    
     if(soldier.amount >= enemy.amount)
         {
             if(soldier.amount % 2 == 0)
@@ -52,7 +51,7 @@ function siege()
             enemy.damage += 0.5;
             
             victories += 1;
-            document.getElementById("result").innerHTML = "You emerged victorious.";
+            gameLog("You emerged victorious.");
         }
     else {
         workers += (soldier.amount / 2);
@@ -62,7 +61,6 @@ function siege()
         stoneAmount -= (enemy.amount * (soldier.amount+1)) * 10;
         
         defeats += 1;
-        document.getElementById("result").innerHTML = "Your army couldn't stop the conquerors.";
+        gameLog("Your army couldn't stop the conquerors.");
     }
-    boolEnemyAttacks = 0;
 }

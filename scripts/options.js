@@ -41,7 +41,10 @@ function save()
         
         victories: victories,
         defeats: defeats,
-        attackNumbers: attackNumbers
+        attackNumbers: attackNumbers,
+
+        ageNumber: ageNumber,
+        ageProgress: ageProgress
     }
       
     try {
@@ -158,6 +161,11 @@ function load()
     if(loadVar.attackNumbers != null) attackNumbers = loadVar.attackNumbers;
     if(loadVar.victories != null) victories = loadVar.victories;
     if(loadVar.defeats != null) defeats = loadVar.defeats;
+
+// Loading Age
+    if(loadVar.ageNumber != null) ageNumber = loadVar.ageNumber;
+    if(loadVar.ageProgress != null) ageProgress = loadVar.ageProgress;
+    
       
 // Loading Booleans
     if(loadVar.boolHasBarrack != null) boolHasBarrack = loadVar.boolHasBarrack;
@@ -185,161 +193,122 @@ function changeName()
 
 function reset()
 {
-    boolHasBarrack = 0;
-    boolHasKiln = 0;
-    boolHasPowdermill = 0;
-    
-    foodAmount = 0;
-    woodAmount = 0;
-    stoneAmount = 0;
-    
-    workers = 0;
-    farmer = {
-        total: 0,
-        shovel: 1,
-        hoe: 1,
-        level: 1,
-        efficienty: 1
-    }
-
-    woodcutter = {
-        total: 0,
-        axe: 1,
-        handSaw: 1,
-        level: 1,
-        efficienty: 1
-    }
-
-    miner = {
-        total: 0,
-        pickaxe: 1,
-        shovel: 1,
-        chisel: 1,
-        level: 1,
-        efficienty: 1
-    }
-    
-    maxPopulation = 0;
-    Population = 0;
-	
-	tentCost = [20, 15, 5];
-	smallHouseCost = [40, 80, 120];
-	mediumHouseCost = [60, 150, 200];
-    
-    localStorage.removeItem("hasCodeRunBefore");
-    
-    h = 0;
-    m = 0;
-    s = 0;
-    
-    boolSoldierMaxRank = 0;
-    
-    soldier = {
-        amount: 0,
-        n: 0,
-        rank: soldierRanks[0],
-        gun: 1,
-        stamina: 1,
-        efficienty: 1
-    }
-    
-    extraRes = {
-        gunpowder: 0,
-        charcoal: 0,
-        coal: 0,
-        leather: 0,
-        gold: 0,
-        iron: 0,
-        silver: 0,
-        apples: 0,
-        chance: 1
-    }
-    
-    victories = 0;
-    defeats = 0;
-    attackNumbers = 0;
-    
-    save();
-    location.reload();
-}
-
-
-// ==============================================
-// Developer Mode
-function add(res)
-{
-    if(res === 'food')
+    let r = confirm("Are you sure you want to reset EVERYTHING ?");
+    if(r == true)
     {
-        foodAmount += 1000;
-        stats.foodTotal += 1000;
-    }
-    if(res === 'wood')
-    {
-        woodAmount += 1000;
-        stats.woodTotal += 1000;
-    }
-    if(res === 'stone')
-    {
-        stoneAmount += 1000;
-        stats.stoneTotal += 1000;
-    }
-    
-    if(res === 'extra')
-        {
-            extraRes.apples += 100;
-            extraRes.charcoal += 100;
-            extraRes.coal += 100;
-            extraRes.iron += 100;
-            extraRes.silver += 100;
-            extraRes.gold += 100;
-            extraRes.gunpowder += 100;
-            extraRes.leather += 100;
-            
-            stats.apples += 100;
-            stats.charcoal += 100;
-            stats.coal += 100;
-            stats.iron += 100;
-            stats.silver += 100;
-            stats.gold += 100;
-            stats.gunpowder += 100;
-            stats.leather += 100;
+        boolHasBarrack = 0;
+        boolHasKiln = 0;
+        boolHasPowdermill = 0;
+        
+        foodAmount = 0;
+        woodAmount = 0;
+        stoneAmount = 0;
+        
+        workers = 0;
+        farmer = {
+            total: 0,
+            shovel: 1,
+            hoe: 1,
+            level: 1,
+            efficienty: 1
         }
-    updateAll();
+
+        woodcutter = {
+            total: 0,
+            axe: 1,
+            handSaw: 1,
+            level: 1,
+            efficienty: 1
+        }
+
+        miner = {
+            total: 0,
+            pickaxe: 1,
+            shovel: 1,
+            chisel: 1,
+            level: 1,
+            efficienty: 1
+        }
+        
+        maxPopulation = 0;
+        Population = 0;
+        
+        tentCost = [20, 15, 5];
+        smallHouseCost = [40, 80, 120];
+        mediumHouseCost = [60, 150, 200];
+        
+        localStorage.removeItem("hasCodeRunBefore");
+        
+        h = 0;
+        m = 0;
+        s = 0;
+        
+        boolSoldierMaxRank = 0;
+        
+        soldier = {
+            amount: 0,
+            n: 0,
+            rank: soldierRanks[0],
+            gun: 1,
+            stamina: 1,
+            efficienty: 1
+        }
+        
+        extraRes = {
+            gunpowder: 0,
+            charcoal: 0,
+            coal: 0,
+            leather: 0,
+            gold: 0,
+            iron: 0,
+            silver: 0,
+            apples: 0,
+            chance: 1
+        }
+        
+        victories = 0;
+        defeats = 0;
+        attackNumbers = 0;
+
+        ageProgress = 0;
+        ageNumber = 0;
+        
+        save();
+        location.reload();
+    }
 }
 
-// TEST
+function gameLog(message){
+	//Not strictly a debug function so much as it is letting the user know when something happens without needing to watch the console.
+	var time = '0.00';
+		//get the current date, extract the current time in HH.MM format
+    	d = new Date();
+		if (d.getMinutes() < 10){
+			time = d.getHours() + ".0" + d.getMinutes();
+		} else {
+			time = d.getHours() + "." + d.getMinutes();
+		}
+		//Check to see if the last message was the same as this one, if so just increment the (xNumber) value
+		if (document.getElementById('logM').innerHTML == message){
+			logRepeat += 1;
+			document.getElementById('log0').innerHTML = '<span id="logT">' + time + ' </span><span id="logM">' + message + '</span><span id="logR"> (x' + logRepeat + ')</span>';
+		} else {
+			//Reset the (x Number) value
+			logRepeat = 1;
+			//Go through all the logs in order, moving them down one and successively overwriting them.
+			//document.getElementById('log4').innerHTML = document.getElementById('log3').innerHTML;
+			//document.getElementById('log3').innerHTML = document.getElementById('log2').innerHTML;
+			document.getElementById('log2').innerHTML = document.getElementById('log1').innerHTML;
+			//Since ids need to be unique, log1 strips the ids from the log0 elements when copying the contents.
+			document.getElementById('log1').innerHTML = '<span>' + document.getElementById('logT').innerHTML + '</span><span>' + document.getElementById('logM').innerHTML + '</span><span>' + document.getElementById('logR').innerHTML + '</span>';
+			//creates new contents with new time, message, and x1
+			document.getElementById('log0').innerHTML = '<span id="logT">' + time + ' </span><span id="logM">' + message + '</span><span id="logR"> (x' + logRepeat + ')</span>';
+		}
+}
 
-//Save
-
-$('#download').on("click", function() {
-  function download() {
-    var saveVar1 = {
-        extraRes: extraRes,
-        soldier: soldier,
-        boolSoldierMaxRank: boolSoldierMaxRank,
-        farmer: farmer,
-        woodcutter: woodcutter,
-        miner: miner,
-        stats: stats,
-        numberBuilds: numberBuilds,
-        
-        boolHasBarrack: boolHasBarrack,
-        boolHasKiln: boolHasKiln,
-        boolHasPowdermill: boolHasPowdermill,
-        
-        victories: victories,
-        defeats: defeats,
-        attackNumbers: attackNumbers
-    }
-    var fileContents = JSON.stringify(saveVar1, null, 2);
-    var fileName = "data.json";
-
-    var pp = document.createElement('a');
-    pp.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileContents));
-    pp.setAttribute('download', fileName);
-    pp.click();
-  }
-  setTimeout(function() {
-    download()
-  }, 500);
-});
+function autoSave()
+{
+    save();
+    gameLog('Automatically Saved Game');
+}
+setInterval(autoSave, 120000);

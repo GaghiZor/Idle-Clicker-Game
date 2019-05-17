@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-functions.js"></script>
+
+    <title>Rise of a new Age - Game</title>
+	
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+	
+	<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#section-1">Game</a></li>
+    <li><a href="#section-2">Workers</a></li>
+    <li><a href="#section-3">Buildings</a></li>
+    <li><a href="#section-4">Blacksmith</a></li>
+    <li><a href="#section-5">Army</a></li>
+    <li><a href="#section-6">Trades</a></li>
+    <li><a href="#section-7">Stats</a></li>
+    <li><a href="#section-8">Options</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section id="section-1">
+        <buton style="display: none" id="btnLogin" class="btn btn-action hide">Log in</buton>
+        <button style="display: none" id="btnSignUp" class="btn btn-secondary hide">Sign Up</button>
+        <button style="float: right;" id="btnLogout" class="btn btn-dark">Log out</button>
+        <div style="float: left;">
+                <p  style="font-size: 12px">Time spent: 
+                        <span id="ore"> 0 </span> hours 
+                        <span id="minute"> 0 </span>  minutes 
+                        <span id="secunde"> 0 </span> seconds
+                    </p>
+                    <strong><p id="name" style="font-size: 20px; color: #000">This nation has no ruler</p></strong>
+                    <strong><p id="ageName" style="font-size: 17px; color: #000">Current Age: </p></strong>
+                    <strong><p id="nextAge" style="font-size: 14px; color: #000">Progress to the next Age: </p></strong>
+                    <div class="myProgress">
+                        <div class="myBar" id="ageProgressBar"></div>
+            </div>
+        </div>
+      <div class="container">
+          <div class="row">
+            <div class="col-sm">
+                <p style="display: none">Nothing</p>
+            </div>
+    
+            <div class="col-sm">
+                <h3>&bull;Event List</h3>
+                    <p id="log0">
+                        <span id="logT">&nbsp;</span>
+                        <span id="logM">&nbsp;</span>
+                        <span id="logR">&nbsp;</span>
+                    </p>
+                    <p id="log1">&nbsp;</p>
+                    <p id="log2">&nbsp;</p>
+            </div>
+          </div>
+      </div>
+
+	<table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
+		<tr>
+			<td>Maximum Population
+			<td><input type="text" id="totalPopulation" disabled style = "text-align: center">
+		</tr>
+		
+		<tr>
+			<td>Current Population
+			<td><input type="text" id="idlePopulation" disabled style = "text-align: center">
+		</tr>
+	</table>
+        <table>     
+            <tr>
+                <td><button onclick="increment('food')" style="width:100%; height: auto; font-size: 20px">Food</button></td>
+                <td id="food" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/food.png" height="42" width="42"></td>
+                <td id="foodSec"> 0 /s </td>
+            </tr>
+
+            <tr>
+                <td><button onclick="increment('wood')" style="width:100%; height: auto; font-size: 20px">Wood</button></td>
+                <td id="wood" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/wood.png" height="42" width="42"></td>
+                <td id="woodSec"> 0 /s </td>
+            </tr>
+
+            <tr>
+                <td><button onclick="increment('stone')" style="width:100%; height: auto; font-size: 20px">Stone</button></td>
+                <td id="stone" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/stone.png" height="42" width="42"></td>
+                <td id="stoneSec"> 0 /s </td>
+            </tr>
+        </table>
+            
+        <table>
+            <tr>
+                <td>Leather</td>
+                <td id="leather" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/extrares/leather.png" height="42" width="42"></td>
+                    <td></td>
+                <td>Apples</td>
+                <td id="apples" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/extrares/apple.png" height="42" width="42"></td>
+            </tr>
+                
+            <tr>
+                <td>Iron</td>
+                <td id="iron" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/extrares/iron.png" height="42" width="42"></td>
+                    <td></td>
+                <td>Silver</td>
+                <td id="silver" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/extrares/silver.png" height="42" width="42"></td>
+            </tr>
+			
+            <tr>
+			    <td>Gold</td>
+                <td id="gold" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/extrares/gold.png" height="42" width="42"></td>
+					<td></td>
+                <td>Gunpowder</td>
+                <td id="gunpowder" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/extrares/gunpowder.png" height="42" width="42"></td>
+            </tr>
+                
+            <tr>
+                <td>Coal</td>
+                <td id="coal" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/extrares/coal.png" height="42" width="42"></td>
+                    <td></td>
+                <td>Charcoal</td>
+                <td id="charcoal" style = "text-align: center">0</td>
+                <td style = "text-align: center"><img src="images/extrares/charcoal.png" height="42" width="42"></td>
+            </tr>
+        </table>
+	</section>
+	
+	<hr>
+	
+	<section id="section-2">
+	<h1>Workers</h1>
+        <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
+            <thead>
+                <th colspan="2">
+                    Create Worker 30 Food
+                    <button onclick="createWorker(1)">+1</button>
+                    <button onclick="createWorker(5)">+5</button>
+                    <button onclick="createWorker(10)">+10</button>
+                </th>
+            </thead>
+            <tr>
+                <td>Workers Available</td>
+                <td id="workers">0</td>
+            </tr>
+
+            <tr>
+                <td>Farmers</td>
+                <td id="foodWA">0</td>
+            </tr>
+
+            <tr>
+                <td>Woodcutters</td>
+                <td id="woodWA">0</td>
+            </tr>
+
+            <tr>
+                <td>Miners</td>
+                <td id="stoneWA" >0</td>
+            </tr>
+        </table>
+
+        <h4>Assign Workers to automatically gather resources</h4>
+        <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">          
+            <tr>
+                <td><button onclick="removeWorker(1,'farmer')" style="width:100%; height: auto"> -1 </button></td>
+                <td><button onclick="removeWorker(5,'farmer')" style="width:100%; height: auto"> -5 </button></td>
+                <td><button onclick="removeWorker(10,'farmer')" style="width:100%; height: auto"> -10 </button></td>
+                    <td style="font-size: 25; text-align: center">Farmer</td>
+                <td><button onclick="addWorker(1,'farmer')" style="width:100%; height: auto"> +1 </button></td>
+                <td><button onclick="addWorker(5,'farmer')" style="width:100%; height: auto"> +5 </button></td>
+                <td><button onclick="addWorker(10,'farmer')" style="width:100%; height: auto"> +10 </button></td>
+            </tr>
+
+            <tr>
+                <td><button onclick="removeWorker(1,'woodcutter')" style="width:100%; height: auto"> -1 </button></td>
+                <td><button onclick="removeWorker(5,'woodcutter')" style="width:100%; height: auto"> -5 </button></td>
+                <td><button onclick="removeWorker(10,'woodcutter')" style="width:100%; height: auto"> -10 </button></td>
+                    <td style="font-size: 25; text-align: center; text-align: center">Woodcutter</td>
+                <td><button onclick="addWorker(1,'woodcutter')" style="width:100%; height: auto"> +1 </button></td>
+                <td><button onclick="addWorker(5,'woodcutter')" style="width:100%; height: auto"> +5 </button></td>
+                <td><button onclick="addWorker(10,'woodcutter')" style="width:100%; height: auto"> +10 </button></td>
+            </tr>
+
+            <tr>
+                <td><button onclick="removeWorker(1,'miner')" style="width:100%; height: auto"> -1 </button></td>
+                <td><button onclick="removeWorker(5,'miner')" style="width:100%; height: auto"> -5 </button></td>
+                <td><button onclick="removeWorker(10,'miner')" style="width:100%; height: auto"> -10 </button></td>
+                    <td style="font-size: 25; text-align: center">Miner</td>
+                <td><button onclick="addWorker(1,'miner')" style="width:100%; height: auto"> +1 </button></td>
+                <td><button onclick="addWorker(5,'miner')" style="width:100%; height: auto"> +5 </button></td>
+                <td><button onclick="addWorker(10,'miner')" style="width:100%; height: auto"> +10 </button></td>
+            </tr>
+        </table>
+	</section>
+
+	<hr>
+	
+	<section id="section-3">
+    <h1>Buildings</h1>
+    <table>
+        <thead>
+            <th style="text-align: center">Name</th>
+            <th style="text-align: center">Cost</th>
+            <th style="text-align: center">Owned</th>
+            <th style="text-align: center">Description</th>
+        </thead>
+        <tr>
+            <td><button onclick="buyTent()" id="tent" style="width:100%; height: auto">Tent</button></td>
+            <td  id="costTent" style = "text-align: center">20 Food | 15 Wood | 5 Stone</td>
+            <td style="text-align: center" id="tentOwned">0</td>
+            <td  style = "text-align: center">Add +1 Maximum Population</td>
+        </tr> 
+
+        <tr>
+            <td><button onclick="buySmallHouse()" id="SmallHouse" style="width:100%; height: auto">Small House</button></td>
+            <td  id="costSmallHouse" style = "text-align: center">40 Food | 80 Wood | 120 Stone</td>
+            <td style="text-align: center"id="smallHouseOwned">0</td>
+            <td  style = "text-align: center">Add +2 Maximum Population</td>
+        </tr>
+
+        <trs>
+            <td><button onclick="buyMediumHouse()" id="MediumHouse" style="width:100%; height: auto">Medium House</button></td>
+            <td  id="costMediumHouse" style = "text-align: center">60 Food | 150 Wood | 200 Stone</td>
+            <td style="text-align: center" id="mediumHouseOwned">0</td>
+            <td  style = "text-align: center">Add +3 Maximum Population</td>
+        </tr>
+			
+        <tr>
+            <td><button onclick="createBarrack()" id="barrack" style="width:100%; height: auto">Barrack</button></td>
+            <td  id="costBarrack" style = "text-align: center">1000 Food | 1000 Wood | 1000 Stone</td>
+            <td style="text-align: center" id="barrackOwned">No</td>
+            <td  style = "text-align: center">Create a layer of defence</td>
+        </tr>
+			
+        <tr>
+            <td><button onclick="createKiln()" id="kiln" style="width:100%; height: auto">Kiln</button></td>
+            <td  id="costKiln" style = "text-align: center">1000 Food | 1000 Wood | 1000 Stone</td>
+            <td style="text-align: center" id="kilnOwned">No</td>
+            <td  style = "text-align: center">Heat wood to produce charcoal</td>
+        </tr>
+			
+        <tr>
+            <td><button onclick="createPowdermill()" id="powdermill" style="width:100%; height: auto">Powder Mill</button></td>
+            <td  id="costPowdermill" style = "text-align: center">1000 Food | 1000 Wood | 1000 Stone</td>
+            <td style="text-align: center" id="powdermillOwned">No</td>
+            <td  style = "text-align: center">Transform charcoal in gunpowder</td>
+        </tr>
+        
+    </table>
+  </section>
+  
+	<hr>
+	
+  <section id="section-4">
+    <h1>Blacksmith</h1>
+    <div id="farmer">
+                <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+					<thead>
+						<tr>
+						  <th style="text-align: center">Farmer</th>
+                          <th style="text-align: center" colspan="3">Cost</th>
+                          <th colspan="3">Farmer's Efficienty: <span id="farmerEff">1</span></th>
+						</tr>
+					</thead>
+                    <tr>
+                        <td>
+                        <button id="farmerMenu0" class="button textButton" style="width: 100%; height: auto" onclick="farmerUpgrade(0)">
+                            Upgrade Farmer
+                        </button>
+                        </td>
+						<td id="farmerCost0a">100 Iron</td>
+						<td id="farmerCost0b">100 Silver</td>
+						<td id="farmerCost0c">100 Gold</td>
+                        <td>Upgrading the farmer improves their stats overall.</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        <button id="farmerMenu1" class="button textButton" style="width: 100%; height: auto" onclick="farmerUpgrade(1)">
+                            Upgrade Shovel
+                        </button>
+                        </td>
+						<td id="farmerCost1a">15 Iron</td>
+						<td id="farmerCost1b">10 Silver</td>
+						<td id="farmerCost1c">5 Gold</td>
+                        <td>Upgrading the shovel improves farmer's skill to dig</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        <button id="farmerMenu2" class="button textButton" style="width: 100%; height: auto" onclick="farmerUpgrade(2)">
+                            Upgrade Hoe
+                        </button>
+                        </td>
+						<td id="farmerCost2a">15 Iron</td>
+						<td id="farmerCost2b">10 Silver</td>
+						<td id="farmerCost2c">5 Gold</td>
+                        <td>Upgrading the hoe improves their ability to plough the land</td>
+                    </tr>
+                </table>
+            </div>
+            
+        <!-- =============================================================================================================== -->
+            <div id="woodcutter">
+                <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+					<thead>
+						<tr>
+						  <th style="text-align: center">Woodcutter</th>
+                          <th style="text-align: center" colspan="3">Cost</th>
+                          <th colspan="3">Woodcutter's Efficienty: <span id="woodcutterEff">1</span></th>
+						</tr>
+					</thead>
+                    <tr>
+                        <td>
+                        <button id="woodcutterMenu0" class="button textButton" style="width: 100%; height: auto" onclick="woodcutterUpgrade(0)">
+                            Upgrade Woodcutter
+                        </button>
+                        </td>
+						<td id="woodcutterCost0a">100 Iron</td>
+						<td id="woodcutterCost0b">100 Silver</td>
+						<td id="woodcutterCost0c">100 Gold</td>
+                        <td>Upgrading the woodcutter improves their stats overall.</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        <button id="woodcutterMenu1" class="button textButton" style="width: 100%; height: auto" onclick="woodcutterUpgrade(1)">
+                            Upgrade Axe
+                        </button>
+                        </td>
+						<td id="woodcutterCost1a">15 Iron</td>
+						<td id="woodcutterCost1b">10 Silver</td>
+						<td id="woodcutterCost1c">5 Gold</td>
+                        <td>Upgrading the axe improves woodcutter's skill to chop trees</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        <button id="woodcutterMenu2" class="button textButton" style="width: 100%; height: auto" onclick="woodcutterUpgrade(2)">
+                            Upgrade Hand Saw
+                        </button>
+                        </td>
+						<td id="woodcutterCost2a">15 Iron</td>
+						<td id="woodcutterCost2b">10 Silver</td>
+						<td id="woodcutterCost2c">5 Gold</td>
+                        <td>Upgrading the hand saw improves their ability to cut pieces of wood</td>
+                    </tr>
+                </table>
+            </div>
+        <!-- =============================================================================================================== -->
+            <div id="miner">
+                <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+					<thead>
+						<tr>
+						  <th style="text-align: center">Miner</th>
+                          <th style="text-align: center" colspan="3">Cost</th>
+                          <th colspan="3">Miner's Efficienty: <span id="minerEff">1</span></th>
+						</tr>
+					</thead>
+                    <tr>
+                        <td>
+                        <button id="minerMenu0" class="button textButton" style="width: 100%; height: auto" onclick="minerUpgrade(0)">
+                            Upgrade Miner
+                        </button>
+                        </td>
+						<td id="minerCost0a">100 Iron</td>
+						<td id="minerCost0b">100 Silver</td>
+						<td id="minerCost0c">100 Gold</td>
+                        <td>Upgrading the miner improves their stats overall.</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        <button id="minerMenu1" class="button textButton" style="width: 100%; height: auto" onclick="minerUpgrade(1)">
+                            Upgrade Pickaxe
+                        </button>
+                        </td>
+						<td id="minerCost1a">15 Iron</td>
+						<td id="minerCost1b">10 Silver</td>
+						<td id="minerCost1c">5 Gold</td>
+                        <td>Upgrading the pickaxe improves miner's skill to mine</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        <button id="minerMenu2" class="button textButton" style="width: 100%; height: auto" onclick="minerUpgrade(2)">
+                            Upgrade Shovel
+                        </button>
+                        </td>
+						<td id="minerCost2a">15 Iron</td>
+						<td id="minerCost2b">10 Silver</td>
+						<td id="minerCost2c">5 Gold</td>
+                        <td>Upgrading the shovel improves their ability to dig in mines</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        <button id="minerMenu3" class="button textButton" style="width: 100%; height: auto" onclick="minerUpgrade(3)">
+                            Upgrade Chisel
+                        </button>
+                        </td>
+						<td id="minerCost3a">15 Iron</td>
+						<td id="minerCost3b">10 Silver</td>
+						<td id="minerCost3c">5 Gold</td>
+                        <td>Upgrading the chisel improves their ability to carve</td>
+                    </tr>
+                </table>
+            </div>
+        <!-- =============================================================================================================== -->
+            <div id="kiln2">
+                <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+                    <thead>
+                        <th style="text-align: center">Kiln</th>
+                        <th colspan="3">Heat wood to produce charcoal</th>
+                    </thead>
+                    
+                    <tr>
+                        <td style="text-align: center">Create charcoal
+                            <br>(5 wood and 1 coal each)</td>
+                        <td style="text-align: center"><button onclick="kiln(1)" id="kilnButton1">+1</button></td>
+                        <td style="text-align: center"><button onclick="kiln(5)" id="kilnButton2">+5</button></td>
+                        <td style="text-align: center"><button onclick="kiln(10)" id="kilnButton3">+10</button></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="4">
+                            <div class="myProgress">
+                              <div class="myBar" id="bar1"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        <!-- =============================================================================================================== -->
+            <div id="powdermill2">
+                <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+                    <thead>
+                        <th style="text-align: center">Powder mill</th>
+                        <th colspan="3">Transform charcoal to gunpowder</th>
+                    </thead>
+                    
+                    <tr>
+                        <td style="text-align: center">Create gunpowder
+                            <br>(3 charcoals)</td>
+                        <td style="text-align: center"><button onclick="powdermill(1)" id="powdermillButton1">+1</button></td>
+                        <td style="text-align: center"><button onclick="powdermill(5)" id="powdermillButton2">+5</button></td>
+                        <td style="text-align: center"><button onclick="powdermill(10)" id="powdermillButton3">+10</button></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="4">
+                            <div class="myProgress">
+                                <div class="myBar" id="bar2"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+  </section>
+  
+	<hr>
+	
+  <section id="section-5">
+    <h1>Army</h1>
+        <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 15px">
+			<thead>
+				<tr>
+				  <th>Soldier</th>
+                  <th colspan="3" style="text-align: center">Cost</th>
+                  <th>Soldier's Efficienty: <span id="soldierEff">1</span>
+                      <br>
+                      <span id="soldierNumber">You currently have: 0 soldier(s)</span>
+                      <br>
+                      <span id="soldierRank">Current soldier's rank: Private</span>
+                  </th>
+				</tr>
+			</thead>
+                <tr>
+                    <td>
+                        <button id="soldierMenu1" class="button textButton" style="width: 100%; height: auto" onclick="soldierUpgrade(1)">
+                            Train Soldier
+                        </button>
+                    </td>
+					<td style="text-align: center">1 Worker Available</td>
+					<td style="text-align: center">150 Food</td>
+					<td></td>
+                    <td class="desc">Training soldiers protects you from attackers.</td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <button id="soldierMenu2" class="button textButton" style="width: 100%; height: auto" onclick="soldierUpgrade(2)">
+                            Upgrade Soldiers Rank
+                        </button>
+                    </td>
+					<td style="text-align: center" id="soldierCost2a">5000 Food</td>
+					<td style="text-align: center" id="soldierCost2b">5000 Wood</td>
+					<td style="text-align: center" id="soldierCost2c">5000 Stone</td>
+                    <td class="desc">Upgrading solider's rank improves their stats overall.</td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <button id="soldierMenu3" class="button textButton" style="width: 100%; height: auto" onclick="soldierUpgrade(3)">
+                            Upgrade Gun
+                        </button>
+                    </td>
+					<td style="text-align: center" id="soldierCost3a">800 Gunpowder</td>
+					<td style="text-align: center" id="soldierCost3b"></td>
+					<td style="text-align: center" id="soldierCost3c"></td>
+                    <td class="desc">Upgrading the gun makes your soldiers to shoot more accurately.</td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <button id="soldierMenu4" class="button textButton" style="width: 100%; height: auto" onclick="soldierUpgrade(4)">
+                            Upgrade Stamina
+                        </button>
+                    </td>
+					<td style="text-align: center" id="soldierCost4a">300 Food</td>
+					<td style="text-align: center" id="soldierCost4b"></td>
+					<td style="text-align: center" id="soldierCost4c"></td>
+                    <td class="desc">Upgrading stamina increases the soldier's resistance.</td>
+				</tr>
+        </table>
+  </section>
+  
+	<hr>
+	
+  <section id="section-6">
+    <h1>Trades</h1>
+    
+  </section>
+  
+	<hr>
+	
+  <section id="section-7">
+    <h1>Stats</h1>
+      
+      <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px; width: auto">
+                <thead>
+                    <th colspan="2" style="text-align: center">Population</th>
+                </thead>
+                <tr>
+                    <td>Maximum Population</td>
+                    <td id="stats1">0</td>
+                </tr>
+
+                <tr>
+                    <td>Current Population</td>
+                    <td id="stats2">0</td>
+                </tr>
+              </table>
+            </div>
+              
+            <div class="col-sm">
+              <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px; width: auto">
+                <thead>
+                    <th colspan="2" style="text-align: center">Army</th>
+                </thead>
+
+                <tr>
+                    <td>Total Soldiers</td>
+                    <td id="stats14">0</td>
+                </tr>
+<!--
+                <tr>
+                    <td>Total Officers</td>
+                    <td id="stats15">0</td>
+                </tr>
+-->
+             </table>
+            </div>
+              
+            <div class="col-sm">
+             
+            </div>
+          </div>
+        </div>
+	
+	
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
+                <thead>
+                    <th colspan="2" style="text-align: center">Farmer Upgrade</th>
+                </thead>
+
+                <tr>
+                    <td style="text-align: center">Shovel</td>
+                    <td id="stats16" style="text-align: center">0</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center">Hoe</td>
+                    <td id="stats17" style="text-align: center">0</td>
+                </tr>
+             </table>
+            </div>
+            <div class="col-sm">
+              <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
+                <thead>
+                    <th colspan="2" style="text-align: center">Woodcutter Upgrade</th>
+                </thead>
+
+                <tr>
+                    <td style="text-align: center">Axe</td>
+                    <td id="stats18" style="text-align: center">0</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center">Hand Saw</td>
+                    <td id="stats19" style="text-align: center">0</td>
+                </tr>
+             </table>
+            </div>
+            <div class="col-sm">
+              <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
+                <thead>
+                    <th colspan="2" style="text-align: center">Miner Upgrade</th>
+                </thead>
+
+                <tr>
+                    <td style="text-align: center">Pickaxe</td>
+                    <td id="stats20" style="text-align: center">0</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center">Shovel</td>
+                    <td id="stats21" style="text-align: center">0</td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center">Chisel</td>
+                    <td id="stats22" style="text-align: center">0</td>
+                </tr>
+
+             </table>
+            </div>
+          </div>
+        </div>
+	
+	<table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px; width: auto">
+		<thead>
+			<th colspan="6" style="text-align: center">Resources</th>
+		</thead>
+		
+		<tr>
+            <td>Total Food Amount</td>
+            <td id="stats3">0</td>
+            
+            <td>Total Apples</td>
+            <td id="stats6">0</td>
+            
+            <td>Total Iron</td>
+            <td id="stats8">0</td>
+        </tr>
+		
+		<tr>
+			<td>Total Wood Amount</td>
+            <td id="stats4">0</td>
+            
+            <td>Total Leather</td>
+            <td id="stats7">0</td>
+            
+            <td>Total Silver</td>
+            <td id="stats9">0</td>
+		</tr>
+		
+		<tr>
+			<td>Total Stone Amount</td>
+            <td id="stats5">0</td>
+            
+            <td>Total Coal</td>
+            <td id="stats11">0</td>
+            
+            <td>Total Gold</td>
+            <td id="stats10">0</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2"></td>
+            
+            <td>Total Charcoal</td>
+            <td id="stats12">0</td>
+            
+            <td>Total Gunpowder</td>
+            <td id="stats13">0</td>
+		</tr>
+	</table>
+
+    <table cellspacing="0" cellpadding="10" style="border-spacing: 10px; margin-left: 10px">
+        <thead>
+            <th colspan="2" style="text-align: center">Others</th>
+        </thead>
+        
+        <tr>
+            <td style="text-align: center">Total Clicks</td>
+            <td id="clicks" style="text-align: center">0</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align: center">Victories</td>
+            <td id="victories" style="text-align: center">0</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align: center">Defeats</td>
+            <td id="defeats" style="text-align: center">0</td>
+        </tr>
+    </table>
+  </section>
+  
+	<hr>
+	
+  <section id="section-8">
+    <div class="row">
+        <div class="col">
+            <h1>Options</h1>
+            <table cellspacing="0" cellpadding="3" style="border-spacing: 5px; margin-left: 20px; width: auto">		
+                <tr>
+                    <td><button onclick="save()" style="width:100%; height: 30px">Save to localStorage</button></td>
+                </tr>
+                
+                <tr>
+                    <td><button onclick="load()" style="width:100%; height: 30px">Load from localStorage</button></td>
+                </tr>
+
+                <tr>
+                    <td><button onclick="saveDB()" style="width:100%; height: 30px">Save to DataBase</button></td>
+                </tr>
+    
+                <tr>
+                    <td><button onclick="loadDB()" style="width:100%; height: 30px">Load from DataBase</button></td>
+                </tr>
+
+                <tr>
+                    <td><button onclick="changeName()" style="width:100%; height: 30px">Change Name</button></td>
+                </tr>
+
+                <tr>
+                    <td><button onclick="reset()" style="width:100%; height: 30px">Reset Everything</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer">
+  &copy;Pirpiliu Gabriel Ștefan - PCLP Project
+</footer>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDr7gk2NF-Qs-P5NNV26WkNlHMkp6Js4AU",
+      authDomain: "rise-of-a-new-era.firebaseapp.com",
+      databaseURL: "https://rise-of-a-new-era.firebaseio.com",
+      projectId: "rise-of-a-new-era",
+      storageBucket: "rise-of-a-new-era.appspot.com",
+      messagingSenderId: "365855428150",
+      appId: "1:365855428150:web:2372a02438054f65"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    const database = firebase.firestore();
+</script>
+
+<script src="scripts/nav.js"></script>
+<script src="scripts/variables.js"></script>
+<script src="scripts/trades.js"></script>
+<script src="scripts/army.js"></script>
+<script src="scripts/blacksmith.js"></script>
+    <!-- ---------------------------------------------------------- -->
+<script src="scripts/updater.js"></script>
+<script src="scripts/buildings.js"></script>
+<script src="scripts/options.js"></script>
+    <!-- ---------------------------------------------------------- -->
+<script src="scripts/script.js"></script>
+<script src="scripts/bot.js"></script>
+
+<script src="scripts/auth.js"></script>
+<script src="scripts/database.js"></script>
+
+</body>
+</html>

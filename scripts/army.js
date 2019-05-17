@@ -54,5 +54,6 @@ function soldierUpgrade(x)
                             }
                     else alert("Not enough resources.");
             }
+    else alert("You don't own 'Barrack'");
     updateArmy();
 }

@@ -1,6 +1,18 @@
 // ================ Variables ================
 var name = "";
 
+var ageProgress = 0;
+var ageNumber = 0;
+var ageName = [
+    "Stone Age",
+    "Bronze Age",
+    "Iron Age",
+    "Middle Ages",
+    "Early Modern Period",
+    "Late Modern Period",
+    "Contemporary History"
+]
+
 /* Booleans */
 var boolHasBarrack = 0;
 var boolHasKiln = 0;
@@ -117,31 +129,11 @@ var soldierRanks = [
     "Sergeant Major of the Army"
 ];
 
-var officerRanks = [
-    "Second Lieutenant",
-    "First Lieutenant",
-    "Captain", "Major",
-    "Lieutenant Colonel",
-    "Colonel", "Brigadier General",
-    "Major General", "Lieutenant General",
-    "General",
-    "General of the Army"
-];
-
 var soldier = {
     amount: 0,
     n: 0,
     rank: soldierRanks[0],
     gun: 1,
     stamina: 1,
-    efficienty: 1
-}
-
-var officer = {
-    amount: 0,
-    n: 0,
-    rank: officerRanks[0],
-    gun: 1,
-    command: 1,
     efficienty: 1
 }

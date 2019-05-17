@@ -17,9 +17,11 @@ function updateAll()
     updateWoodcutter();
     updateMiner();
     updateWorkers();
+    updateBuildingsOwned();
     
     updateStats();
     updateName();
+    updateAge();
 }
 
 setInterval(timer, 1000);
@@ -129,12 +131,25 @@ function updateArmy()
 {
     if(boolHasBarrack == 0)
         document.getElementById("barrack").disabled = false;
-        else document.getElementById("barrack").disable = true;
+    else document.getElementById("barrack").disable = true;
+
+    if(soldier.n == 11)
+    {
+        document.getElementById("soldierMenu2").disabled = true;
+        document.getElementById("soldierCost2a").innerHTML = "MAXED";
+        document.getElementById("soldierCost2b").innerHTML = "MAXED";
+        document.getElementById("soldierCost2c").innerHTML = "MAXED";
+    }
+    else {
+        document.getElementById("soldierMenu2").disabled = false;
+        document.getElementById("soldierCost2a").innerHTML = 5000 * (1+soldier.n) + " Food";
+        document.getElementById("soldierCost2b").innerHTML = 5000 * (1+soldier.n) + " Wood";
+        document.getElementById("soldierCost2c").innerHTML = 5000 * (1+soldier.n) + " Stone";
+    }
     
-    document.getElementById("soldierCost2a").innerHTML = 5000 * (1+soldier.n) + " Food";
-    document.getElementById("soldierCost2b").innerHTML = 5000 * (1+soldier.n) + " Wood";
-    document.getElementById("soldierCost2c").innerHTML = 5000 * (1+soldier.n) + " Stone";
     
+    
+    document.getElementById("soldierEff").innerHTML = soldier.efficienty;
     document.getElementById("soldierNumber").innerHTML = "You currently have: " + soldier.amount + " soldier(s).";
     document.getElementById("soldierRank").innerHTML = "Current soldier's rank: " + soldier.rank + " .";
 }
@@ -194,13 +209,36 @@ function updateMiner()
     document.getElementById("minerEff").innerHTML = miner.efficienty;
 }
 
-function updateEvents()
+function updateBuildingsOwned()
 {
-    if(boolEnemyAttacks == 0)
-    {
-        document.getElementById("events").innerHTML = "&bull;Your nation is safe ( for now )";
-        document.getElementById("result").innerHTML = "";
-    }
+    document.getElementById("tentOwned").innerHTML = numberBuilds.tent;
+    document.getElementById("smallHouseOwned").innerHTML = numberBuilds.smallHouse;
+    document.getElementById("mediumHouseOwned").innerHTML = numberBuilds.mediumHouse;
 }
 
-setInterval(updateEvents, 30000);
+function updateAge()
+{
+    let elem = document.getElementById("ageProgressBar"); 
+    let width = ageProgress;
+    if(width >= 100) 
+    {
+        elem.style.width = 0;
+
+        ageProgress = 0;
+        ageNumber += 1;
+    } 
+    else 
+    {
+        width = ageProgress;
+        elem.style.width = width + '%'; 
+    }
+
+    if(ageNumber < 6)
+        document.getElementById("ageName").innerHTML = "Current Age: " + ageName[ageNumber];
+    else {
+        document.getElementById("ageName").innerHTML = "Current Age: " + ageName[6];
+        document.getElementById("nextAge").innerHTML = "You've reached the final Age";
+        elem.style.width = 100 + '%';
+    }
+}
+setInterval(updateAge, 1000);

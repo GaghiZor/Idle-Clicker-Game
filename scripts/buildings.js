@@ -15,7 +15,9 @@ function buyTent()
         tentCost[1] += (numberBuilds.tent * 6) / 3;
         tentCost[2] += (numberBuilds.tent * 6) / 3;
         
-		update();
+        ageProgress += 5;
+
+		updateAll();
 	}
 	else alert("Not enough resources.");
 }
@@ -34,8 +36,10 @@ function buySmallHouse()
         smallHouseCost[0] += (numberBuilds.smallHouse * 6) / 3;
         smallHouseCost[1] += (numberBuilds.smallHouse * 6) / 3;
         smallHouseCost[2] += (numberBuilds.smallHouse * 6) / 3;
+
+        ageProgress += 5;
         
-		update();
+		updateAll();
 	}
 	else alert("Not enough resources.");
 }
@@ -54,54 +58,68 @@ function buyMediumHouse()
         mediumHouseCost[0] += (numberBuilds.mediumHouse * 6) / 3;
         mediumHouseCost[1] += (numberBuilds.mediumHouse * 6) / 3;
         mediumHouseCost[2] += (numberBuilds.mediumHouse * 6) / 3;
+
+        ageProgress += 5;
         
-		update();
+		updateAll();
 	}
 	else alert("Not enough resources.");
 }
 
 function createBarrack()
 {
-    if( foodAmount >= 1000 && woodAmount >= 1000 && stoneAmount >= 1000)
+    if( foodAmount >= 1000 && woodAmount >= 1000 && stoneAmount >= 1000 && ageNumber >= 2)
         {
             foodAmount -= 1000;
             woodAmount -= 1000;
             stoneAmount -= 1000;
             boolHasBarrack = 1;
-            update();
+            ageProgress += 10;
+            updateAll();
             
             document.getElementById("barrack").disabled = true;
+            document.getElementById("barrackOwned").innerHTML = "Yes";
         }
-    else alert("Not enough resources.");
+    else if(foodAmount < 1000 || woodAmount < 1000 || stoneAmount < 1000)
+            alert("Not enough resources.");
+    else alert("Unlocked in 'Iron Age'");
 }
 
 function createKiln()
 {
-    if( foodAmount >= 1000 && woodAmount >= 1000 && stoneAmount >= 1000)
+    if( foodAmount >= 1000 && woodAmount >= 1000 && stoneAmount >= 1000 && ageNumber >= 3)
         {
             foodAmount -= 1000;
             woodAmount -= 1000;
             stoneAmount -= 1000;
             boolHasKiln = 1;
-            update();
+            ageProgress += 10;
+            updateAll();
             
             document.getElementById("kiln").disabled = true;
+            document.getElementById("kilnOwned").innerHTML = "Yes";
         }
-    else alert("Not enough resources.");
+    else if(foodAmount < 1000 || woodAmount < 1000 || stoneAmount < 1000)
+            alert("Not enough resources.");
+    else alert("Unlocked in 'Middle Ages'");
 }
 
 function createPowdermill()
 {
-    if( foodAmount >= 1000 && woodAmount >= 1000 && stoneAmount >= 1000)
+    if( foodAmount >= 1000 && woodAmount >= 1000 && stoneAmount >= 1000 && ageNumber >= 4)
         {
             foodAmount -= 1000;
             woodAmount -= 1000;
             stoneAmount -= 1000;
             boolHasPowdermill = 1;
-            update();
+            ageProgress += 10;
+            updateAll();
             
             document.getElementById("powdermill").disabled = true;
+            document.getElementById("powdermillOwned").innerHTML = "Yes";
         }
-    else alert("Not enough resources.");
+    else if(foodAmount < 1000 || woodAmount < 1000 || stoneAmount < 1000)
+            alert("Not enough resources.");
+    else alert("Unlocked in 'Early Modern Period'");
 }
 // ==============================================

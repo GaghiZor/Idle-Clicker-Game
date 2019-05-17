@@ -162,9 +162,9 @@ function kiln(x)
                 document.getElementById("kilnButton2").disabled = true;
                 document.getElementById("kilnButton3").disabled = true;
                 
-                var elem = document.getElementById("bar1"); 
-                var width = 1;
-                var id = setInterval(frame, (10*x));
+                let elem = document.getElementById("bar1"); 
+                let width = 1;
+                let id = setInterval(frame, (10*x));
                 function frame() 
                 {
                     if(width >= 100) 
@@ -200,9 +200,9 @@ function powdermill(x)
                 document.getElementById("powdermillButton2").disabled = true;
                 document.getElementById("powdermillButton3").disabled = true;
                 
-                var elem2 = document.getElementById("bar2"); 
-                var width2 = 1;
-                var id2 = setInterval(frame2, (10*x));
+                let elem2 = document.getElementById("bar2"); 
+                let width2 = 1;
+                let id2 = setInterval(frame2, (10*x));
                 function frame2()
                 {
                     if(width2 >= 100)

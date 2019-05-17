@@ -55,4 +55,13 @@ Project v.0.0.8
 	1. Added 'Kiln' building + functionality
 	2. Added 'Powder mill' building + functionality
 	3. Added an event list
-	
+
+Project v.0.0.9
+------------------------------------------------------------	
+	1. Implemented a 'Register and Login System'
+	2. Added an options to save or load from database
+	3. Added 'Evolution stage' with a progress bar
+	4. AutoSaveGame function implemented 
+
+Project v0.1.0
+------------------------------------------------------------

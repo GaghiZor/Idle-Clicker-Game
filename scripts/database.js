@@ -216,12 +216,13 @@ function loadDB()
       // --- Age ----
         ageProgress = doc.data().ageProgress;
         ageNumber = doc.data().ageNumber;
+
+        alert("Loaded from DataBase");
+        updateAll();
 		} else {
-			console.log("No document");
+			gameLog("No document found in database.");
 		}
 	}).catch(function(error) {
 		console.log("Error getting document:", error);
 	});
-	
-  alert("Loaded from DataBase");
 }

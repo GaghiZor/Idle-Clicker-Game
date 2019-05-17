@@ -60,7 +60,9 @@ var stats = {
     shovelMiner: 0,
     chiselMiner: 0,
     
-    clicks: 0
+    clicks: 0,
+    tradesAccepted: 0,
+    tradesRefused: 0
 }
 
 /* Workers */

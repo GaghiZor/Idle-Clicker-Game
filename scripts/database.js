@@ -55,6 +55,8 @@ function saveDB()
         chiselMiner: stats.chiselMiner,
       // ------------------------------------
         clicks: stats.clicks,
+        tradesAccepted: stats.tradesAccepted,
+        tradesRefused: stats.tradesRefused,
 
       // --- Workers ---
         workers: workers,
@@ -113,7 +115,7 @@ function saveDB()
         ageNumber: ageNumber
     });
 	
-	alert("Saved to DataBase");
+	gameLog("Saved to DataBase");
 }
 
 function loadDB()
@@ -160,6 +162,8 @@ function loadDB()
         stats.chiselMiner = doc.data().chiselMiner;
       // ------------------------------------
         stats.clicks = doc.data().clicks;
+        stats.tradesAccepted = doc.data().tradesAccepted;
+        stats.tradesRefused = doc.data().tradesRefused;
 
       // --- Workers ---
         workers = doc.data().workers;
@@ -217,7 +221,7 @@ function loadDB()
         ageProgress = doc.data().ageProgress;
         ageNumber = doc.data().ageNumber;
 
-        alert("Loaded from DataBase");
+        gamelog("Loaded from DataBase");
         updateAll();
 		} else {
 			gameLog("No document found in database.");

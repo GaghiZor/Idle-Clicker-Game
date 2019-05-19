@@ -52,6 +52,8 @@ function save()
     } catch(err) {
         console.log("Can not acces localStorage");
     }
+
+    gameLog("Saved in localStorage");
 }
 
 function load()
@@ -153,6 +155,8 @@ function load()
     if(loadVar.stats.silver != null) stats.silver = loadVar.stats.silver;
     if(loadVar.stats.coal != null) stats.coal = loadVar.stats.coal;
     if(loadVar.stats.charcoal != null) stats.charcoal = loadVar.stats.charcoal;
+    if(loadVar.stats.tradesAccepted != null) stats.tradesAccepted = loadVar.stats.tradesAccepted;
+    if(loadVar.stats.tradesRefused != null) stats.tradesRefused = loadVar.stats.tradesRefused;
 // Loading Number of Builds
     if(loadVar.numberBuilds.tent != null) numberBuilds.tent = loadVar.numberBuilds.tent;
     if(loadVar.numberBuilds.smallHouse != null) numberBuilds.smallHouse = loadVar.numberBuilds.smallHouse;
@@ -182,7 +186,8 @@ function load()
     if(boolSoldierMaxRank == 1)
         document.getElementById("soldierMenu2").disabled = true;
 
-    updateAll()
+    updateAll();
+    gameLog("Loaded from localStorage");
 }
   
 function changeName()
@@ -272,8 +277,38 @@ function reset()
 
         ageProgress = 0;
         ageNumber = 0;
+
+        stats = {   
+            foodTotal: 0,
+            woodTotal: 0,
+            stoneTotal: 0,
+            
+            gunpowder: 0,
+            charcoal: 0,
+            coal: 0,
+            leather: 0,
+            gold: 0,
+            iron: 0,
+            silver: 0,
+            apples: 0,
+            
+            shovelFarmer: 0,
+            hoeFarmer: 0,
+            
+            axeWoodcutter: 0,
+            handSawWoodcutter: 0,
+            
+            pickaxeMiner: 0,
+            shovelMiner: 0,
+            chiselMiner: 0,
+            
+            clicks: 0,
+            tradesAccepted: 0,
+            tradesRefused: 0
+        }
         
         save();
+        saveDB();
         location.reload();
     }
 }
@@ -306,9 +341,64 @@ function gameLog(message){
 		}
 }
 
+function menuIcons(type)
+{
+    if(type == "enable")
+    {
+        document.getElementById("image_1").style.display = "block";
+        document.getElementById("image_2").style.display = "block";
+        document.getElementById("image_3").style.display = "block";
+        document.getElementById("image_4").style.display = "block";
+        document.getElementById("image_5").style.display = "block";
+        document.getElementById("image_6").style.display = "block";
+        document.getElementById("image_7").style.display = "block";
+        document.getElementById("image_8").style.display = "block";
+    }
+
+    if(type == "disable")
+    {
+        document.getElementById("image_1").style.display = "none";
+        document.getElementById("image_2").style.display = "none";
+        document.getElementById("image_3").style.display = "none";
+        document.getElementById("image_4").style.display = "none";
+        document.getElementById("image_5").style.display = "none";
+        document.getElementById("image_6").style.display = "none";
+        document.getElementById("image_7").style.display = "none";
+        document.getElementById("image_8").style.display = "none";
+    }
+}
+
+function menuText(type)
+{
+    if(type == "enable")
+    {
+        document.getElementById("menu_1").style.display = "block";
+        document.getElementById("menu_2").style.display = "block";
+        document.getElementById("menu_3").style.display = "block";
+        document.getElementById("menu_4").style.display = "block";
+        document.getElementById("menu_5").style.display = "block";
+        document.getElementById("menu_6").style.display = "block";
+        document.getElementById("menu_7").style.display = "block";
+        document.getElementById("menu_8").style.display = "block";
+    }
+
+    if(type == "disable")
+    {
+        document.getElementById("menu_1").style.display = "none";
+        document.getElementById("menu_2").style.display = "none";
+        document.getElementById("menu_3").style.display = "none";
+        document.getElementById("menu_4").style.display = "none";
+        document.getElementById("menu_5").style.display = "none";
+        document.getElementById("menu_6").style.display = "none";
+        document.getElementById("menu_7").style.display = "none";
+        document.getElementById("menu_8").style.display = "none";
+    }
+
+}
+
 function autoSave()
 {
     save();
-    gameLog('Automatically Saved Game');
+    gameLog('Auto Saved Game');
 }
 setInterval(autoSave, 120000);

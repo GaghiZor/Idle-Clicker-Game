@@ -51,6 +51,8 @@ function updateStats()
     document.getElementById("clicks").innerHTML = stats.clicks;
     document.getElementById("victories").innerHTML = victories;
     document.getElementById("defeats").innerHTML = defeats;
+    document.getElementById("tradesAcceped").innerHTML = stats.tradesAccepted;
+    document.getElementById("tradesRefused").innerHTML = stats.tradesRefused;
     
     document.getElementById("stats1").innerHTML = maxPopulation;
     document.getElementById("stats2").innerHTML = Population;
@@ -98,6 +100,20 @@ function update()
     document.getElementById("costTent").innerHTML = tentCost[0] + " Food | " + tentCost[1] + " Wood | " + tentCost[2] + " Stone"; // Tent's Cost
     document.getElementById("costSmallHouse").innerHTML = smallHouseCost[0] + " Food | " + smallHouseCost[1] + " Wood | " + smallHouseCost[2] + " Stone"; // SmallHouse's Cost
     document.getElementById("costMediumHouse").innerHTML = mediumHouseCost[0] + " Food | " + mediumHouseCost[1] + " Wood | " + mediumHouseCost[2] + " Stone"; // MediumHouse's Cost
+
+    if(boolHasKiln == 1)
+        {
+            document.getElementById("kiln2").style.display = "block";
+            document.getElementById("kilnBuild").style.display = "none";
+        }
+    else document.getElementById("kiln2").style.display = "none";
+
+    if(boolHasPowdermill == 1)
+        {
+            document.getElementById("powdermill2").style.display = "block";
+            document.getElementById("powdermillBuild").style.display = "none";
+        }
+    else document.getElementById("powdermill2").style.display = "none";
 }
 
 function updateExtraRes()
@@ -129,9 +145,8 @@ function updateName()
 
 function updateArmy()
 {
-    if(boolHasBarrack == 0)
-        document.getElementById("barrack").disabled = false;
-    else document.getElementById("barrack").disable = true;
+    if(boolHasBarrack == 1)
+        document.getElementById("barrackBuild").style.display = "none";
 
     if(soldier.n == 11)
     {
@@ -231,6 +246,12 @@ function updateAge()
     {
         width = ageProgress;
         elem.style.width = width + '%'; 
+    }
+    
+    if(ageNumber >= 2)
+    {
+        document.getElementById("tradesLocked").style.display = "none";
+        document.getElementById("merchantHere").style.display = "block";
     }
 
     if(ageNumber < 6)

@@ -1,0 +1,71 @@
+Project v0.0.1
+------------------------------------------------------------
+	Original release
+
+Project v0.0.2
+------------------------------------------------------------
+	Minor changes.
+
+Project v0.0.3
+------------------------------------------------------------
+	1. Completely UI changed
+	2. Added a navigation menu
+	3. Added a name for the nation's owner
+	4. Added [Change name] option
+	5. Added possibility to fire workers
+	6. Adjusted function to hire workers
+	7. Other minor changes to code
+
+Project v0.0.4
+------------------------------------------------------------
+	1. Created the 'Army' tab
+	2. Implemented 'Barrack' to host soldiers
+	3. Added possibility to train soldiers
+	4. Added soldier's / officer's ranks
+	5. Changed the cost of buildings
+	6. Added a 'Reset' option to reset everything
+	7. Minor changes to code
+
+Project v0.0.5
+------------------------------------------------------------
+	1. Fixed 'Train Soldier'
+	2. Fixed CSS overlaping
+	3. Added a menu for 'Extra Resources'
+	4. Added a drop chance for extra resources when you click on normal resources
+	5. Changed the increment function for normal resources
+
+Project v.0.0.6
+------------------------------------------------------------
+	1. Added 3 more extra resources : 'Coal', 'Charcoal' and 'Gunpowder'
+	2. Changed how workers are declared
+	3. Added option to remove the image from background
+	4. Implemented Farmer's upgrade
+	5. Added 'Stats' tab
+
+Project v.0.0.7
+------------------------------------------------------------
+	1. Included Bootstrap Library
+	2. Redesigned Interface
+	3. Added 'Stats' tab functionality
+	4. Added Woodcutter's upgrades and Miner's upgrades to blacksmith
+	5. Implemented a simple AI to attack the player's empire
+
+Project v.0.0.8
+------------------------------------------------------------
+	1. Added 'Kiln' building + functionality
+	2. Added 'Powder mill' building + functionality
+	3. Added 'Event list'
+
+Project v.0.0.9
+------------------------------------------------------------	
+	1. Implemented a 'Register and Login System'
+	2. Added an options to save or load from database
+	3. Added 'Evolution stage' with a progress bar
+	4. AutoSaveGame function implemented 
+
+Project v0.1.0
+------------------------------------------------------------
+	1. Auto load game
+	2. Added more functionality to 'Event list'
+	3. Added 'Trades'
+	4. New Login / Register form

@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1558938202 source:e:\[]pclp 2\tema2\main.cpp
+	<iostream>
+	"Pereche.h"
+	"Rational.h"
+	"Complex.h"
+	"Putere.h"
+
+1558797218 e:\[]pclp 2\tema2\include\pereche.h
+	<iostream>
+	<math.h>
+
+1558881239 source:e:\[]pclp 2\tema2\src\complex.cpp
+	"Complex.h"
+
+1558795452 source:e:\[]pclp 2\tema2\src\pereche.cpp
+	"Pereche.h"
+
+1558881584 source:e:\[]pclp 2\tema2\src\putere.cpp
+	"Putere.h"
+
+1558881584 source:e:\[]pclp 2\tema2\src\rational.cpp
+	"Rational.h"
+
+1558938202 e:\[]pclp 2\tema2\include\rational.h
+	"Pereche.h"
+
+1558938202 e:\[]pclp 2\tema2\include\complex.h
+	"Pereche.h"
+
+1558938202 e:\[]pclp 2\tema2\include\putere.h
+	"Pereche.h"
+

@@ -4,6 +4,7 @@ function timer()
 	update();
     updateStats();
     updateExtraRes();
+    updateDisplay();
 	
 	autoResources();
 }
@@ -11,6 +12,7 @@ function timer()
 function updateAll()
 {
     update();
+    updateDisplay();
     updateArmy();
     updateExtraRes();
     updateFarmer();
@@ -18,6 +20,7 @@ function updateAll()
     updateMiner();
     updateWorkers();
     updateBuildingsOwned();
+    updateBuilds();
     
     updateStats();
     updateName();
@@ -145,9 +148,6 @@ function updateName()
 
 function updateArmy()
 {
-    if(boolHasBarrack == 1)
-        document.getElementById("barrackBuild").style.display = "none";
-
     if(soldier.n == 11)
     {
         document.getElementById("soldierMenu2").disabled = true;
@@ -161,8 +161,6 @@ function updateArmy()
         document.getElementById("soldierCost2b").innerHTML = 5000 * (1+soldier.n) + " Wood";
         document.getElementById("soldierCost2c").innerHTML = 5000 * (1+soldier.n) + " Stone";
     }
-    
-    
     
     document.getElementById("soldierEff").innerHTML = soldier.efficienty;
     document.getElementById("soldierNumber").innerHTML = "You currently have: " + soldier.amount + " soldier(s).";
@@ -184,6 +182,9 @@ function updateFarmer()
     document.getElementById("farmerCost2c").innerHTML = Math.round((5 * farmer.efficienty * farmer.hoe)) + " Gold";
     
     document.getElementById("farmerEff").innerHTML = farmer.efficienty;
+
+    if(boolCanGetLeather == 1)
+        document.getElementById("canGetLeather").style.display = "none";
 }
 
 function updateWoodcutter()
@@ -201,6 +202,9 @@ function updateWoodcutter()
     document.getElementById("woodcutterCost2c").innerHTML = Math.round((5 * woodcutter.efficienty * woodcutter.handSaw)) + " Gold";
     
     document.getElementById("woodcutterEff").innerHTML = woodcutter.efficienty;
+
+    if(boolCanGetApple == 1)
+        document.getElementById("canGetApples").style.display = "none";
 }
 
 function updateMiner()
@@ -222,6 +226,9 @@ function updateMiner()
     document.getElementById("minerCost3c").innerHTML = Math.round((5 * miner.efficienty * miner.chisel)) + " Gold";
     
     document.getElementById("minerEff").innerHTML = miner.efficienty;
+
+    if(boolCanGetOre == 1)
+        document.getElementById("canGetOre").style.display = "none";
 }
 
 function updateBuildingsOwned()
@@ -250,7 +257,6 @@ function updateAge()
     
     if(ageNumber >= 2)
     {
-        document.getElementById("tradesLocked").style.display = "none";
         document.getElementById("merchantHere").style.display = "block";
     }
 
@@ -263,3 +269,59 @@ function updateAge()
     }
 }
 setInterval(updateAge, 1000);
+
+function updateBuilds()
+{
+    if(boolHasBlacksmith == 1)
+    {
+        document.getElementById("blacksmithBuild").style.display = "none";
+        document.getElementById("section-4").style.display = "block";
+        document.getElementById("section4").style.display = "block";
+    }
+
+    if(boolHasBarrack == 1)
+    {
+        document.getElementById("barrackBuild").style.display = "none";
+        document.getElementById("section-5").style.display = "block";
+        document.getElementById("section5").style.display = "block";
+    }
+
+    if(boolHasKiln == 1)
+    {
+        document.getElementById("kilnBuild").style.display = "none";
+    }
+
+    if(boolHasPowdermill == 1)
+    {
+        document.getElementById("powdermillBuild").style.display = "none";
+    }
+}
+
+function updateDisplay()
+{
+    updateBuilds();
+
+    if(stats.foodTotal >= 20 && stats.woodTotal >= 15 && stats.stoneTotal >=5)
+    {
+        document.getElementById("section-2").style.display = "block";
+        document.getElementById("section2").style.display = "block";
+    }
+
+    if(maxPopulation >= 1)
+    {
+        document.getElementById("section-3").style.display = "block";
+        document.getElementById("section3").style.display = "block";
+    }
+
+    if(h >= 1)
+    {
+        document.getElementById("section-7").style.display = "block";
+        document.getElementById("section7").style.display = "block";
+    }
+
+    if(ageNumber >= 2)
+    {
+        document.getElementById("section-6").style.display = "block";
+        document.getElementById("section6").style.display = "block";
+    }
+}

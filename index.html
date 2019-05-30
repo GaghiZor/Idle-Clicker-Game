@@ -3,7 +3,8 @@
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en" class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="UTF-8" />
         <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
@@ -19,13 +20,18 @@
 		<script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-firestore.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-functions.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.0.1/firebase-functions.js"></script>
+        
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+		
+		<link rel="shortcut icon" type="favicon" href="favicon.ico" />
 		
     </head>
     <body>
         <div class="container">
             <header>
-                <h1>Rise of a new Age <span>| Join Us |</span></h1>
+                <h1>Rise of a new Age <br><span>| WELCOME |</span></h1>
             </header>
             <section>				
                 <div id="container_demo" >
@@ -35,8 +41,9 @@
                         <div id="login" class="animate form">
 
                                 <h1>Log in</h1> 
+                                
                                 <p> 
-                                    <label for="email" class="uname" data-icon="u" > Your email </label>
+                                    <label for="email" class="youmail" data-icon="e" > Your email </label>
                                     <input id="txtEmail" name="email" required="required" type="email" placeholder="mymail@mail.com"/>
                                 </p>
                                 <p> 
@@ -50,15 +57,14 @@
                                 <p class="change_link">
 									Not a member yet ?
 									<a href="#toregister" class="to_register">Join us</a>
-								</p>
-
+                                </p>
                         </div>
 
                         <div id="register" class="animate form">
                                 <h1> Sign up </h1> 
 								  <p id="reg" style="display: none; text-align: center;">Registration complete</p>
 								  <p id="userEmail" style="display: none; text-align: center;"></p>
-								  <p id="userPassword" style="display: none; text-align: center;"></p>
+                                  <p id="userPassword" style="display: none; text-align: center;"></p>
                                 <p> 
                                     <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
                                     <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/> 
@@ -81,7 +87,8 @@
                         </div>
 						
                     </div>
-                </div>  
+                </div> 
+                <div id="firebaseui-auth-container" style="float: center;"></div> 
 				<button id="btnLogout" style="display: none">Log out</button>
             </section>
         </div>
@@ -101,6 +108,24 @@
         const db = firebase.firestore();
         const auth = firebase.auth();
     </script>
+
+    <script type="text/javascript">
+        // FirebaseUI config.
+        var uiConfig = {
+        signInSuccessUrl: "game.html",
+        signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+        ]
+        };
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
 	<script src="scripts/auth.js"></script>
 	
     </body>

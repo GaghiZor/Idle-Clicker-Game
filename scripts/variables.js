@@ -17,6 +17,11 @@ var ageName = [
 var boolHasBarrack = 0;
 var boolHasKiln = 0;
 var boolHasPowdermill = 0;
+var boolHasBlacksmith = 0;
+// Workers
+var boolCanGetLeather = 0;
+var boolCanGetApple = 0;
+var boolCanGetOre = 0;
 
 /* Resources */
 var foodAmount = 0;
@@ -104,8 +109,8 @@ var s = 0; // Seconds
 
 /* Building Cost */
 var tentCost = [20, 15, 5];
-var smallHouseCost = [40, 80, 120];
-var mediumHouseCost = [60, 150, 200];
+var smallHouseCost = [40, 80, 60];
+var mediumHouseCost = [60, 150, 120];
 
 var numberBuilds = {
     tent: 0,

@@ -13,46 +13,10 @@ window.onload = function () {
 }
 	
 // ==================================================================================================================
-
-// Update resources from workers
-function autoResources()
-{
-    foodAmount += (farmer.total * farmer.level) * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10;
-    woodAmount += (woodcutter.total * woodcutter.level) * (1+(woodcutter.efficienty * woodcutter.axe * woodcutter.handSaw)) / 10;
-    stoneAmount += (miner.total * miner.level) * (1+(miner.efficienty * miner.chisel * miner.pickaxe * miner.shovel)) / 10;
-    
-    stats.foodTotal += (farmer.total * farmer.level) * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10;
-    stats.woodTotal += (woodcutter.total * woodcutter.level) * (1+(woodcutter.efficienty * woodcutter.axe * woodcutter.handSaw)) / 10;
-    stats.stoneTotal += (miner.total * miner.level) * (1+(miner.efficienty * miner.chisel * miner.pickaxe * miner.shovel)) / 10;
-    getProgress();
-}
-
-// ==============================================
-// Gather resources
-function increment(name)
+function getExtraRes(name)
 {
     let x, y, z;
-    
-    if(name === "food")
-    {
-        foodAmount += 1;
-        stats.foodTotal += 1;
-    }
-    
-    if(name === "wood")
-    {
-        woodAmount += 1;
-        stats.woodTotal += 1;
-    }
-    
-    if(name === "stone")
-    {
-        stoneAmount += 1;
-        stats.stoneTotal += 1;
-    }
-    
-// ----------------------------------
-// Obtain extra resources
+    // Obtain extra resources
     x = Math.random();
     
     y = Math.floor(Math.random() * 10) + 1;
@@ -94,12 +58,71 @@ function increment(name)
             extraRes.coal += 1;
             stats.coal += 1;
         }
+    updateExtraRes();
+}
+
+// Update resources from workers
+function autoResources()
+{
+    if(farmer.total >= 1)
+    {
+        foodAmount += (farmer.total * farmer.level) * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10;
+        stats.foodTotal += (farmer.total * farmer.level) * (1+(farmer.efficienty * farmer.shovel * farmer.hoe)) / 10;
+        getProgress();
+        if(boolCanGetLeather == 1)
+            getExtraRes("food");
+    }
+    
+    if(woodcutter.total >= 1)
+    {
+        woodAmount += (woodcutter.total * woodcutter.level) * (1+(woodcutter.efficienty * woodcutter.axe * woodcutter.handSaw)) / 10;
+        stats.woodTotal += (woodcutter.total * woodcutter.level) * (1+(woodcutter.efficienty * woodcutter.axe * woodcutter.handSaw)) / 10;
+        getProgress();
+        if(boolCanGetApple == 1)
+            getExtraRes("wood");
+    }
+    
+    if(miner.total >= 1)
+    {
+        stoneAmount += (miner.total * miner.level) * (1+(miner.efficienty * miner.chisel * miner.pickaxe * miner.shovel)) / 10;
+        stats.stoneTotal += (miner.total * miner.level) * (1+(miner.efficienty * miner.chisel * miner.pickaxe * miner.shovel)) / 10;
+        getProgress();
+        if(boolCanGetOre == 1)
+            getExtraRes("stone");
+    }
+}
+
+// ==============================================
+// Gather resources
+function increment(name)
+{
+    if(name === "food")
+    {
+        foodAmount += 1;
+        stats.foodTotal += 1;
+        getExtraRes("food");
+    }
+    
+    if(name === "wood")
+    {
+        woodAmount += 1;
+        stats.woodTotal += 1;
+        getExtraRes("wood");
+    }
+    
+    if(name === "stone")
+    {
+        stoneAmount += 1;
+        stats.stoneTotal += 1;
+        getExtraRes("stone");
+    }
+    
+// ----------------------------------
     
     stats.clicks += 1;
     
     getProgress();
     update();
-    updateExtraRes();
 }
 // ==============================================
 
@@ -113,7 +136,7 @@ function createWorker(x)
         foodAmount = foodAmount - (30*x);
         Population += x;
 
-        ageProgress += (1*x)/2;
+        ageProgress += (1*x)/5;
 
         updateWorkers();
         update();
@@ -183,19 +206,22 @@ function getProgress()
     if(stats.foodTotal != 0)
         if(stats.foodTotal % 1000 == 0)
         {
-            ageProgress += 5;
+            ageProgress += 1;
+            console.log("Clicked Food");
         }
 
     if(stats.woodTotal != 0)
         if(stats.woodTotal % 1000 == 0)
         {
-            ageProgress += 5;
+            ageProgress += 1;
+            console.log("Clicked Wood");
         }
 
     if(stats.stoneTotal != 0)
         if(stats.stoneTotal % 1000 == 0)
         {
-            ageProgress += 5;
+            ageProgress += 1;
+            console.log("Clicked Stone");
         }
 }
 

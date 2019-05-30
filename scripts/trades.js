@@ -370,5 +370,4 @@ function merchantAnswer(ans)
             document.getElementById("refuseTrade").style.display = "none";
         }
 }
-
 setInterval(merchant, 120000);

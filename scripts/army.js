@@ -10,6 +10,7 @@ function soldierUpgrade(x)
                                 foodAmount -= 150;
                                 workers -= 1;
                                 soldier.amount += 1;
+
                                 update();
                                 updateArmy();
                                 updateWorkers();
@@ -25,6 +26,9 @@ function soldierUpgrade(x)
                                 woodAmount = woodAmount - (5000 * soldier.n);
                                 stoneAmount = stoneAmount - (5000 * soldier.n);
                                 soldier.efficienty += 1;
+                                soldier.gun += 1;
+                                soldier.stamina += 1;
+
                                 update();
                                 updateArmy();
                             }
@@ -36,12 +40,14 @@ function soldierUpgrade(x)
                             }
                         break;
                 // Upgrade Gun
-                case 3 : if(extraRes.gunpowder >= 800)
+                case 3 : if(extraRes.gunpowder >= 50)
                             {
                                 soldier.gun += 1;
-                                extraRes.gunpowder -= 800;
+                                extraRes.gunpowder -= 50;
+
                                 updateExtraRes();
                                 updateArmy();
+                                update();
                             }
                     else alert("Not enough resources.");
                         break;
@@ -49,6 +55,7 @@ function soldierUpgrade(x)
                             {
                                 foodAmount -= 300;
                                 soldier.stamina += 1;
+                                
                                 update();
                                 updateArmy();
                             }

@@ -109,6 +109,10 @@ function saveDB()
         boolHasBarrack: boolHasBarrack,
         boolHasKiln: boolHasKiln,
         boolHasPowdermill: boolHasPowdermill,
+        boolHasBlacksmith: boolHasBlacksmith,
+        boolCanGetLeather: boolCanGetLeather,
+        boolCanGetApple: boolCanGetApple,
+        boolCanGetOre: boolCanGetOre,
 
       // --- Age ----
         ageProgress: ageProgress,
@@ -122,7 +126,7 @@ function loadDB()
 {
 	data.doc(userID).get().then(function(doc) {
 		if(doc.exists) {
-			name = doc.data().name;
+      name = doc.data().name;
       // --- Resources ---
         foodAmount = doc.data().foodAmount;
         woodAmount = doc.data().woodAmount;
@@ -216,6 +220,10 @@ function loadDB()
         boolHasBarrack = doc.data().boolHasBarrack;
         boolHasKiln = doc.data().boolHasKiln;
         boolHasPowdermill = doc.data().boolHasPowdermill;
+        boolHasBlacksmith = doc.data().boolHasBlacksmith;
+        boolCanGetApple = doc.data().boolCanGetApple;
+        boolCanGetLeather = doc.data().boolCanGetLeather;
+        boolCanGetOre = doc.data().boolCanGetOre;
 
       // --- Age ----
         ageProgress = doc.data().ageProgress;

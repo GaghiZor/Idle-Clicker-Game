@@ -15,7 +15,7 @@ function buyTent()
         tentCost[1] += (numberBuilds.tent * 6) / 3;
         tentCost[2] += (numberBuilds.tent * 6) / 3;
         
-        ageProgress += 5;
+        ageProgress += 0.5;
 
 		updateAll();
 	}
@@ -37,7 +37,7 @@ function buySmallHouse()
         smallHouseCost[1] += (numberBuilds.smallHouse * 6) / 3;
         smallHouseCost[2] += (numberBuilds.smallHouse * 6) / 3;
 
-        ageProgress += 5;
+        ageProgress += 0.5;
         
 		updateAll();
 	}
@@ -59,11 +59,28 @@ function buyMediumHouse()
         mediumHouseCost[1] += (numberBuilds.mediumHouse * 6) / 3;
         mediumHouseCost[2] += (numberBuilds.mediumHouse * 6) / 3;
 
-        ageProgress += 5;
+        ageProgress += 0.5;
         
 		updateAll();
 	}
 	else alert("Not enough resources.");
+}
+
+function createBlacksmith()
+{
+    if(extraRes.leather >= 50 && extraRes.iron >= 20 && stoneAmount >= 500)
+    {
+        extraRes.leather -= 50;
+        extraRes.iron -= 20;
+        stoneAmount -= 500;
+        boolHasBlacksmith = 1;
+
+        ageProgress += 5;
+        updateAll();
+
+        document.getElementById("blacksmithBuild").removeChild;
+    }
+    else alert("Not enough resources.");
 }
 
 function createBarrack()
@@ -73,12 +90,10 @@ function createBarrack()
             foodAmount -= 1000;
             woodAmount -= 1000;
             stoneAmount -= 1000;
+
             boolHasBarrack = 1;
-            ageProgress += 10;
+            ageProgress += 5;
             updateAll();
-            
-            document.getElementById("barrack").disabled = true;
-            document.getElementById("barrackOwned").innerHTML = "Yes";
         }
     else if(foodAmount < 1000 || woodAmount < 1000 || stoneAmount < 1000)
             alert("Not enough resources.");
@@ -93,11 +108,8 @@ function createKiln()
             woodAmount -= 1000;
             stoneAmount -= 1000;
             boolHasKiln = 1;
-            ageProgress += 10;
+            ageProgress += 5;
             updateAll();
-            
-            document.getElementById("kiln").disabled = true;
-            document.getElementById("kilnOwned").innerHTML = "Yes";
         }
     else if(foodAmount < 1000 || woodAmount < 1000 || stoneAmount < 1000)
             alert("Not enough resources.");
@@ -112,11 +124,8 @@ function createPowdermill()
             woodAmount -= 1000;
             stoneAmount -= 1000;
             boolHasPowdermill = 1;
-            ageProgress += 10;
+            ageProgress += 5;
             updateAll();
-            
-            document.getElementById("powdermill").disabled = true;
-            document.getElementById("powdermillOwned").innerHTML = "Yes";
         }
     else if(foodAmount < 1000 || woodAmount < 1000 || stoneAmount < 1000)
             alert("Not enough resources.");

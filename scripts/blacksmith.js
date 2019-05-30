@@ -8,6 +8,7 @@ function farmerUpgrade(x)
                             extraRes.silver -= 100 * farmer.efficienty;
                             extraRes.gold -= 100 * farmer.efficienty;
                             farmer.efficienty += 1;
+                            ageProgress += 2;
                             updateExtraRes();
                             updateFarmer();
                         }
@@ -21,6 +22,7 @@ function farmerUpgrade(x)
                             extraRes.gold -= 5 * farmer.efficienty * farmer.shovel;
                             farmer.shovel += 0.2;
                             stats.shovelFarmer += 1;
+                            ageProgress += 0.5;
                             updateExtraRes();
                             updateFarmer();
                         }
@@ -34,8 +36,22 @@ function farmerUpgrade(x)
                             extraRes.gold -= 5 * farmer.efficienty * farmer.hoe;
                             farmer.hoe += 0.2;
                             stats.hoeFarmer += 1;
+                            ageProgress += 0.5;
                             updateExtraRes();
                             updateFarmer();
+                        }
+                else alert("Not enough resources.");
+                    break;
+                    break;
+            // Improve Gathering
+            case 3 : if(extraRes.leather >= 20 && foodAmount >= 500 && extraRes.apples >= 10)
+                        {
+                            extraRes.leather -= 20;
+                            extraRes.apples -= 10;
+                            foodAmount -= 500;
+                            boolCanGetLeather = 1;
+                            ageProgress += 0.5;
+                            updateAll();
                         }
                 else alert("Not enough resources.");
                     break;
@@ -54,6 +70,7 @@ function woodcutterUpgrade(x)
                             extraRes.silver -= 100 * woodcutter.efficienty;
                             extraRes.gold -= 100 * woodcutter.efficienty;
                             woodcutter.efficienty += 1;
+                            ageProgress += 0.5;
                             updateExtraRes();
                             updateWoodcutter();
                         }
@@ -67,6 +84,7 @@ function woodcutterUpgrade(x)
                             extraRes.gold -= 5 * woodcutter.efficienty * woodcutter.axe;
                             woodcutter.axe += 0.2;
                             stats.axeWoodcutter += 1;
+                            ageProgress += 0.5;
                             updateExtraRes();
                             updateWoodcutter();
                         }
@@ -80,12 +98,25 @@ function woodcutterUpgrade(x)
                             extraRes.gold -= 5 * woodcutter.efficienty * woodcutter.handSaw;
                             woodcutter.handSaw += 0.2;
                             stats.handSawWoodcutter += 1;
+                            ageProgress += 0.5;
                             updateExtraRes();
                             updateWoodcutter();
                         }
                 else alert("Not enough resources.");
                     break;
-                
+                    break;
+            // Improve Chopping Trees
+            case 3 : if(extraRes.leather >= 10 && woodAmount >= 500 && extraRes.apples >= 50)
+                        {
+                            extraRes.leather -= 10;
+                            extraRes.apples -= 50;
+                            woodAmount -= 500;
+                            boolCanGetApple = 1;
+                            ageProgress += 0.5;
+                            updateAll();
+                        }
+                else alert("Not enough resources.");
+                    break;
         }
     updateWoodcutter();
 }
@@ -100,6 +131,7 @@ function minerUpgrade(x)
                             extraRes.silver -= 100 * miner.efficienty;
                             extraRes.gold -= 100 * miner.efficienty;
                             miner.efficienty += 1;
+                            ageProgress += 0.5;
                             updateExtraRes();
                             updateMiner();
                         }
@@ -113,6 +145,7 @@ function minerUpgrade(x)
                             extraRes.gold -= 5 * miner.efficienty * miner.pickaxe;
                             miner.pickaxe += 0.2;
                             stats.pickaxeMiner += 1;
+                            ageProgress += 0.5;
                             updateExtraRes();
                             updateMiner();
                         }
@@ -126,6 +159,7 @@ function minerUpgrade(x)
                             extraRes.gold -= 5 * miner.efficienty * miner.shovel;
                             miner.shovel += 0.2;
                             stats.shovelMiner += 1;
+                            ageProgress += 0.5;
                             updateExtraRes();
                             updateMiner();
                         }
@@ -139,12 +173,25 @@ function minerUpgrade(x)
                             extraRes.gold -= 5 * miner.efficienty * miner.chisel;
                             miner.chisel += 0.2;
                             stats.chiselMiner += 1;
+                            ageProgress += 0.5;
                             updateExtraRes();
                             updateMiner();
                         }
                 else alert("Not enough resources.");
                     break;
-                
+                    break;
+			// Improve Mining
+            case 4 : if(extraRes.iron >= 10 && stoneAmount >= 500 && extraRes.gold >= 5)
+                        {
+                            extraRes.iron -= 10;
+                            extraRes.gold -= 5;
+                            stoneAmount -= 500;
+                            boolCanGetOre = 1;
+                            ageProgress += 0.5;
+                            updateAll();
+                        }
+                else alert("Not enough resources.");
+                    break;
         }
     updateMiner();
 }

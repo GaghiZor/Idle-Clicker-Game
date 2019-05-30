@@ -3,6 +3,8 @@ const txtPassword = document.getElementById("txtPassword");
 const btnLogin = document.getElementById("btnLogin");
 const btnLogout = document.getElementById("btnLogout");
 
+var provider = new firebase.auth.GoogleAuthProvider();
+
 // Add login event
 btnLogin.addEventListener("click", e => {
   // Get email and password
@@ -20,12 +22,15 @@ btnLogin.addEventListener("click", e => {
   });
 });
 
+// Add login with Google
+
+
 // Add signup event
 btnSignUp.addEventListener("click", e => {
   // Get email and password
-  const email = emailsignup.value;
-  const pass = passwordsignup.value;
-  const pass2 = passwordsignup_confirm.value;
+  const email = document.getElementById("emailsignup").value;
+  const pass = document.getElementById("passwordsignup").value;
+  const pass2 = document.getElementById("passwordsignup_confirm").value;
 
     // Sign in
 	if(pass == pass2)
@@ -41,9 +46,11 @@ btnSignUp.addEventListener("click", e => {
 			document.getElementById("userPassword").style.display = "block";
 			document.getElementById("reg").style.display = "block";
 			
-			emailsignup.value = "";
-			passwordsignup.value = "";
-			passwordsignup_confirm.value = "";
+			email.value = "";
+			pass.value = "";
+      pass2.value = "";
+      
+      saveDB();
 		  })
 		  .catch(e => {
 			console.log(e.message)
@@ -74,4 +81,3 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     btnLogout.classList.add("hide");
   }
 });
-

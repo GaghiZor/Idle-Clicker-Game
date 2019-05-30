@@ -38,6 +38,10 @@ function save()
         boolHasBarrack: boolHasBarrack,
         boolHasKiln: boolHasKiln,
         boolHasPowdermill: boolHasPowdermill,
+        boolHasBlacksmith: boolHasBlacksmith,
+        boolCanGetApple: boolCanGetApple,
+        boolCanGetLeather: boolCanGetLeather,
+        boolCanGetOre: boolCanGetOre,
         
         victories: victories,
         defeats: defeats,
@@ -53,7 +57,7 @@ function save()
         console.log("Can not acces localStorage");
     }
 
-    gameLog("Saved in localStorage");
+    gameLog('Saved game in localStorage.');
 }
 
 function load()
@@ -175,16 +179,10 @@ function load()
     if(loadVar.boolHasBarrack != null) boolHasBarrack = loadVar.boolHasBarrack;
     if(loadVar.boolHasKiln != null) boolHasKiln = loadVar.boolHasKiln;
     if(loadVar.boolHasPowdermill != null) boolHasPowdermill = loadVar.boolHasPowdermill;
-    
-    if(boolHasBarrack == 1)
-        document.getElementById("barrack").disabled = true;
-    if(boolHasKiln == 1)
-        document.getElementById("kiln").disabled = true;
-    if(boolHasPowdermill == 1)
-        document.getElementById("powdermill").disabled = true;
-    
-    if(boolSoldierMaxRank == 1)
-        document.getElementById("soldierMenu2").disabled = true;
+    if(loadVar.boolHasBlacksmith != null) boolHasBlacksmith = loadVar.boolHasBlacksmith;
+    if(loadVar.boolCanGetApple != null) boolCanGetApple = loadVar.boolCanGetApple;
+    if(loadVar.boolCanGetLeather != null) boolCanGetLeather = loadVar.boolCanGetLeather;
+    if(loadVar.boolCanGetOre != null) boolCanGetOre = loadVar.boolCanGetOre;
 
     updateAll();
     gameLog("Loaded from localStorage");
@@ -204,6 +202,10 @@ function reset()
         boolHasBarrack = 0;
         boolHasKiln = 0;
         boolHasPowdermill = 0;
+
+        boolCanGetLeather = 0;
+        boolCanGetApple = 0;
+        boolCanGetOre = 0;
         
         foodAmount = 0;
         woodAmount = 0;
@@ -241,8 +243,12 @@ function reset()
         tentCost = [20, 15, 5];
         smallHouseCost = [40, 80, 120];
         mediumHouseCost = [60, 150, 200];
-        
-        localStorage.removeItem("hasCodeRunBefore");
+		
+		numberBuilds = {
+			tent: 0,
+			smallHouse: 0,
+			mediumHouse: 0
+		}
         
         h = 0;
         m = 0;
@@ -306,7 +312,8 @@ function reset()
             tradesAccepted: 0,
             tradesRefused: 0
         }
-        
+		localStorage.removeItem("hasCodeRunBefore");
+             
         save();
         saveDB();
         location.reload();
@@ -341,64 +348,51 @@ function gameLog(message){
 		}
 }
 
-function menuIcons(type)
-{
-    if(type == "enable")
-    {
-        document.getElementById("image_1").style.display = "block";
-        document.getElementById("image_2").style.display = "block";
-        document.getElementById("image_3").style.display = "block";
-        document.getElementById("image_4").style.display = "block";
-        document.getElementById("image_5").style.display = "block";
-        document.getElementById("image_6").style.display = "block";
-        document.getElementById("image_7").style.display = "block";
-        document.getElementById("image_8").style.display = "block";
-    }
+var menuIconStat = 1;
+var menuTextStat = 1;
 
-    if(type == "disable")
-    {
-        document.getElementById("image_1").style.display = "none";
-        document.getElementById("image_2").style.display = "none";
-        document.getElementById("image_3").style.display = "none";
-        document.getElementById("image_4").style.display = "none";
-        document.getElementById("image_5").style.display = "none";
-        document.getElementById("image_6").style.display = "none";
-        document.getElementById("image_7").style.display = "none";
-        document.getElementById("image_8").style.display = "none";
-    }
+function menuIcons()
+{
+    let toogleIcons = document.getElementsByClassName("iconMenu");
+
+    if(menuTextStat == 1)
+        for(i = 0; i < toogleIcons.length; i++)
+            if(toogleIcons[i].style.display != "none")
+                {
+                    toogleIcons[i].style.display = "none";
+                    document.getElementById("menuIconButton").innerHTML = "Enable Menu Icons";
+                    menuIconStat = 0;
+                }
+            else 
+            {
+                toogleIcons[i].style.display = "inline";
+                document.getElementById("menuIconButton").innerHTML = "Disable Menu Icons";
+                menuIconStat = 1;
+            }
 }
 
-function menuText(type)
+function menuText()
 {
-    if(type == "enable")
-    {
-        document.getElementById("menu_1").style.display = "block";
-        document.getElementById("menu_2").style.display = "block";
-        document.getElementById("menu_3").style.display = "block";
-        document.getElementById("menu_4").style.display = "block";
-        document.getElementById("menu_5").style.display = "block";
-        document.getElementById("menu_6").style.display = "block";
-        document.getElementById("menu_7").style.display = "block";
-        document.getElementById("menu_8").style.display = "block";
-    }
+    let toogleText = document.getElementsByClassName("textMenu");
 
-    if(type == "disable")
-    {
-        document.getElementById("menu_1").style.display = "none";
-        document.getElementById("menu_2").style.display = "none";
-        document.getElementById("menu_3").style.display = "none";
-        document.getElementById("menu_4").style.display = "none";
-        document.getElementById("menu_5").style.display = "none";
-        document.getElementById("menu_6").style.display = "none";
-        document.getElementById("menu_7").style.display = "none";
-        document.getElementById("menu_8").style.display = "none";
-    }
-
+    if(menuIconStat == 1)
+        for(i = 0; i < toogleText.length; i++)
+            if(toogleText[i].style.display != "none")
+                {
+                    toogleText[i].style.display = "none";
+                    document.getElementById("menuTextButton").innerHTML = "Enable Menu Icons";
+                    menuTextStat = 0;
+                }
+            else 
+            {
+                toogleText[i].style.display = "inline";
+                document.getElementById("menuTextButton").innerHTML = "Disable Menu Icons";
+                menuTextStat = 1;
+            }
 }
 
 function autoSave()
 {
     save();
-    gameLog('Auto Saved Game');
 }
-setInterval(autoSave, 120000);
+setInterval(autoSave, 300000);

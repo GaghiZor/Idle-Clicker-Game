@@ -8,7 +8,7 @@ function farmerUpgrade(x)
                             extraRes.silver -= 100 * farmer.efficienty;
                             extraRes.gold -= 100 * farmer.efficienty;
                             farmer.efficienty += 1;
-                            ageProgress += 2;
+                            ageProgress += 10;
                             updateExtraRes();
                             updateFarmer();
                         }
@@ -22,7 +22,7 @@ function farmerUpgrade(x)
                             extraRes.gold -= 5 * farmer.efficienty * farmer.shovel;
                             farmer.shovel += 0.2;
                             stats.shovelFarmer += 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateExtraRes();
                             updateFarmer();
                         }
@@ -36,7 +36,7 @@ function farmerUpgrade(x)
                             extraRes.gold -= 5 * farmer.efficienty * farmer.hoe;
                             farmer.hoe += 0.2;
                             stats.hoeFarmer += 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateExtraRes();
                             updateFarmer();
                         }
@@ -50,7 +50,7 @@ function farmerUpgrade(x)
                             extraRes.apples -= 10;
                             foodAmount -= 500;
                             boolCanGetLeather = 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateAll();
                         }
                 else alert("Not enough resources.");
@@ -70,7 +70,7 @@ function woodcutterUpgrade(x)
                             extraRes.silver -= 100 * woodcutter.efficienty;
                             extraRes.gold -= 100 * woodcutter.efficienty;
                             woodcutter.efficienty += 1;
-                            ageProgress += 0.5;
+                            ageProgress += 10;
                             updateExtraRes();
                             updateWoodcutter();
                         }
@@ -84,7 +84,7 @@ function woodcutterUpgrade(x)
                             extraRes.gold -= 5 * woodcutter.efficienty * woodcutter.axe;
                             woodcutter.axe += 0.2;
                             stats.axeWoodcutter += 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateExtraRes();
                             updateWoodcutter();
                         }
@@ -98,7 +98,7 @@ function woodcutterUpgrade(x)
                             extraRes.gold -= 5 * woodcutter.efficienty * woodcutter.handSaw;
                             woodcutter.handSaw += 0.2;
                             stats.handSawWoodcutter += 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateExtraRes();
                             updateWoodcutter();
                         }
@@ -112,7 +112,7 @@ function woodcutterUpgrade(x)
                             extraRes.apples -= 50;
                             woodAmount -= 500;
                             boolCanGetApple = 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateAll();
                         }
                 else alert("Not enough resources.");
@@ -131,7 +131,7 @@ function minerUpgrade(x)
                             extraRes.silver -= 100 * miner.efficienty;
                             extraRes.gold -= 100 * miner.efficienty;
                             miner.efficienty += 1;
-                            ageProgress += 0.5;
+                            ageProgress += 10;
                             updateExtraRes();
                             updateMiner();
                         }
@@ -145,7 +145,7 @@ function minerUpgrade(x)
                             extraRes.gold -= 5 * miner.efficienty * miner.pickaxe;
                             miner.pickaxe += 0.2;
                             stats.pickaxeMiner += 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateExtraRes();
                             updateMiner();
                         }
@@ -159,7 +159,7 @@ function minerUpgrade(x)
                             extraRes.gold -= 5 * miner.efficienty * miner.shovel;
                             miner.shovel += 0.2;
                             stats.shovelMiner += 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateExtraRes();
                             updateMiner();
                         }
@@ -173,7 +173,7 @@ function minerUpgrade(x)
                             extraRes.gold -= 5 * miner.efficienty * miner.chisel;
                             miner.chisel += 0.2;
                             stats.chiselMiner += 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateExtraRes();
                             updateMiner();
                         }
@@ -187,7 +187,7 @@ function minerUpgrade(x)
                             extraRes.gold -= 5;
                             stoneAmount -= 500;
                             boolCanGetOre = 1;
-                            ageProgress += 0.5;
+                            ageProgress += 4;
                             updateAll();
                         }
                 else alert("Not enough resources.");
@@ -220,6 +220,7 @@ function kiln(x)
                         elem.style.width = 0;
                         
                         extraRes.charcoal += 1 * x;
+                        ageProgress += (1*x)/3;
 
                         document.getElementById("kilnButton1").disabled = false;
                         document.getElementById("kilnButton2").disabled = false;
@@ -258,6 +259,7 @@ function powdermill(x)
                         elem2.style.width = 0;
                         
                         extraRes.gunpowder += 1 * x;
+                        ageProgress += (1*x)/3;
 
                         document.getElementById("powdermillButton1").disabled = false;
                         document.getElementById("powdermillButton2").disabled = false;

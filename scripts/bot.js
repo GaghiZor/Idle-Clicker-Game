@@ -55,6 +55,7 @@ function attack()
             if(soldier.stamina <= 0)
             {
                 soldier.amount -= 1;
+                soldier.stamina = 0;
                 newEnemy += 1;
             }
 

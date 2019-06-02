@@ -45,10 +45,11 @@ function save()
         
         victories: victories,
         defeats: defeats,
-        attackNumbers: attackNumbers,
 
         ageNumber: ageNumber,
-        ageProgress: ageProgress
+        ageProgress: ageProgress,
+
+        enemy: enemy
     }
       
     try {
@@ -166,9 +167,9 @@ function load()
     if(loadVar.numberBuilds.smallHouse != null) numberBuilds.smallHouse = loadVar.numberBuilds.smallHouse;
     if(loadVar.numberBuilds.mediumHouse != null) numberBuilds.mediumHouse = loadVar.numberBuilds.mediumHouse;
 // Loading for AI
-    if(loadVar.attackNumbers != null) attackNumbers = loadVar.attackNumbers;
     if(loadVar.victories != null) victories = loadVar.victories;
     if(loadVar.defeats != null) defeats = loadVar.defeats;
+    if(loadVar.enemy != null) enemy = loadVar.enemy;
 
 // Loading Age
     if(loadVar.ageNumber != null) ageNumber = loadVar.ageNumber;
@@ -202,6 +203,7 @@ function reset()
         boolHasBarrack = 0;
         boolHasKiln = 0;
         boolHasPowdermill = 0;
+		boolHasBlacksmith = 0;
 
         boolCanGetLeather = 0;
         boolCanGetApple = 0;
@@ -279,7 +281,6 @@ function reset()
         
         victories = 0;
         defeats = 0;
-        attackNumbers = 0;
 
         ageProgress = 0;
         ageNumber = 0;

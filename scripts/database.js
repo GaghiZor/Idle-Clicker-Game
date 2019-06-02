@@ -88,6 +88,10 @@ function saveDB()
       // --- Army ---
         victories: victories,
         defeats: defeats,
+        enemyAmount: enemy.amount,
+        enemyHealth: enemy.health,
+        enemyDamage: enemy.damage,
+        enemyStamina: enemy.stamina,
         //boolSoldierMaxRank: boolSoldierMaxRank,
         soldierAmount: soldier.amount,
         soldierN: soldier.n,
@@ -198,8 +202,12 @@ function loadDB()
 
       // --- Army ---
         victories = doc.data().victories;
-        defeats = defeats;
-        boolSoldierMaxRank = doc.data().boolSoldierMaxRank;
+        defeats = doc.data().defeats;
+        enemy.amount = doc.data().enemyAmount;
+        enemy.health = doc.data().enemyHealth;
+        enemy.damage = doc.data().enemyDamage;
+        enemy.stamina = doc.data().enemyStamina;
+          //boolSoldierMaxRank = doc.data().boolSoldierMaxRank;
         soldier.amount = doc.data().soldierAmount;
         soldier.n = doc.data().soldierN;
         soldier.rank = doc.data().soldierRank;
@@ -229,7 +237,7 @@ function loadDB()
         ageProgress = doc.data().ageProgress;
         ageNumber = doc.data().ageNumber;
 
-        gamelog("Loaded from DataBase");
+        gameLog("Loaded from DataBase");
         updateAll();
 		} else {
 			gameLog("No document found in database.");

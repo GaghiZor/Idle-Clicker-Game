@@ -5,6 +5,7 @@ window.onload = function () {
 	{
         name = window.prompt("How should I call you? ");
         localStorage.setItem("hasCodeRunBefore", true);
+        updateName();
         save();
     }
     else load();

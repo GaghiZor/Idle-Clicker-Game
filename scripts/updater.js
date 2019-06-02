@@ -142,7 +142,7 @@ function updateWorkers()
 function updateName()
 {
     if(name === "")
-	   document.getElementById("name").innerHTML = "This nation has no ruler." + name;
+	   document.getElementById("name").innerHTML = "This nation has no ruler.";
     else document.getElementById("name").innerHTML = "The Ruler of this nation is " + name;
 }
 
